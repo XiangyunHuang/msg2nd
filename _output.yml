@@ -1,0 +1,20 @@
+bookdown::bs4_book:
+  css: style.css
+  theme:
+    primary: "#096B72"
+  repo:
+    base: https://github.com/XiangyunHuang/msg
+    branch: main
+  split_bib: true
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: biblatex
+  template: null
+  dev: "cairo_pdf"
+  keep_tex: yes
+  toc_appendix: yes
+  toc_bib: yes
+  highlight: NULL
+  quote_footer: ["\\hspace*{\\fill} ", ""]

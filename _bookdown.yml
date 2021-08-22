@@ -1,0 +1,22 @@
+book_filename: "msg2"
+new_session: true
+before_chapter_script: _common.R
+delete_merged_file: true
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+    thm: '定理 '
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]
+    appendix_name: ["附录 "]
+
+rmd_files:
+- "index.Rmd"
+
+- "preface.Rmd"                     # 前言
+
+- "appendix.Rmd"                    # 附录和命令行操作
+
+- "references.Rmd"

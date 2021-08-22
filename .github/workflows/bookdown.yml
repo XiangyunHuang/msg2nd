@@ -48,6 +48,7 @@ jobs:
       - name: Install ghostscript and Others
         run: |
           brew install ghostscript
+          brew install --cask xquartz
 
       - name: Cache R packages
         uses: actions/cache@v2

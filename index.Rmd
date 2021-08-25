@@ -42,10 +42,10 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 :::
 
 书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
-为方便跨操作系统编译本书电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体，
-本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无存线英文字体和 Noto Serif SC 宋体中文字体，如图\@ref(fig:noto-fonts) 所示，左、右图分别是在 Base R 和 ggplot2 图形中使用中英文字体的效果。先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。
+为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。
+而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。图\@ref(fig:noto-fonts) 中的左、右子图分别展示 Base R 和 ggplot2 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
-```{r noto-fonts, fig.cap="本书图形中英文字体设置", fig.subcap=c('中英文字体在 Base R 图里', '中英文字体在 ggplot2 图里'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
+```{r noto-fonts, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
 # 准备 Noto 中英文字体
 sysfonts::font_add_google(name = "Noto Sans")
 sysfonts::font_add_google(name = "Noto Serif SC")
@@ -79,7 +79,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 ```
 
 ::: {.rmdnote data-latex="{注意}"}
-为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，为了尽可能减少可重复的成本，保持书籍可以在 MacOS、Windows 和 Linux 等系统上顺利编译，要求字体尽可能便携，此外还考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，所以在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
+为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
 :::
 
 考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格采纳 **knitr** 和 **kableExtra** 的能力，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。
@@ -94,10 +94,10 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
 
 ## 软件信息 {#session .unnumbered}
 
-本书写作过程中，依赖 knitr [@xie2015]、rmarkdown [@xie2018; @xie2020] 和 bookdown [@xie2016]，书籍在 `r R.version.string` 下编译，Pandoc 版本 2.14.2，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`。
+本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，其它使用的 R 包如下。
 
 ```{r}
 xfun::session_info(packages = c(
-  "knitr", "rmarkdown", "bookdown", "ggplot2"
+  "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", "showtext"
 ), dependencies = FALSE)
 ```

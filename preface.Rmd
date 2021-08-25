@@ -12,15 +12,6 @@ and $a$ and $b$ denote the lengths of the **other** two sides, we have
 $$a^2 + b^2 = c^2$$
 :::
 
-::: {.rmdnote data-latex="{注意}"}
-You can use **markdown** inside a block.
-
-```{r collapse=TRUE}
-head(beaver1, n = 5)
-```
-
-:::
-
 ```{r, out.lines=6}
 swiss
 ```

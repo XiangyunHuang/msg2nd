@@ -35,46 +35,43 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 ---
 
 
-
 # 欢迎 {#welcome .unnumbered}
 
-《现代统计图形》[@msg2021]
+本书是《现代统计图形》[@msg2021] 的后续，尚处于草创阶段，欢迎大家参与。
 
-书籍字体设置
+书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
+为方便跨操作系统编译本书电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体，
+本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无存线英文字体和 Noto Serif SC 宋体中文字体，如图\@ref(fig:noto-fonts) 所示，左、右图分别是在 Base R 和 ggplot2 图形中使用中英文字体的效果。先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。
 
-代码字体 Source Code Pro
-中文字体 宋体和黑体
-
-图形字体设置
-
-```bash
-brew tap homebrew/cask-fonts 
-brew install font-noto-serif font-noto-serif-cjk-sc
-```
-
-See Figure \@ref(fig:nice-fig).
-
-```{r add-noto-font}
-sysfonts::font_add_google(name = "Noto Serif", family = "Noto Serif")
-sysfonts::font_add_google(name = "Noto Serif SC", family = "Noto Serif SC")
-```
-
-```{r nice-fig, fig.cap='中英文字体在 Base R 图里', out.width='75%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE}
-par(mar = c(4, 4, .2, .1), family = "Noto Serif")
+```{r noto-fonts, fig.cap="本书图形中英文字体设置", fig.subcap=c('中英文字体在 Base R 图里', '中英文字体在 ggplot2 图里'), out.width='45%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
+# 准备 Noto 中英文字体
+sysfonts::font_add_google(name = "Noto Sans")
+sysfonts::font_add_google(name = "Noto Serif SC")
+# 在 Base R 图形中使用 Noto 字体
+par(mar = c(4, 4, .2, .1), family = "Noto Sans")
 plot(pressure, type = 'b', pch = 19, ann = FALSE)
 title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")
-```
-
-
-```{r nice-fig2, fig.cap="中英文字体在 ggplot2 图里", out.width='75%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.showtext=TRUE}
+# 在 ggplot2 图形中使用 Noto 字体
 library(ggplot2)
 ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   geom_line() +
   geom_point() +
   labs(x = "温度", y = "压力") +
+  scale_x_continuous(breaks = seq(0, 400, by = 50)) +
+  theme_bw(base_size = 14) +
   theme(
     axis.title = element_text(family = "Noto Serif SC"),
-    axis.text = element_text(family = "Noto Serif")
+    axis.title.x = element_text(
+      margin = margin(b = 0, l = 0, t = 20, r = 0)
+    ),
+    axis.title.y = element_text(
+      margin = margin(b = 0, l = 0, t = 0, r = 20)
+    ),
+    axis.text.x = element_text(family = "Noto Sans"),
+    axis.text.y = element_text(
+      angle = 90, vjust = 1.5, hjust = 0.5,
+      family = "Noto Sans"
+    )
   )
 ```
 

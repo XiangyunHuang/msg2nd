@@ -1,6 +1,4 @@
-\mainmatter
-
-# 前言 {#chap-preface}
+# 前言 {#chap-preface .unnumbered}
 
 ```{r setup, echo=FALSE}
 source(file = "_common.R")

@@ -87,7 +87,19 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   )
 ```
 
-图\@ref(fig:noto-fonts) 所用数据集 pressure 来自 Base R 自带的 **datasets** 包，描述汞蒸气压力（毫米）随温度（摄氏度）的变化。为美观起见，除了设置字体外，右图以黑白主题替换了默认的灰色主题，调整了横、纵坐标轴标题到坐标轴的距离，面板边界线从灰色调为黑色，取消背景网格线，轴须增加至0.25厘米，适当增加了刻度标签的大小和位置。
+图\@ref(fig:noto-fonts) 所用数据集 pressure 来自 Base R 自带的 **datasets** 包，描述汞蒸气压力（毫米）随温度（摄氏度）的变化。为美观起见，除了设置字体外，右图以黑白主题替换了默认的灰色主题，调整了横、纵坐标轴标题到坐标轴的距离，面板边界线从灰色调为黑色，取消背景网格线，轴须增加至0.25厘米，适当增加了刻度标签的大小和位置。再和原始的 ggplot2 的图形对比，如图 \@ref(fig:noto-fonts-ugly) 所示，美颜前后已不可同日而语，能解决最重要的 20\% 细节问题就能让整个档次显著提升，达到让大多数人认可的水准。当然，一味地追求统一 Base R 风格或 ggplot2 风格是没有必要的，举此例也无意宣扬 Base R 绘图的简便，展示 ggplot2 绘图的复杂，简便和复杂往往不是由工具决定的，而是数据本身和工具使用的场景。将错误的工具放在错误的数据上，除了能带来实现上的技术挑战，造出一堆难以理解的图形垃圾，还可能误导受众。
+
+```{r noto-fonts-ugly, fig.cap="ggplot2 默认的风格", out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.showtext=TRUE, echo=FALSE}
+ggplot(data = pressure, aes(x = temperature, y = pressure)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "温度", y = "压力") +
+  theme(
+    axis.title = element_text(family = "Noto Serif SC"),
+    axis.text = element_text(family = "Noto Sans")
+  )
+```
+
 
 如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等，在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，力求一图胜千言。
 
@@ -97,7 +109,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
 :::
 
-考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格采纳 **knitr** 和 **kableExtra** 的能力，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。
+考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格采纳 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 的能力，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。截止写作时间，能够制作表格的 R 包有很多，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
 
 ```{r iris-tab}
 library(knitr)
@@ -106,10 +118,11 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
   kable_classic()
 ```
 
+总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，优质的内容必将持续为读者提供价值！
 
 ## 软件信息 {#session .unnumbered}
 
-本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，其它使用的 R 包如下。
+本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，其它使用的 R 包如下：
 
 ```{r}
 xfun::session_info(packages = c(

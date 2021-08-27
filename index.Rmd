@@ -31,6 +31,8 @@ biblio-style: gb7714-2015ay
 biblatexoptions: 
   - backend=biber
   - gbpub=true
+  - sorting=nyt
+  - gbtype=false
 csl: china-national-standard-gb-t-7714-2015-author-date.csl
 ---
 
@@ -44,7 +46,7 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 
 书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。
-而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。图\@ref(fig:noto-fonts) 中的左、右子图分别展示 Base R 和 ggplot2 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
+而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。图\@ref(fig:noto-fonts) 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
 ```{r noto-fonts, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
 # 准备 Noto 中英文字体
@@ -58,7 +60,7 @@ title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")
 library(ggplot2)
 ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   geom_line() +
-  geom_point() +
+  geom_point(size = 2) +
   labs(x = "温度", y = "压力") +
   scale_x_continuous(breaks = seq(0, 400, by = 50)) +
   theme_bw(base_size = 13) +
@@ -70,14 +72,26 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
     axis.title.y = element_text(
       margin = margin(b = 0, l = 0, t = 0, r = 20)
     ),
+    panel.border = element_rect(color = "black"),
     panel.grid = element_blank(),
-    axis.text.x = element_text(family = "Noto Sans"),
+    axis.ticks.length = unit(0.25, "cm"),
+    axis.text.x = element_text(
+      family = "Noto Sans", color = "black",
+      vjust = -1.5, size = rel(1.25)
+    ),
     axis.text.y = element_text(
+      family = "Noto Sans", color = "black",
       angle = 90, vjust = 1.5, hjust = 0.5,
-      family = "Noto Sans"
+      size = rel(1.25)
     )
   )
 ```
+
+图\@ref(fig:noto-fonts) 所用数据集 pressure 来自 Base R 自带的 **datasets** 包，描述汞蒸气压力（毫米）随温度（摄氏度）的变化。为美观起见，除了设置字体外，右图以黑白主题替换了默认的灰色主题，调整了横、纵坐标轴标题到坐标轴的距离，面板边界线从灰色调为黑色，取消背景网格线，轴须增加至0.25厘米，适当增加了刻度标签的大小和位置。
+
+如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等，在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，力求一图胜千言。
+
+书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 
 ::: {.rmdnote data-latex="{注意}"}
 为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。

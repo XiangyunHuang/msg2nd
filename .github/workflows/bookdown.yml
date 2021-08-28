@@ -106,7 +106,7 @@ jobs:
         if: github.event_name == 'push'
         env:
           CONNECT_API_KEY: ${{ secrets.RSC_BOOKDOWN_ORG_TOKEN }}
-          CONTENT_ID: 8125
+          CONTENT_ID: 8172
         run: |
           Rscript '_deploy-book.R'
 

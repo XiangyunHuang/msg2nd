@@ -157,11 +157,11 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
 
 <!-- 记号约定，注释，R 包环境管理，部署服务 -->
 
-本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，其它使用的 R 包如下：
+本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，使用的 R 包如下：
 
 ```{r package-info}
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
-  "showtext", ""
+  "showtext", "tikzDevice", "magick", "pdftools"
 ))
 ```

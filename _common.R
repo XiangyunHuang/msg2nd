@@ -1,12 +1,4 @@
-# example R options set globally
-options(width = 60)
-
-# example chunk options set globally
-knitr::opts_chunk$set(
-  comment = "#>",
-  collapse = TRUE
-  )
-
+# 修改输出的显示行数
 knitr::knit_hooks$set(output = local({
   # the default output hook
   hook_output = knitr::knit_hooks$get('output')
@@ -23,6 +15,14 @@ knitr::knit_hooks$set(output = local({
   }
 }))
 
+# 修改代码块字体大小
+knitr::knit_hooks$set(chunk = local({
+  hook_chunk <- knitr::knit_hooks$get("chunk")
+  function(x, options) {
+    x <- hook_chunk(x, options)
+    ifelse(options$size != "normalsize", paste0("\n \\", options$size, "\n\n", x, "\n\n \\normalsize"), x)
+  }
+}))
 
 to_png <- function(fig_path) {
   png_path <- sub("\\.pdf$", ".png", fig_path)
@@ -32,3 +32,11 @@ to_png <- function(fig_path) {
   )
   return(png_path)
 }
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  size = "scriptsize",
+  fig.align = "center"
+)

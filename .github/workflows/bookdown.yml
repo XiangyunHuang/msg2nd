@@ -47,7 +47,7 @@ jobs:
 
       - name: Install ghostscript and Others
         run: |
-          brew install ghostscript
+          brew install ghostscript imagemagick poppler
           brew install --cask xquartz
 
       - name: Cache R packages

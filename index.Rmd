@@ -41,7 +41,7 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 # 欢迎 {#welcome .unnumbered}
 
 ::: {.rmdwarning data-latex="{警告}"}
-本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段，欢迎大家参与。
+本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
 :::
 
 书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
@@ -101,7 +101,38 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 ```
 
 
-如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等，在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，力求一图胜千言。
+如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，力求一图胜千言。
+
+
+```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="75%", fig.width=4, fig.height=4, cache=TRUE, fig.process=to_png, fig.align='center', echo=FALSE}
+set.seed(2021)
+x <- rnorm(10)
+y <- x + rnorm(5, sd = 0.25)
+lab <- sample(
+  x = paste0("$\\mathcal{", LETTERS, "}$"),
+  size = 10, replace = FALSE
+)
+model <- lm(y ~ x)
+rsq <- summary(model)$r.squared
+rsq <- signif(rsq, 4)
+plot(x, y,
+  main = "你好 \\LaTeX!", # 引入 7 号文本字体
+  sub = "$\\mathcal{N}(x;\\mu,\\Sigma)$",
+  xlab = "$x$", ylab = "$y$", type = "n"
+)
+text(x = x, y = y, labels = lab)
+abline(model, col = "red")
+# 引入 7 号数学字体
+mtext(paste("线性模型: $\\mathsf{R}^{2}=", rsq, "$"), line = 0.5)
+legend("bottomright",
+  legend = paste0(
+    "$y = ", round(coef(model)[2], 3), "x +",
+    round(coef(model)[1], 3), "$"
+  ),
+  bty = "n"
+)
+```
+
 
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 
@@ -118,14 +149,19 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
   kable_classic()
 ```
 
-总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，优质的内容必将持续为读者提供价值！
+总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，坚信优质的内容必将持续为读者提供价值！
 
-## 软件信息 {#session .unnumbered}
+<!-- 耐心、用心、善心，如何参与具体的贡献 -->
+
+## 软件信息 {#session-info .unnumbered}
+
+<!-- 记号约定，注释，R 包环境管理，部署服务 -->
 
 本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，其它使用的 R 包如下：
 
-```{r}
+```{r package-info}
 xfun::session_info(packages = c(
-  "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", "showtext"
-), dependencies = FALSE)
+  "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
+  "showtext", ""
+))
 ```

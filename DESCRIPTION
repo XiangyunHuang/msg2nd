@@ -12,6 +12,8 @@ Imports:
   fontcm (>= 1.1),
   ggplot2 (>= 3.3.5),
   knitr (>= 1.33),
+  magick (>= 2.7.3),
+  pdftools (>= 3.0.1),
   showtext (>= 0.9),
   tikzDevice (>= 0.12.3.1),
   xkcd (>= 0.0.6),

@@ -39,6 +39,10 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 
 \mainmatter
 
+```{r, echo=FALSE}
+source(file = "_common.R")
+```
+
 # 欢迎 {#welcome .unnumbered}
 \chaptermark{欢迎}
 

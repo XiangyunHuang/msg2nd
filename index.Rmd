@@ -40,6 +40,7 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 \mainmatter
 
 # 欢迎 {#welcome .unnumbered}
+\chaptermark{欢迎}
 
 ::: {.rmdwarning data-latex="{警告}"}
 本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
@@ -164,5 +165,5 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
   "showtext", "tikzDevice", "magick", "pdftools"
-))
+), dependencies = FALSE)
 ```

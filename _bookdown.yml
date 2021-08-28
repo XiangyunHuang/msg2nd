@@ -1,4 +1,4 @@
-book_filename: "msg2"
+book_filename: "msg2nd"
 new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
@@ -6,7 +6,7 @@ language:
   label:
     fig: "图 "
     tab: "表 "
-    thm: '定理 '
+    thm: "定理 "
   ui:
     edit: "编辑"
     chapter_name: ["第 ", " 章"]
@@ -17,6 +17,6 @@ rmd_files:
 
 - "preface.Rmd"                     # 前言
 
-- "appendix.Rmd"                    # 附录和命令行操作
+- "appendix.Rmd"                    # 附录
 
 - "references.Rmd"

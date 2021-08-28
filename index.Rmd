@@ -1,5 +1,6 @@
 --- 
 title: "现代统计图形（第二版）"
+subtitle: "Modern Statistical Graphics (Second Edition)"
 author: "黄湘云"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site

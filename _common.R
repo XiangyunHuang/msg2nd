@@ -37,6 +37,6 @@ to_png <- function(fig_path) {
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
-  size = "scriptsize",
+  size = "footnotesize",
   fig.align = "center"
 )

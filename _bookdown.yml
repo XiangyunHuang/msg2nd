@@ -16,7 +16,7 @@ rmd_files:
 - "index.Rmd"
 
 - "preface.Rmd"                     # 前言
-
+- "technology.Rmd"                  # 技术专题
 - "appendix.Rmd"                    # 附录
 
 - "references.Rmd"

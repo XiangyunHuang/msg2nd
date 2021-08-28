@@ -1,3 +1,4 @@
+alegreya
 animate
 appendixnumberbeamer
 arev

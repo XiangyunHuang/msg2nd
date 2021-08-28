@@ -47,6 +47,7 @@ jobs:
       - name: Install ghostscript and Others
         run: |
           brew install ghostscript imagemagick poppler
+          brew install --cask xquartz
           brew tap homebrew/cask-fonts
           brew install --cask font-xkcd
 

@@ -46,17 +46,22 @@ csl: china-national-standard-gb-t-7714-2015-author-date.csl
 本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
 :::
 
+
+## 排版约定 {#convention .unnumbered}
+
+\index{showtext}
+
 书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。
 而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。图\@ref(fig:noto-fonts) 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
-```{r noto-fonts, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
+```{r noto-fonts, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
 # 准备 Noto 中英文字体
 sysfonts::font_add_google(name = "Noto Sans")
 sysfonts::font_add_google(name = "Noto Serif SC")
 # 在 Base R 图形中使用 Noto 字体
 par(mar = c(4, 4, .2, .1), family = "Noto Sans")
-plot(pressure, type = 'b', pch = 19, ann = FALSE)
+plot(pressure, type = "b", pch = 19, ann = FALSE)
 title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")
 # 在 ggplot2 图形中使用 Noto 字体
 library(ggplot2)
@@ -91,7 +96,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 
 图\@ref(fig:noto-fonts) 所用数据集 pressure 来自 Base R 自带的 **datasets** 包，描述汞蒸气压力（毫米）随温度（摄氏度）的变化。为美观起见，除了设置字体外，右图以黑白主题替换了默认的灰色主题，调整了横、纵坐标轴标题到坐标轴的距离，面板边界线从灰色调为黑色，取消背景网格线，轴须增加至0.25厘米，适当增加了刻度标签的大小和位置。再和原始的 ggplot2 的图形对比，如图 \@ref(fig:noto-fonts-ugly) 所示，美颜前后已不可同日而语，能解决最重要的 20\% 细节问题就能让整个档次显著提升，达到让大多数人认可的水准。当然，一味地追求统一 Base R 风格或 ggplot2 风格是没有必要的，举此例也无意宣扬 Base R 绘图的简便，展示 ggplot2 绘图的复杂，简便和复杂往往不是由工具决定的，而是数据本身和工具使用的场景。将错误的工具放在错误的数据上，除了能带来实现上的技术挑战，造出一堆难以理解的图形垃圾，还可能误导受众。
 
-```{r noto-fonts-ugly, fig.cap="ggplot2 默认的风格", out.width='50%', fig.width=4.5, fig.height=3.5, fig.align='center', fig.showtext=TRUE, echo=FALSE}
+```{r noto-fonts-ugly, fig.cap="ggplot2 默认的风格", out.width='50%', fig.width=4.5, fig.height=3.5, fig.showtext=TRUE, echo=FALSE}
 ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   geom_line() +
   geom_point() +
@@ -106,7 +111,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，力求一图胜千言。
 
 
-```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="75%", fig.width=4, fig.height=4, cache=TRUE, fig.process=to_png, fig.align='center', echo=FALSE}
+```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="50%", fig.width=4, fig.height=4, cache=TRUE, fig.process=to_png, echo=FALSE}
 set.seed(2021)
 x <- rnorm(10)
 y <- x + rnorm(5, sd = 0.25)
@@ -123,7 +128,7 @@ plot(x, y,
   xlab = "$x$", ylab = "$y$", type = "n"
 )
 text(x = x, y = y, labels = lab)
-abline(model, col = "red")
+abline(model, col = "black")
 # 引入 7 号数学字体
 mtext(paste("线性模型: $\\mathsf{R}^{2}=", rsq, "$"), line = 0.5)
 legend("bottomright",
@@ -143,6 +148,8 @@ legend("bottomright",
 :::
 
 考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格采纳 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 的能力，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。截止写作时间，能够制作表格的 R 包有很多，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
+
+\index{kableExtra}
 
 ```{r iris-tab}
 library(knitr)

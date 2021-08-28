@@ -2,6 +2,7 @@ if (file.exists('~/.Rprofile')) sys.source('~/.Rprofile', envir = environment())
 
 options(
   citation.bibtex.max = 999,
+  crayon.enabled = FALSE,
   tinytex.engine = 'xelatex',
   tikzDefaultEngine = "xetex",
   tikzDocumentDeclaration = "\\documentclass[tikz]{standalone}\n",

@@ -115,7 +115,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，达到「道」与「术」和谐统一的境界。
 
 
-```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="50%", fig.width=4, fig.height=4, cache=TRUE, fig.process=to_png, echo=FALSE}
+```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="75%", fig.width=4, fig.height=4, cache=TRUE, fig.process=to_png, echo=FALSE}
 set.seed(2021)
 x <- rnorm(10)
 y <- x + rnorm(5, sd = 0.25)

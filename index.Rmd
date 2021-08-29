@@ -127,10 +127,11 @@ ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
 ```
 
 
-如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，达到「道」与「术」和谐统一的境界。
+如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，到达「道」与「术」和谐统一的境界。
 
 
 ```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="60%", fig.width=3, fig.height=3, cache=TRUE, fig.process=to_png, echo=FALSE}
+par(mgp = c(2, 0.7, 0), mar = c(4, 3, 4, 1) + 0.1)
 set.seed(2021)
 x <- rnorm(10)
 y <- x + rnorm(5, sd = 0.25)
@@ -166,7 +167,7 @@ legend("bottomright",
 为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
 :::
 
-考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格采纳 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 的能力，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。截止写作时间，能够制作表格的 R 包有很多，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
+考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格使用 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 包，为简单起见，提供一个迷你的表格样式示例，如表 \@ref(tab:iris-tab) 所示。截止写作时间，能够制作表格的 R 包其实有很多，比如 [DT](https://github.com/rstudio/DT)、[gt](https://github.com/rstudio/gt) 等[@xie2020]，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
 
 \index{kableExtra}
 
@@ -179,17 +180,26 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
 
 总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，坚信优质的内容必将持续为读者提供价值！
 
-<!-- 耐心、用心、善心，如何参与具体的贡献 -->
+书籍开源在 Github 上，聪明的你如果准备参与创作，需要掌握一些基本的技能，以便大家展开协作。图\@ref(fig:skills)是一个简单的技能栈图，书稿以一个个 R Markdown 文件的形式存在，符合 bookdown 的组织方式，本地在 RStudio 里编辑和编译，线上在 GitHub Action 环境里编译成 HTML 和 PDF 格式，如果你还了解 LaTeX 或 Pandoc 就更好了，可以把本书做得更加漂亮。当然，工具可以不限于提到的这些，只要使着顺手，比如 [VS Code](https://code.visualstudio.com/)，它对 R 语言的支持也很好了，只要你懂各种配置，体验不比 RStudio 差。
+
+```{r skills, engine="tikz", fig.cap="《现代统计图形》的技能栈", out.width="65%", echo=FALSE, cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[default]{sourcesanspro}","\\usepackage[fontset=fandol]{ctex}", "\\usepackage{smartdiagram}"))}
+\smartdiagram[bubble diagram]{基础技能,
+  编辑 (RStudio), 组织 (bookdown), 协作 (Git), 排版 (LaTeX/Pandoc), 编译 (GitHub Action)}
+```
 
 ## 软件信息 {#session-info .unnumbered}
 
 <!-- 记号约定，注释，R 包环境管理，部署服务 -->
 
-本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018; @xie2020] 和 **bookdown** [@xie2016]，书籍在 `r R.version.string` 下编译，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，使用的 R 包如下：
+```{r ci-indicator, echo=FALSE}
+ci <- identical(Sys.getenv("CI"), "true")
+```
+
+R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 `plot()`，函数的参数名同理。代码块内注释用 `#` 表示，运行结果每一行开头以 `#>` 标记。本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018] 和 **bookdown** [@xie2016] 等众多 R 包，为方便管理，引入 [**renv**](https://github.com/rstudio/renv) 包将 R 包信息快照下来，存成一个 `renv.lock` 文件，同书稿一起存储在 Github 仓库内，方便读者复现本书内容。目前，书稿使用 `r R.version.string` 编译，你现在看到的是`r ifelse(ci, '在线', '离线')`编译版本，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，直接使用的 R 包如下：
 
 ```{r package-info}
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
-  "showtext", "tikzDevice", "magick", "pdftools"
+  "showtext", "tikzDevice", "magick", "pdftools", "renv"
 ), dependencies = FALSE)
 ```

@@ -64,6 +64,8 @@ source(file = "_common.R")
 sysfonts::font_add_google(name = "Noto Sans")
 sysfonts::font_add_google(name = "Noto Serif SC")
 # 在 Base R 图形中使用 Noto 字体
+opar = par(no.readonly = TRUE)
+on.exit(par(opar), add = TRUE)
 par(mar = c(4, 4, .2, .1), family = "Noto Sans")
 plot(pressure, type = "b", pch = 19, ann = FALSE)
 title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")

@@ -50,6 +50,9 @@ jobs:
           brew install --cask xquartz
           brew tap homebrew/cask-fonts
           brew install --cask font-xkcd
+          fc-list :lang=zh | sort
+          fc-list :lang=en | sort
+          fc-list : family | sort -f
 
       - name: Cache R packages
         uses: actions/cache@v2

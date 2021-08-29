@@ -27,7 +27,7 @@ bibliography:
 url: https://bookdown.org/xiangyun/msg2
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  现代统计图形（第二版）.
+  这里是本书摘要.
 biblio-style: gb7714-2015ay
 biblatexoptions: 
   - backend=biber
@@ -46,7 +46,7 @@ source(file = "_common.R")
 # 欢迎 {#welcome .unnumbered}
 \chaptermark{欢迎}
 
-::: {.rmdwarning data-latex="{警告}"}
+::: {.rmdwarn data-latex="{警告}"}
 本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
 :::
 

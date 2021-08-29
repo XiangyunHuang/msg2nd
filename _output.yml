@@ -18,3 +18,7 @@ bookdown::pdf_book:
   toc_bib: yes
   # highlight: NULL
   quote_footer: ["\\hspace*{\\fill} ", ""]
+bookdown::epub_book:
+  template: "default"
+  epub_version: "epub3"
+  stylesheet: style.css

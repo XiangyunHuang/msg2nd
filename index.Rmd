@@ -172,7 +172,7 @@ ggplot(data = sim_dat, aes(x = p, y = prob, color = nsample)) +
   geom_point() +
   geom_path() +
   geom_hline(yintercept = 0.95) +
-  facet_grid(rows = vars(methods), scales = "free_y") +
+  facet_wrap(vars(methods), ncol = 1, scales = "free_y") +
   labs(x = "成功概率", y = "覆盖概率", color = "样本量") +
   theme_bw(base_size = 13, base_family = "Noto Sans") +
   theme(title = element_text(family = "Noto Serif SC"))
@@ -201,6 +201,8 @@ title(xlab = "喷发时间", ylab = "等待时间", family = "Noto Serif SC")
 
 
 ```{r linear-model, dev='tikz', fig.cap="简单线性模型", out.width="60%", fig.width=3, fig.height=3, cache=TRUE, fig.process=to_png, echo=FALSE}
+opar <- par(no.readonly = TRUE)
+on.exit(par(opar), add = TRUE)
 par(mgp = c(2, 0.7, 0), mar = c(4, 3, 4, 1) + 0.1)
 set.seed(2021)
 x <- rnorm(10)

@@ -107,7 +107,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 
 图\@ref(fig:noto-fonts) 所用数据集 pressure 来自 Base R 自带的 **datasets** 包，描述汞蒸气压力（以毫米计）随温度（以摄氏度计）的变化。为美观起见，除了设置字体外，右图以黑白主题替换了默认的灰色主题，调整了横、纵坐标轴标题到坐标轴的距离，面板边界线从灰色调为黑色，取消背景网格线，轴须增加至0.25厘米，适当增加了刻度标签的大小和位置。再和原始的 ggplot2 的图形对比，如图 \@ref(fig:noto-fonts-ugly) 所示，美颜前后已不可同日而语，能解决最重要的 20\% 细节问题就能让整个档次显著提升，达到让大多数人认可的水准。当然，一味地追求统一 Base R 风格或 ggplot2 风格是没有必要的，举此例也无意宣扬 Base R 绘图的简便，展示 ggplot2 绘图的复杂，简便和复杂往往不是由工具决定的，而是数据本身和工具使用的场景。将错误的工具放在错误的数据上，除了能带来实现上的技术挑战，造出一堆难以理解的图形垃圾，还可能误导受众。
 
-```{r noto-fonts-ugly, fig.cap="ggplot2 默认的风格", out.width='50%', fig.width=4.5, fig.height=3.5, fig.showtext=TRUE, echo=FALSE}
+```{r noto-fonts-ugly, fig.cap="ggplot2 默认的风格", out.width='60%', fig.width=4.5, fig.height=3.5, fig.showtext=TRUE, echo=FALSE}
 # https://github.com/Mikata-Project/ggthemr
 # 书籍就绪后，考虑统一颜色主题
 ggplot(data = pressure, aes(x = temperature, y = pressure)) +
@@ -120,7 +120,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   )
 ```
 
-图 \@ref(fig:xkcd-fonts) 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系，所用 iris 数据集也来自 Base R 自带的 **datasets** 包，由 Anderson Edgar 收集，最早见于 1935 年的文章，后被 Ronald Fisher 在研究分类问题时引用，到如今，在机器学习的社区里，提及 iris 数据集，很多人只知 Fisher 不知 Anderson。
+图 \@ref(fig:xkcd-fonts) 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系，所用 iris 数据集也来自 Base R 自带的 **datasets** 包，由 Anderson Edgar 收集，最早见于 1935 年的文章，后被 Ronald Fisher 在研究分类问题时引用[@Fisher1936]，到如今，在机器学习的社区里，提及 iris 数据集，很多人只知 Fisher 不知 Anderson。
 
 ```{r xkcd-fonts, fig.cap="手绘漫画风格的图形", out.width="75%", fig.width=5, fig.height=3, echo=FALSE, fig.showtext=TRUE}
 # brew tap homebrew/cask-fonts
@@ -136,7 +136,7 @@ ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
 ```
 
 
-统计图形很重要的一个作用是揭示统计概念，这就要求不拘泥于抽象的严格数学表达，借助数值模拟，可视化等手段帮助读者发散思维，加深理解复杂的逻辑概念，建立统计直觉，正如顾恺之所言「以形写神，形神兼备」。下面试图仅以二项分布为例讲讲区间估计及其覆盖概率。众所周知，在置信水平为 $1 - \alpha$ 的情况下，二项分布 $\mathrm{Bin}(n,p)$ 的参数 $p$ （也叫成功概率）的 Wald 区间估计为 $(\hat{p} - Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n}, \hat{p} + Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n})$，这里 $n$ 为样本量，$Z_{1-\alpha/2}$ 为标准正态分布 $\mathcal{N}(0,1)$ 在 $1-\alpha/2$ 处的分位点，一般 $\alpha$ 取 0.05，进而 $Z_{1-\alpha/2} \approx 1.96$。用通俗的话说，有 $1 - \alpha$ 的把握确定参数真值 $p$ 在该估计区间内，可见区间估计的意义是解决点估计可靠性问题，但是可靠性和精度往往不能兼得。统计上，通常的做法是先给定可靠性，去尽可能提升精度，即给定置信水平，使估计区间的长度尽可能短，这就涉及到区间估计的方法问题。
+统计图形很重要的一个作用是揭示统计概念，这就要求不拘泥于抽象的严格数学表达，借助数值模拟，可视化等手段帮助读者发散思维，加深理解复杂的逻辑概念，建立统计直觉，正如顾恺之所言「以形写神，形神兼备」。下面仅以二项分布为例讲讲区间估计及其覆盖概率。众所周知，在置信水平为 $1 - \alpha$ 的情况下，二项分布 $\mathrm{Bin}(n,p)$ 的参数 $p$ （也叫成功概率）的 Wald 区间估计为 $(\hat{p} - Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n}, \hat{p} + Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n})$，这里 $n$ 为样本量，$Z_{1-\alpha/2}$ 为标准正态分布 $\mathcal{N}(0,1)$ 在 $1-\alpha/2$ 处的分位点，一般 $\alpha$ 取 0.05，进而 $Z_{1-\alpha/2} \approx 1.96$。用通俗的话说，有 $1 - \alpha$ 的把握确定参数真值 $p$ 在该估计区间内，可见区间估计的意义是解决点估计可靠性问题，但是可靠性和精度往往不能兼得。统计上，通常的做法是先给定可靠性，去尽可能提升精度，即给定置信水平，使估计区间的长度尽可能短，这就涉及到区间估计的方法问题。
 
 下面通过数值模拟的方式辅助说明 Wald 和 Agresti-Coull 两种区间估计方法，现固定样本量 $n = 10$ 或 $n = 100$，重复抽样 1000 次，将参数 $p$ 以 0.01 的间隔离散化，从 0.01 取值到 0.99。已知给定参数 $p$，每次抽样都可以得到参数 $p$ 的估计值 $\hat{p}$ 及其置信区间，1000 次的重复抽样可以计算出来 1000 个置信区间，每个区间要么覆盖真值，要么没有覆盖真值，覆盖的比例可以近似为覆盖概率。
 如图\@ref(fig:coverage) 所示，上下两个子图分别代表 Wald 和 Agresti-Coull 区间估计，纵坐标是覆盖概率，横坐标是参数 $p$ 的真值，图中黑线表示置信水平 $1-\alpha=0.95$，红蓝点线分别表示样本量 $n=10$ 和 $n=100$ 的模拟情况，不难看出，Wald 区间估计方法在小样本情况下表现很差，覆盖概率很少能达到置信水平的，而 Agresti-Coull 区间估计在 Wald 基础上添加了修正后，情况得到显著改善，详细的介绍见文献 @Lawrence2001 。此外，还有 Wilson 区间估计，也是用的更加广泛的，Base R 内置的二项比例检验函数 `prop.test()` 就是用该方法获得比例 $p$ 的区间估计[@Wilson1927]。
@@ -182,7 +182,7 @@ ggplot(data = sim_dat, aes(x = p, y = prob, color = nsample)) +
   geom_hline(yintercept = 0.95) +
   facet_grid(rows = vars(methods), scales = "free_y") +
   labs(x = "成功概率", y = "覆盖概率", color = "样本量") +
-  theme_bw(base_family = "Noto Sans") +
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
   theme(title = element_text(family = "Noto Serif SC"))
 ```
 
@@ -192,7 +192,7 @@ ggplot(data = sim_dat, aes(x = p, y = prob, color = nsample)) +
 
 散点图\@ref(fig:faithful-bkde2d) 展示美国怀俄明州黄石国家公园[老忠实间歇泉](https://en.wikipedia.org/wiki/Old_Faithful)喷发规律，横轴表示喷发持续时间（以分钟计），纵轴表示等待时间（以分钟计），点的亮暗程度（白到黑）代表附近点密度的高低，亮度值通过二维核密度估计方法得到，具体实现借助了 **KernSmooth** [@KernSmooth1995] 包提供的 `bkde2D()` 函数。不难看出，每等待55分钟左右间歇泉喷发约2分钟，或者每等待80分钟左右间歇泉喷发4.5约分钟，非常守时，表现得很老实，故而得名。
 
-```{r faithful-bkde2d, fig.cap="二维核密度估计", out.width="50%", fig.width=5, fig.height=5, fig.showtext=TRUE, echo=FALSE}
+```{r faithful-bkde2d, fig.cap="二维核密度估计", out.width='60%', fig.width=5, fig.height=5, fig.showtext=TRUE, echo=FALSE}
 plot(faithful, 
   pch = 20, panel.first = grid(), cex = 1, ann = FALSE, 
   col = densCols(faithful, colramp = gray.colors)
@@ -200,6 +200,10 @@ plot(faithful,
 title(xlab = "喷发时间", ylab = "等待时间", family = "Noto Serif SC")
 ```
 
+<!-- 
+书籍第一版没有介绍 核密度估计 的原理，第二版中要予以介绍，做到知其然且知其所以然，
+核密度估计方法在可视化中应用是相当广泛的 
+-->
 
 如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，到达「道」与「术」和谐统一的境界。
 

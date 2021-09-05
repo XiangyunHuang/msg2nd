@@ -59,20 +59,12 @@ source(file = "_common.R")
 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。
 而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。图\@ref(fig:noto-fonts) 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
-```{r, eval=FALSE, echo=FALSE}
-showtextdb::font_install(showtextdb::google_fonts("Noto Sans"))
-showtextdb::font_install(showtextdb::google_fonts("Noto Serif SC"))
-```
-
-```{r noto-fonts, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
+```{r noto-fonts, par=TRUE, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
 # 准备 Noto 中英文字体
 sysfonts::font_add_google(name = "Noto Sans")
 sysfonts::font_add_google(name = "Noto Serif SC")
 # 在 Base R 图形中使用 Noto 字体
-opar = par(no.readonly = TRUE)
-on.exit(par(opar), add = TRUE)
-par(mar = c(4, 4, .2, .1), family = "Noto Sans")
-plot(pressure, type = "b", pch = 19, ann = FALSE)
+plot(pressure, type = "b", pch = 19, ann = FALSE, family = "Noto Sans")
 title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")
 # 在 ggplot2 图形中使用 Noto 字体
 library(ggplot2)
@@ -192,7 +184,7 @@ ggplot(data = sim_dat, aes(x = p, y = prob, color = nsample)) +
 
 散点图\@ref(fig:faithful-bkde2d) 展示美国怀俄明州黄石国家公园[老忠实间歇泉](https://en.wikipedia.org/wiki/Old_Faithful)喷发规律，横轴表示喷发持续时间（以分钟计），纵轴表示等待时间（以分钟计），点的亮暗程度（白到黑）代表附近点密度的高低，亮度值通过二维核密度估计方法得到，具体实现借助了 **KernSmooth** [@KernSmooth1995] 包提供的 `bkde2D()` 函数。不难看出，每等待55分钟左右间歇泉喷发约2分钟，或者每等待80分钟左右间歇泉喷发4.5约分钟，非常守时，表现得很老实，故而得名。
 
-```{r faithful-bkde2d, fig.cap="二维核密度估计", out.width='60%', fig.width=5, fig.height=5, fig.showtext=TRUE, echo=FALSE}
+```{r faithful-bkde2d, par=TRUE, fig.cap="二维核密度估计", out.width='60%', fig.width=5, fig.height=4.5, fig.showtext=TRUE, echo=FALSE}
 plot(faithful, 
   pch = 20, panel.first = grid(), cex = 1, ann = FALSE, 
   col = densCols(faithful, colramp = gray.colors)
@@ -279,5 +271,5 @@ R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
   "showtext", "tikzDevice", "magick", "pdftools", "renv"
-), dependencies = FALSE)
+), dependencies = TRUE)
 ```

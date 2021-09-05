@@ -33,6 +33,13 @@ to_png <- function(fig_path) {
   return(png_path)
 }
 
+knitr::knit_hooks$set(par = function(before, options, envir) {
+  if (before && options$fig.show != "none") {
+    par(
+      mar = c(4, 4, .1, .1)
+    )
+  }
+})
 # example chunk options set globally
 knitr::opts_chunk$set(
   comment = "#>",

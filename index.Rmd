@@ -31,8 +31,6 @@ url: https://bookdown.org/xiangyun/msg2
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
   这里是本书摘要.
-# biblio-style: plainnat
-# natbiboptions: "authoryear"
 biblio-style: gb7714-2015ay
 biblatexoptions:
   - backend=biber

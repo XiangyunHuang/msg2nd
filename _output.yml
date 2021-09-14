@@ -10,13 +10,14 @@ bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
+  # citation_package: natbib
   citation_package: biblatex
   template: null
   dev: "cairo_pdf"
   keep_tex: yes
   toc_appendix: yes
   toc_bib: yes
-  # highlight: NULL
+  highlight: NULL
   quote_footer: ["\\hspace*{\\fill} ", ""]
 bookdown::epub_book:
   template: "default"

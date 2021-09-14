@@ -1,16 +1,366 @@
-# 前言 {#chap-preface .unnumbered}
+# 前言 {#preface .unnumbered}
+\chaptermark{前言}
 
-```{r setup, echo=FALSE}
+```{r setup-preface, echo=FALSE}
 source(file = "_common.R")
+sysfonts::font_add_google(name = "Noto Sans")
+sysfonts::font_add_google(name = "Noto Serif SC")
+# library(showtext)
+# showtext_auto()
 ```
 
-::: {.theorem #tri name="勾股定理"}
-For a right triangle, if $c$ denotes the *length* of the hypotenuse
-and $a$ and $b$ denote the lengths of the **other** two sides, we have
-$$a^2 + b^2 = c^2$$
-:::
+<!-- 
+作者自己写的，介绍本书内容：目标读者、内容结构、阅读方案、符号约定、可重复性
+-->
 
-```{r, out.lines=6}
-swiss
+> 世界上只有一种英雄主义，就是看清生活的真相之后依然热爱它。  
+>
+> --- 罗曼·罗兰
+
+我在本书每个章节开头都会给一条名人名言，不要笑，生活已经很苦了，写书让我感到快乐和慰藉。这些名人名言伴随了我心路成长的历程。
+
+> 既然是《现代统计图形》的第二版，和第一版的主要区别是什么？目标读者是否一样？
+
+1. 全书的图形风格将更加的协调和美观，无论 Base R 还是 ggplot2 绘制的图形都要遵循这一点。
+
+1. 全书的组织和内容更加体现应用性，将更多地从数据和应用场景出发，而不是从图形种类和技术出发。
+
+1. 更加强调数据可视化在探索性数据分析、可重复性数据分析、沟通交流和信息传递中的重要性。
+
+1. 全书图片采用灰度调色板统一配色，黑白印刷也不会出现图文颜色描述不匹配的情况，方便出版打印，也能一定程度上降低书籍的定价，部分图形提供彩版。
+
+1. 尽量兼顾统计理论的严格和统计图形的直观，对于有明显统计意义的图形都要讲述其统计原理，做到知其然且知其所以然。
+
+1. 统计图形的历史不再单独成章介绍，而是在具体的数据分析和应用时介绍或者作为一个章节的片尾故事。
+
+我们希望目标读者学过一点微积分、线性代数和非专业的统计学，对数据分析和可视化，乃至整个数据科学都感兴趣。本书非常适合经济管理、新闻传播、社科医学、统计专业的高年级本科生和研究生，对从事数据相关工作的商业分析师和算法工程师会非常有帮助，对有志从事数据科学的其它专业学生和已从事相关工作的人也有价值。
+
+> 国内外介绍统计图形的书肯定不止这一本，本书独特的价值在哪里？
+
+本书从数据和场景出发，应用性会非常强，其次，数据分析、可视化和信息展示的过程可重复，既照顾到技术的快速发展又有很强的稳定性，结合作者多年来从事数据科学工作的实践经验，从学以自用到学以致用，相信会很有参考意义。
+
+> 你为什么要写这样一本书，你的创作初衷是什么？
+
+我在读本科学习数理统计的时候接触了 R 语言，自此和数据可视化结缘，曾也专注于统计理论的学习，但越学越觉得建立统计直觉比学习理论更加的重要。工作后，一直从事数据分析相关的工作，从本科以来就有记笔记的习惯，读研究生的时候接触了 **rmarkdown** 和 **bookdown**，线下笔记可以很好的线上化，分门别类，不少人也知道我的一些技术笔记在 Github 上迭代过好几轮，经年累月，受益匪浅，持续的技术和业务沉淀让我决心以出版书籍的标准再次整理笔记和素材。
+
+> 你为什么选择 R 语言？
+
+R 语言在统计图形方面不仅走得早还走的远，当然，Python 语言也不错，近年来新起的 Julia 语言也很好。R 语言在统计图形方面的沉淀是非常深厚的，近年来，我发现越是简洁的越是优美，灵活的东西使用起来还非常简单，以 R 包 **datasets**内的数据集 PlantGrowth 为例，一般地，展示数据的分布会想到箱线图、直方图、密度图等，R 函数的泛型设计可以根据数据对象和变量的类型自动选择合适的图形，图\@ref(fig:plant-growth) 是泛型函数 `plot()` 调用普通函数 `boxplot()` 和 `spineplot()` 绘制的。
+
+```{r plant-growth, fig.cap="影响植物生长的因素", fig.subcap=c("箱线图", "脊柱图"), out.width='50%', fig.width=4.5, fig.height=4, fig.showtext=TRUE, fig.ncol=2, echo=FALSE}
+opar <- par(no.readonly = TRUE)
+on.exit(par(opar), add = TRUE)
+par(mar = c(4, 4, 1.1, 2.5))
+plot(weight ~ group, data = PlantGrowth, family = "Noto Sans", ann = FALSE)
+title(xlab = "组", ylab = "植物干重", family = "Noto Serif SC")
+plot(cut(weight, 2) ~ group,
+  data = PlantGrowth, # ann = FALSE 不能去掉坐标轴标签
+  family = "Noto Sans", xlab = "", ylab = ""
+)
+title(xlab = "组", ylab = "植物干重", family = "Noto Serif SC")
 ```
 
+所以，直接调用相应的绘图函数也是可以的，如下：
+
+```{r spinograms, eval=FALSE, echo=TRUE}
+boxplot(weight ~ group, data = PlantGrowth, ylab = "植物干重", xlab = "组")
+spineplot(cut(weight, 2) ~ group, data = PlantGrowth, ylab = "植物干重", xlab = "组")
+```
+
+脊柱图是马赛克图的一种特殊情况，也可以看做是堆积条形图的推广形式或者直方图的扩展。上面 `cut()` 函数的作用是将数值型变量 weight 分桶，对照组（control，简写 ctrl）和两个不同的实验组（treatment，简写 trt）都按同样的划分方式分作两桶。
+
+```{r plant-growth-group}
+dat <- transform(PlantGrowth, weight_bucket = cut(weight, 2))
+aggregate(data = dat, weight ~ weight_bucket + group, FUN = length)
+```
+
+> 小小年纪，你凭什么可以写这样一本书？
+
+首先，我要感谢我的家人支持我持续地投入时间和精力去做这样一件事，其次，我要感谢一路走来得到诸多朋友的帮助，比如统计之都的谢益辉、刘思喆等，还要感谢 R 语言社区，涌现了这么多优秀的 R 包，让 R 语言走进课堂、科研、企业，挖掘数据的潜能，受此感召，时不我待，为数据科学的蓬勃发展贡献自己的力量。
+
+> 国内外，相关书籍的概况如何？
+
+早年比较经典的书籍包括《Graphics of Large Datasets: Visualizing a Million》[@Unwin2006] 和《Handbook of Data Visualization》[@Chen2008]。近些年，新的可视化工具和技术日趋成熟，《R Graphics》主要介绍了 R 语言环境中栅格绘图系统 [@Paul2018]。在此基础上，衍生出 **ggplot2** 扩展包，它基于图形语法，建立了从数据到图形的映射。[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) 主要介绍了 **ggplot2** 绘图技法 [@Wickham2016]，紧接着出现了以 ggplot2 为主的图形食谱 [R Graphics Cookbook](https://r-graphics.org/) [@Chang2018]，主要解决读者作图过程中常碰到的问题。而《Displaying Time Series, Spatial, and Space-Time Data with R》[@Oscar2018] 针对时间序列数据、空间数据和时空数据提供了详细的介绍，《Interactive web-based data visualization with R, plotly, and shiny》[@Sievert2020] 着重介绍了以 **plotly** 和 **shiny** 为代表的图形交互能力。
+Kieran Healy 的 [Data Visualization: A practical introduction](https://socviz.co/) [@Healy2019] 和
+Claus O. Wilke 的 [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) [@Wilke2019] 由浅入深地介绍了数据可视化的要素和原则，而 Thomas Rahlf 的《Data Visualisation with R》[@Rahlf2019] 提供了丰富的示例。国内陈为老师的《数据可视化》[@Chen2019] 也非常值得一看。
+
+> 你觉得数据可视化的核心价值是什么？
+
+anscombe 数据集来自 R 软件内置的 R 包 **datasets**，它包含四组数据 $(x_i, y_i), i =1,2,3,4$，如表\@ref(tab:anscombe-datasets)所示， 用统计的方法发现四组数据的样本均值、方差、相关系数和回归系数几乎是相同的，实际上，借助散点图\@ref(fig:anscombe) 分别描述各组数据的关系时，却发现四组数据之间有极大的差异 [@Anscombe1973]。统计计算和统计图形分别描述量与形，定量和定性，可以相互补充。
+
+```{r anscombe-datasets, echo=FALSE}
+library(knitr)
+library(kableExtra)
+new_order <- unlist(lapply(1:4, function(x) paste(c("x", "y"), x, sep = "")))
+kable(anscombe[, new_order], caption = "anscombe 数据集", booktabs = T) |>
+  kable_styling() |>
+  add_header_above(c("第1组" = 2, "第2组" = 2, "第3组" = 2, "第4组" = 2)) |> 
+  kable_classic()
+```
+
+```{r anscombe, fig.cap="数据可视化很重要", fig.showtext=TRUE, out.width='85%', fig.width=6, fig.height=6, echo=FALSE}
+data(anscombe)
+form <- sprintf("y%d ~ x%d", 1:4, 1:4)
+fit <- lapply(form, lm, data = anscombe)
+par(mfrow = c(2, 2), mgp = c(2, 0.7, 0), mar = c(3, 3, 1, 1) + 0.1, oma = c(0, 0, 2, 0))
+for (i in 1:4) {
+  plot(as.formula(form[i]),
+    data = anscombe, col = "black",
+    pch = 20, xlim = c(3, 19), ylim = c(3, 13),
+    xlab = as.expression(substitute(x[i], list(i = i))),
+    ylab = as.expression(substitute(y[i], list(i = i))),
+    family = "Noto Sans"
+  )
+  abline(fit[[i]], col = "black")
+  text(
+    x = 7, y = 12, family = "Noto Sans",
+    labels = bquote(R^2 == .(round(summary(fit[[i]])$r.squared, 3)))
+  )
+}
+mtext("数据集的四重奏", outer = TRUE, family = "Noto Serif SC")
+```
+
+> 你觉得 Base R 作图的不足之处有哪些？
+
+值得一提的是，**plotrix** [@plotrix2006]、**scatterplot3d** [@scatterplot3d2003]、**misc3d** [@misc3d2008] 和 **plot3D** [@plot3D2021] 加强了 Base R 在制作三维图形方面的能力。但归根结底，很多时候束缚住自己的不是工具，而是视野和思维。
+
+```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='60%', fig.width=6, fig.height=5.5, fig.showtext=TRUE, echo=FALSE}
+library(plot3D)
+image2D(volcano,
+  shade = 0.2, rasterImage = TRUE,
+  xlab = "南北方向", ylab = "东西方向",
+  main = "Maunga Whau 地形图",
+  contour = FALSE,
+  colkey = list(
+    at = seq(90, 190, by = 20),
+    labels = seq(90, 190, by = 20), 
+    length = 1, width = 1
+  ),
+  family = "Noto Serif SC",
+  clab = "高度\n(米)",
+  col = gray.colors(100)
+)
+```
+
+正因为有所不足，所以我也不会纠结于工具层面的东西，什么好用用什么！三维图\@ref(fig:plot3d-tikz) 是用 LaTeX 里的优秀绘图工具 TikZ 制作的，细心的读者会发现本书多次用到这个工具。
+
+```{r plot3d-tikz, engine="tikz", echo=FALSE, cache=TRUE, fig.cap="TikZ 绘制三维图", out.width='50%', engine.opts=list(extra.preamble=c("\\usepackage{pgfplots}","\\pgfplotsset{width=7cm,compat=1.17}"))}
+\begin{tikzpicture}
+\begin{axis}[
+    hide axis,
+    colormap/viridis, % blackwhite
+]
+\addplot3[
+    mesh,
+    samples=50,
+    domain=-8:8,
+]
+{sin(deg(sqrt(x^2+y^2)))/sqrt(x^2+y^2)};
+% \addlegendentry{$\frac{\sin(r)}{r}$}
+\end{axis}
+\end{tikzpicture}
+```
+
+
+> 创作本书的过程中，有什么值得借鉴和学习的地方？
+
+自 2021 年 8 月 22 日以来，累计提交量随时间的变化情况如图 \@ref(fig:book-commit)，记录了作者创作的历程。
+
+```{r setup-git, include=FALSE}
+library(gert)
+git_config_set("user.name", "XiangyunHuang")
+git_config_set("user.email", "xiangyunfaith@outlook.com")
+```
+```{r book-commit, fig.cap="累计提交量变化趋势", echo=FALSE, fig.showtext=TRUE, out.width='50%', fig.width=4.5, fig.height=3.5}
+library(gert)
+dat <- git_log(max = 1000)
+library(ggplot2)
+dat <- transform(dat,
+  date = format(time, "%Y-%m-%d"),
+  year = format(time, "%Y") ,
+  month = format(time, "%m"),
+  weekday = factor(format(time, "%a"),
+    levels = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+  ),
+  week = as.integer(format(time, "%W"))
+)
+
+dat <- aggregate(formula = commit ~ year + month, data = dat, FUN = length)
+
+ggplot(data = dat, aes(x = month, y = cumsum(commit), fill = year)) +
+  geom_bar(stat = "identity", position = "dodge2") +
+  scale_fill_grey() +
+  labs(x = "月份", y = "累计提交量", fill = "年份") +
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
+  theme(title = element_text(family = "Noto Serif SC"))
+```
+
+> 你也认为饼图很糟糕吗？
+
+更多时候推荐条形图或柱形图替代饼图。
+
+```{r virginia-deaths, fig.cap="1940年弗吉尼亚州死亡率", out.width='75%', fig.width=6, fig.height=6, fig.showtext=TRUE, echo=FALSE}
+dat <- transform(expand.grid(
+  site = c("乡村", "城镇"), sex = c("男", "女"), 
+  age = c("50-54", "55-59", "60-64", "65-69", "70-74")
+), deaths = as.vector(t(VADeaths)) / 1000)
+ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
+  geom_col(position = "dodge2") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_fill_grey(start = 0.8, end = 0.2) +
+  facet_wrap(~site, ncol = 1) +
+  theme_bw(base_size = 13, base_family = "Noto Serif SC") +
+  labs(x = "性别", y = "死亡率", fill = "年龄") +
+  theme(
+    axis.text.y = element_text(family = "Noto Sans"),
+    legend.text = element_text(family = "Noto Sans")
+  )
+```
+
+> 你觉得应该怎样学习数据可视化？
+
+向优秀的作品学习，然后在实践中锤炼，总结属于自己的经验，提炼属于自己的方法论。
+[SciPy](https://www.scipy2020.scipy.org/plotting-contest) 每年都会举办绘图比赛，为了纪念 [matplotlib](https://matplotlib.org/) 的创建者 John Hunter，旨在强调科学探索过程中数据可视化的重要性和展示开源软件的可视化能力。
+
+> 最令你印象深刻的可视化作品是哪个？
+
+数据来源于：<https://www.gapminder.org/data/>，落后国家、发展中国家、发达国家存在明显的分层现象，而且扎堆
+
+```{r gapminder, fig.cap="2002 年全球 142 个国家和地区国民寿命和生产总值之间的关系", out.width='75%', fig.width=7.5, fig.height=5, fig.showtext=TRUE, echo=FALSE}
+library(gapminder)
+library(ggrepel)
+ggplot(
+  data = gapminder[gapminder$year == 2002, ],
+  aes(x = gdpPercap, y = lifeExp)
+) +
+  geom_point(aes(size = pop / 10^6, color = continent), alpha = 0.5) +
+  geom_text_repel(
+    data = gapminder[gapminder$year == 2002 & gapminder$pop > 50 * 10^6, ],
+    aes(size = pop/(5*10^7), label = country), 
+    alpha = 0.7, max.overlaps = 50, segment.colour = "gray", seed = 2021
+  ) +
+  scale_x_log10() +
+  scale_size(breaks = c(1, 10, 100, 1000), range = c(1, 30)) +
+  labs(
+    x = "国民生产总值（美元，对数尺度）", y = "寿命（年）",
+    size = "人口数量\n（百万）", color = "地区"
+  ) +
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
+  theme(title = element_text(family = "Noto Serif SC"))
+```
+
+> 你准备在书里介绍统计理论，范围是什么？深度如何？
+
+统计部分覆盖面是数理统计的常规内容，涉及抽样分布（常见正态、$t$ 和$\chi^2$ 分布），参数估计（点估计、区间估计和估计方法三方面的内容）和假设检验（参数、非参数检验及其检验理论）。不会过多重复普通教材的内容，教材内已有的会点到即止，重点在彼此的联系，基础概念的深刻理解，又要保持通俗易懂。
+
+```{r triangle, engine="tikz", echo=FALSE, fig.cap="数理统计", engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usetikzlibrary{mindmap}")), out.width="45%"}
+\begin{tikzpicture}[align=center]
+  \node (sampling-distributions) at (2, 0) [concept, concept color=orange] {抽样分布};
+  \node (parameter-estimators) at (-2, 0) [concept, concept color=teal] {参数估计};
+  \node (hypothesis-tests) at (0, -3) [concept, concept color=blue!60!black, text=white] {假设检验};
+
+  \path (sampling-distributions) to[circle connection bar switch color=from (orange) to (teal)] node[above=1ex, font=\small] {极限定理} (parameter-estimators);
+  \path (parameter-estimators) to[circle connection bar switch color=from (teal) to (blue!60!black)] node[left=1ex, font=\small] {N-P引理} (hypothesis-tests);
+  \path (hypothesis-tests) to[circle connection bar switch color=from (blue!60!black) to (orange)] node[right=1ex, font=\small] {大数定律} (sampling-distributions);
+\end{tikzpicture}
+```
+
+
+> 你准备在书里介绍机器学习，范围是什么？深度如何？
+
+结合自己在工作这几年的所见所闻，又考虑到本书的定位，理论的范围以 [Spark 的机器学习库](https://spark.apache.org/docs/latest/ml-guide.html) 为参照
+
+> 你多年从事数据相关的工作，你怎么看待数据科学？
+
+我很多人都看过 Hadley Wickham 和 Garrett Grolemund 合著的《R for Data Science》[@Hadley2017]，书里对数据科学的描述大致如图 \@ref(fig:data-science) 所示，实际上数据收集可不是调几个 R 包，不同学科，如经济管理会发问卷，物理做实体或模拟实验，互联网在 App 内埋点收集数据。收集数据之前要做好试验设计，试验设计之前要提出好问题，如何发现、定义和界定问题其实是最难的部分，不仅需要熟悉全链路的技术环节，还要知晓各个岗位的职责边界，既要像万花筒那样深根自己的领域，又要学会像八抓鱼那样获取团队、部门和公司内外的有效输入，还要以强大的执行力推动问题解决。
+
+```{r data-science, engine="tikz", echo=FALSE, cache=TRUE, fig.cap="数据科学", engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usetikzlibrary{mindmap}"))}
+\begin{tikzpicture}[scale=1,transform shape]
+  \path[mindmap,concept color=blue,text=white]
+    node[concept] {\Large 数据科学}
+    [clockwise from=0]
+    child[concept color=green!50!black] {
+      node[concept] {数据操作}
+      [clockwise from=90]
+      child { node[concept] {data.table} }
+      child { node[concept] {dplyr} }
+      child { node[concept] {Base R} }
+      child { node[concept] {tidyr} }
+    }  
+    child[concept color=blue!50!black] {
+      node[concept] {数据建模}
+      [clockwise from=-30]
+      child { node[concept] {glmnet} }
+      child { node[concept] {xgboost} }
+      child { node[concept] {lightgbm} }
+    }
+    child[concept color=red] { 
+      node[concept] {数据收集} 
+      [clockwise from=-90]
+      child { node[concept] {readr} }
+      child { node[concept] {readxl} }
+    }
+    child[concept color=orange] { 
+      node[concept] {数据清洗} 
+      [clockwise from=-90]
+      child { node[concept] {stringr} }
+      child { node[concept] {rvest} }
+      child { node[concept] {xml2} }
+      child { node[concept] {httr} }
+    }
+    child[concept color=red!40!black] {
+      node[concept] {数据交流}
+      [clockwise from=145]
+      child { node[concept] {R Markdown} }
+      child { node[concept] {R Shiny} }
+    }
+    child[concept color=pink!80!black] {
+      node[concept] {数据探索}
+      [clockwise from=145]
+      child { node[concept] {tidyverse} }
+      child { node[concept] {tidymodels} }
+      child { node[concept] {mlr3verse} }
+    };
+\end{tikzpicture}
+```
+
+
+> 你写书的心路历程是怎样的？经历过怎样的认知迭代？
+
+探索数据科学的旅程如邓宁-克鲁格认知迭代曲线 \@ref(fig:dk-curve)， 经历不知道自己不知道的愚昧阶段，知道自己不知道的绝望阶段，知道自己知道的开悟阶段，经过漫长的修行到达不知道自己知道的大师阶段。
+
+我也经历了放弃，放弃一段时间后，偶然看到某篇文章、某本书或者某个讲座上某个人说过的某句话，灵光一现，又再捡起来，会有完全不同的想法冒出来，过程很奇妙，有柳暗花明又一村的感觉！比如书中关于二项分布的参数 $p$ 在不同的区间估计下，参数 $p$ 与覆盖概率的关系，见图\@ref(fig:coverage)，其实，早在2020年5月就埋下[伏笔](https://d.cosx.org/d/421502)了。 
+
+我原以为自己是统计科班出身，研究生学习数理统计还算扎实，想必读几十年前关于数理统计的论文会比较容易，遂先从置信区间开始，哪知即遭当头一棒，C. J. Clopper 和 E. S. Pearson 在 1934 年合作的论文 @Clopper1934 我竟前前后后读了近两年时间才自觉明白。为什么呢？近百年过去了，一些提法和现在的书不同了，加之已有一些先入为主的概念阻碍了我，又是利用工作之余的时间在读，缺乏连续性，当年在学校里侧重知识的灌输而不是思维的训练，对基本概念缺乏追根溯源式的深入学习。
+
+```{r dk-curve, engine="tikz", echo=FALSE, cache=TRUE, out.width="50%", fig.cap="邓宁-克鲁格认知迭代曲线", engine.opts=list(extra.preamble="\\usepackage[fontset=fandol]{ctex}")}
+\begin{tikzpicture}[scale=2,transform shape]
+\draw[<->, thick] (8,0) node[below]{大师} -- (0,0) node[left]{低} -- (0,7) node[left]{高};
+\draw (4,0) node[below]{\textbf{智慧}} -- (0,0) node[below right]{巨婴} -- (0,4.5) node[above left, rotate=90]{\textbf{自信程度}};
+\draw (1, 5.5) node[above]{愚昧山峰};
+\draw (2, 0.2) node[above]{绝望山谷};
+\draw (4.5, 3) node[above, rotate=60]{开悟之旅};
+\draw (7, 6) node[above]{持续平稳高原};
+\draw (4, -0.5) node[below]{\textbf{（知识\texttt{+}经验）}};
+\draw[very thick] (0,0) to [out=80,in=100] (1,5) 
+    to [out=-80,in=100] (1.5, 1) to [out=-80,in=230] (6,5)
+    to [out=50,in=190] (8, 6);
+\end{tikzpicture}
+```
+
+> 你写书的执行过程是怎样的？你觉得自己的执行力如何？
+
+写书首先是善心，把思维的光华而不是糟粕分享给读者；其次是耐心，它是一个长期性的项目，期间涉及个人创作、出版沟通、家庭生活和工作学习，不要独立地看待写书这个事情；最后需要决心，强大的执行力才是最后成事的关键，再好的想法不付诸实践最后都只是空想。
+
+```{r algo, engine="tikz", echo=FALSE, fig.cap="执行过程", out.width="75%", cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usepackage{smartdiagram}"))}
+\smartdiagramset{uniform color list=gray!40!white for 10 items}
+\smartdiagram[descriptive diagram]{
+  {规划, 选择主题，权衡广度、深度和远度},
+  {学习, 回炉再造，重拾基本概念和前辈思想},
+  {共情, 换位思考，阳春白雪和下里巴人结合},
+  {执行, 精雕细琢，收集反馈和持续优化迭代}}
+```
+
+> 你为什么要讲创作的心路历程？
+
+因为我觉得过程比结果重要，身临其境才有感同身受，培养延迟满足感很重要，2019年我在论坛发问：[书应该怎么写才符合素质教育的理念？](https://d.cosx.org/d/421159)。国内外有大量非常好的书籍介绍统计学史，一些基本概念的来龙去脉，比如《Past, Present, and Future of Statistical Science》[@Lin2014]、《Fisher, Neyman, and the Creation of Classical Statistics》[@Lehmann2011]、《The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century》[@Salsburg2001]、《Statisticians of the Centuries》[@Heyde2001] 和《Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present》 [@Johnson1997]，国内也有很多，比如陈希孺先生的《统计学漫话》[@Chen2016] 和《数理统计学简史》[@Chen2000]，还有人物传记类，比如《Neyman》[@Reid1982]、《漫漫修远攻算路：方开泰自述》 [@Fang2016] 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 [@Xu2010]，还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》[@Jeff1986]和《统计学者的工作及风范：灵感、抱负、雄心》[@Jeff2011]，以及他 2018 年在北大的讲座 [对中国统计发展的一些浅见](https://www.stat.pku.edu.cn/xwzx/xw/98359.htm)，还有2010年新办的杂志[《数学文化》](https://www.global-sci.com/mc.html)，统计之都也有大量访谈形式的文章，非常值得一读。真是篇幅所限，没法一一列举。培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！

@@ -7,9 +7,7 @@
 \usepackage[labelfont=bf,singlelinecheck=off,textfont=it,justification=centering]{caption}
 
 \usepackage{bookmark}
-\bookmarksetup{
-open,
-numbered,
+\bookmarksetup{open,numbered,
 depth=2, %设置PDF的书签级别,2显示到subsection,3显示到subsubsection
 addtohook={%
 \ifnum\bookmarkget{level}=0 % chapter
@@ -63,8 +61,6 @@ addtohook={%
 \newtcolorbox{rmdinfo}{
   colframe=colorinfo % 边框色
 }
-
-\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},formatcom=\xeCJKVerbAddon}
 
 \usepackage{makeidx}
 \makeindex

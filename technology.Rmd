@@ -1,5 +1,6 @@
 # (PART) 技术专题 {-}
 
 # 介绍 {#part-technology .unnumbered}
+\chaptermark{介绍}
 
 技术专题

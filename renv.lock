@@ -326,10 +326,10 @@
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
-      "Version": "1.5.3",
+      "Version": "1.5.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6fdaa86d0700f8b3e92ee3c445a5a10d"
+      "Hash": "76147821cd3fcd8c4b04e1ef0498e7fb"
     },
     "httr": {
       "Package": "httr",
@@ -375,10 +375,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.33",
+      "Version": "1.34",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0bc1b5da1b0eb07cd4b727e95e9ff0b8"
+      "Hash": "aa958054ac6f0360926bb952ea302f0f"
     },
     "labeling": {
       "Package": "labeling",
@@ -422,13 +422,6 @@
       "Repository": "CRAN",
       "Hash": "41287f1ac7d28a92f0a286ed507928d3"
     },
-    "markdown": {
-      "Package": "markdown",
-      "Version": "1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
-    },
     "mgcv": {
       "Package": "mgcv",
       "Version": "1.8-36",
@@ -452,10 +445,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-152",
+      "Version": "3.1-153",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "35de1ce639f20b5e10f7f46260730c65"
+      "Hash": "2d632e0d963a653a0329756ce701ecdd"
     },
     "nnet": {
       "Package": "nnet",
@@ -554,6 +547,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "1fb097f233ee98968f8e5d0bcd42df6d"
+    },
+    "rootSolve": {
+      "Package": "rootSolve",
+      "Version": "1.8.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "04769b4916d6d20d7c37f992472c5c1b"
     },
     "rpart": {
       "Package": "rpart",

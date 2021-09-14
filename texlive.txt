@@ -59,6 +59,7 @@ setspace
 smartdiagram
 soul
 sourcecodepro
+sourcesanspro
 standalone
 subfig
 tabu

@@ -321,6 +321,7 @@ R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 
 ```{r package-info}
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
-  "showtext", "tikzDevice", "magick", "pdftools", "renv"
+  "showtext", "tikzDevice", "magick", "pdftools", "renv",
+  "gapminder", "ggrepel", "rootSolve"
 ), dependencies = TRUE)
 ```

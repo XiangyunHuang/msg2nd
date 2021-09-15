@@ -255,8 +255,8 @@ ggplot(
 
 ```{r triangle, engine="tikz", echo=FALSE, fig.cap="数理统计", engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usetikzlibrary{mindmap}")), out.width="45%"}
 \begin{tikzpicture}[align=center]
-  \node (sampling-distributions) at (2, 0) [concept, concept color=orange] {抽样分布};
-  \node (parameter-estimators) at (-2, 0) [concept, concept color=teal] {参数估计};
+  \node (sampling-distributions) at (2, 0) [concept, concept color=orange, text=white] {抽样分布};
+  \node (parameter-estimators) at (-2, 0) [concept, concept color=teal, text=white] {参数估计};
   \node (hypothesis-tests) at (0, -3) [concept, concept color=blue!60!black, text=white] {假设检验};
 
   \path (sampling-distributions) to[circle connection bar switch color=from (orange) to (teal)] node[above=1ex, font=\small] {极限定理} (parameter-estimators);
@@ -333,7 +333,7 @@ ggplot(
 
 我原以为自己是统计科班出身，研究生学习数理统计还算扎实，想必读几十年前关于数理统计的论文会比较容易，遂先从置信区间开始，哪知即遭当头一棒，C. J. Clopper 和 E. S. Pearson 在 1934 年合作的论文 @Clopper1934 我竟前前后后读了近两年时间才自觉明白。为什么呢？近百年过去了，一些提法和现在的书不同了，加之已有一些先入为主的概念阻碍了我，又是利用工作之余的时间在读，缺乏连续性，当年在学校里侧重知识的灌输而不是思维的训练，对基本概念缺乏追根溯源式的深入学习。
 
-```{r dk-curve, engine="tikz", echo=FALSE, cache=TRUE, out.width="50%", fig.cap="邓宁-克鲁格认知迭代曲线", engine.opts=list(extra.preamble="\\usepackage[fontset=fandol]{ctex}")}
+```{r dk-curve, engine="tikz", echo=FALSE, cache=TRUE, out.width="60%", fig.cap="邓宁-克鲁格认知迭代曲线", engine.opts=list(extra.preamble="\\usepackage[fontset=fandol]{ctex}")}
 \begin{tikzpicture}[scale=2,transform shape]
 \draw[<->, thick] (8,0) node[below]{大师} -- (0,0) node[left]{低} -- (0,7) node[left]{高};
 \draw (4,0) node[below]{\textbf{智慧}} -- (0,0) node[below right]{巨婴} -- (0,4.5) node[above left, rotate=90]{\textbf{自信程度}};

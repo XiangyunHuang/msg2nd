@@ -90,6 +90,7 @@ jobs:
       - name: Install LaTeX Packages
         run: |
           tinytex::tlmgr_install(readLines("texlive.txt"))
+          tinytex::tl_pkgs()
         shell: Rscript {0}
 
       - name: Render Book

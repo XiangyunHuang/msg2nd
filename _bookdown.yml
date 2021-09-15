@@ -12,6 +12,8 @@ language:
     chapter_name: ["第 ", " 章"]
     appendix_name: ["附录 "]
 
+clean: ["*.log"]
+
 rmd_files:
 - "index.Rmd"
 

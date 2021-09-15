@@ -5,6 +5,7 @@ options(
   crayon.enabled = FALSE,
   tinytex.engine = 'xelatex',
   tikzDefaultEngine = "xetex",
+  bookdown.clean_book = TRUE,
   tikzDocumentDeclaration = "\\documentclass[tikz]{standalone}\n",
   tikzXelatexPackages = c(
     "\\usepackage[fontset=fandol]{ctex}",

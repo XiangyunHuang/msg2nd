@@ -304,7 +304,7 @@ kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |>
 ```{r skills, engine="tikz", fig.cap="《现代统计图形》的技能栈", out.width="65%", echo=FALSE, cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[default]{sourcesanspro}","\\usepackage[fontset=fandol]{ctex}", "\\usepackage{smartdiagram}"))}
 \smartdiagramset{planet color=gray!40!white, uniform color list=gray!40!white for 10 items}
 \smartdiagram[bubble diagram]{基础技能,
-  编辑~/\\ (RStudio), 组织~/\\ (bookdown), 协作~/\\ (Git), 排版~/\\ (LaTeX/Pandoc), 编译~/\\ (GitHub Action)}
+  编辑~\\ (RStudio), 组织~\\ (bookdown), 协作~\\ (Git), 排版~\\ (LaTeX/Pandoc), 编译~\\ (GitHub Action)}
 ```
 
 

@@ -45,7 +45,7 @@ jobs:
       - name: Install Pandoc
         uses: r-lib/actions/setup-pandoc@v1
         with:
-          pandoc-version: '2.11.4'
+          pandoc-version: '2.14.1'
 
       - name: Install ghostscript and Others
         run: |

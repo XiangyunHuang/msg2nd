@@ -124,7 +124,7 @@ mtext("数据集的四重奏", outer = TRUE, family = "Noto Serif SC")
 
 值得一提的是，**plotrix** [@plotrix2006]、**scatterplot3d** [@scatterplot3d2003]、**misc3d** [@misc3d2008] 和 **plot3D** [@plot3D2021] 加强了 Base R 在制作三维图形方面的能力。但归根结底，很多时候束缚住自己的不是工具，而是视野和思维。
 
-```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='60%', fig.width=6, fig.height=5.5, fig.showtext=TRUE, echo=FALSE}
+```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='60%', fig.width=6, fig.height=5.5, fig.showtext=TRUE, echo=FALSE, warning=FALSE}
 library(plot3D)
 image2D(volcano,
   shade = 0.2, rasterImage = TRUE,

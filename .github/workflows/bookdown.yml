@@ -29,6 +29,9 @@ jobs:
     env:
       LANG: "en_US.UTF-8"
       TZ: "Asia/Shanghai"
+      DISPLAY: ':99.0'
+      RGL_USE_NULL: TRUE
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repo

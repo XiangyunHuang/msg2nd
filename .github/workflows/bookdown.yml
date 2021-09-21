@@ -96,6 +96,12 @@ jobs:
           tinytex::tl_pkgs()
         shell: Rscript {0}
 
+      - name: Install fonts
+        run: |
+          library(showtext)
+          font_install(source_han_serif(), quiet = TRUE)
+        shell: Rscript {0}
+
       - name: Render Book
         id: render-book
         run: |

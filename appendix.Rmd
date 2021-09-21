@@ -4,11 +4,83 @@
 
 ```{r setup-appendix, echo=FALSE}
 source(file = "_common.R")
-sysfonts::font_add_google(name = "Noto Sans")
-sysfonts::font_add_google(name = "Noto Serif SC")
 ```
 
+<!-- 
 https://github.com/XiangyunHuang/masr/issues/19
+Epilogue 结语 后记 afterword postscript backmatter
+序言 序幕 preface foreword prologue
+提及的书籍都是正式出版的，未出版的都会加以说明
+时间线，深度学习框架初次发布的时间点
+-->
+
+数据分析是未来，涉及一系列的问题，如何出发，如何分析，如何理论，如何收获，如何应用，如何推广。用 R 语言讲好数据故事 [@Machlis2018]。
+
+Karl Pearson 那个时代，生物统计系，达尔文进化论能被人所接受，我觉得很大部分是因为有大量的数据所支撑，来自世界各地的人给实验室寄去了各类标本，实验室做了大量的数据分析工作，主要的工具就是描述性统计（如均值、方差、相关系数等）和 Pearson 卡方检验（后来被 R. A. Fisher 改进了自由度），当时已经有线性模型、Pearson 相关系数，但是没有构建严格的数学理论，这个严格化的工作，包括假设检验等，后来主要由 Jerzy Neyman 和 Egon S. Pearson 完成。如果大家去仔细看相关的历史故事，会发现和如今有惊人的相似之处，就是算法和模型等工具已经在广泛使用，但是不知道它的理论基础，比如现在的深度学习为什么那么有效，这也同样带给人非常大的兴奋点，按照历史的发展轨迹来看，其严格化的数学基础应该会在我辈有生之年里建立起来。这方面的典范是 从可加逻辑回归这一统计模型的角度看梯度提升[@Friedman2000]。
+
+<!--
+https://youtu.be/quoU5fjKBqo 结合历史资料给出一个时间轴图
+-->
+
+数据分析、可视化、探索性分析、可解释性、可重复性的关注度越来越高，其重要性不言而喻[@Tukey1977]，
+方差分析从一开始就是数据分析[@Scheffe1959]，数据分析的未来 [@Tukey1962]，数据分析设计原则 [@McGowan2021]。借助 R 语言这一优秀的统计分析和计算环境，过渡到现代数据科学 [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/)，数据科学导论：数据分析和预测算法[@Irizarry2019]。
+
+
+- 稳定性：可重复性对任何科学发现都是至关重要的，是稳定性的重要方面，实现稳定性从数据扰动入手的有 Jacknife、bootstrap、交叉验证，从模型扰动入手有稳健统计 [@Yu2013]。可重复性危机是使用方式不当，甚至是滥用所致，Russell A. Poldrack 深有感触，故而回到写书的教育工作[@Poldrack2021]。
+
+- 可视化：受 [Michael Friendly](https://www.datavis.ca/) 的著作《Visualizing Categorical Data》[@Friendly2000] 的启发，David Meyer 开发了 R 包 **vcd** [@Meyer06]，而后，二人一起合著《Discrete Data Analysis with R》[@Friendly2016]，Michael Friendly 继续开发了 [vcdExtra](https://github.com/friendly/vcdExtra) 包，扩展很多绘图能力。Antony Unwin 的《Graphical Data Analysis with R》[@Unwin2015] 和 Robert Kabacoff 的[Data Visualization with R](https://rkabacoff.github.io/datavis/)[^rkabacoff] 非常适合入门。
+
+[^rkabacoff]: Robert Kabacoff 是 《R in Action: Data Analysis and Graphics with R》 的作者，并维护了
+<https://www.statmethods.net/> 网站
+
+- 统计分析：贝叶斯数据分析经典教材当属 Andrew Gelman 等人合著的《Bayesian Data Analysis》 [@Gelman2013]，读者可跟随 [Aki Vehtari](https://avehtari.github.io/) 的课程 [Bayesian Data Analysis](https://avehtari.github.io/BDA_course_Aalto/) 一起学习。
+
+- 统计建模：两种文化 [@Breiman2001]，数据科学的50年 [@Donoho2017]，
+[过去50年最重要的8个统计概念](https://arxiv.org/abs/2012.00174)，
+计算贝叶斯：从1976年至21世纪的贝叶斯计算 [@Martin2020]
+
+- 统计检验：多重检验中的控制错误发现率 FDR [@Benjamini1995]，功效分析 [@Cohen1988]，列联表的统计分析 [@Fagerland2017]。关于假设检验，重新定义假设检验 [@Benjamin2017]，统计假设显著性退休吧 [@Amrhein2019] 逃离 $p<0.05$ 的世界 [@Wasserstein2019]。
+
+- 可解释性：模型的可解释性受到越来越多的关注和重视 [@Biecek2021;@Molnar2020]，而因果关系的发现和利用变得越来越重要[@Miguel2020]。
+可解释性机器学习的定义、方法和应用[@Murdoch2019]
+
+- 新方向：《自然》杂志发布深度学习 [@LeCun2015] 开启深度学习的浪潮，
+如雨后春笋，涉及数据科学的理论、模型、算法，机器翻译 [@Bishop2006;@Goodfellow2016;@Mohri2018;@Theodoridis2020]，跟随新浪潮，国内神经网络相关的书籍也多如牛毛，
+陆续翻译和创作了一批书籍[@Zhou2016;@Zhao2017;@Qiu2020;@Xiao2021]。如何从统计角度建立深度学习的理论框架是当前热门的方向。机器学习的数学基础 [Mathematics for Machine Learning](https://mml-book.github.io/)[@Deisenroth2020]。Gabriel Peyré 的著作数据科学的数学基础 [Mathematical Foundations of Data Sciences](https://mathematical-tours.github.io/book/)，提供很多个语言版本的实现 [Numerical Tours of Data Sciences](https://www.numerical-tours.com/)。
+
+- 统计理论：统计基础理论 [@Savage1972]，统计学习理论 [@Vapnik1998;@Hastie2009;@Hastie2015;@Efron2016;@James2021]
+
+- 统计软件：继 [Tensorflow](https://github.com/tensorflow/tensorflow)、 [PyTorch](https://github.com/pytorch/pytorch)、 [MXNet](https://github.com/apache/incubator-mxnet) 之后，深度学习框架开始涌现，大厂和创业公司都在涉足，比如[oneflow](https://github.com/Oneflow-Inc/oneflow)
+
+- 知识传递：[G. Elliott Morris](https://github.com/elliottmorris/R-for-political-data) 是杂志《The Economist》的 Data journalist 数据新闻工作者。
+
+
+R 语言应用到各行各业的数据分析，比如
+
+- 用户行为分析：[Enrique Garcia Ceja](https://www.enriquegc.com/) 曾在华为工作，行为监测和分析，机器学习，可穿戴设备，研究了 11 年 行为分析[@Garcia2021]
+
+- 事件历史分析：[eha](https://github.com/goranbrostrom/eha/) [@Brostrom2021] 
+
+- 组织人事分析：
+[Keith McNulty](https://drkeithmcnulty.com/)
+统计里的回归模型应用到组织中的人事分析，在机器学习和深度学习里，预测是主要的工作，而在组织人事分析方面，如何找到原因是更关系的问题。[@McNulty2021]
+
+- 公共政策分析：服务于社会学家和城市规划师，政府数据分析为智慧城市建设献言献策 [@Steif2022;@Urdinez2021]
+
+- 卫生健康分析：空间建模和数据可视化应用于公共卫生健康领域 [@Moraga2019;@Lawson2021;@Haining2021;@Wikle2019;@Andrew2021]
+
+- 社会人口分析：每次人口普查相关的数据公布，都会引发热烈的关注，2021 年完成第七次全国人口普查，发布了一批数据，自古以来，人口和土地是非常重要的资源，如何系统地分析和挖掘其中的信息非常重要。Kyle Walker 以美国的普查数据为分析对象，从方法、地图和模型等多角度，想必是很有参考价值的[@Walker2022]。
+
+- 空间数据分析：空间采样[@Brus2021]
+
+- 教育行业分析：教育行业的数据科学[@Estrellado2020]
+
+
+
+
+
+
+## 区间估计 {#cp-estimator}
 
 首先简单回顾一下什么是区间估计？
 
@@ -66,15 +138,15 @@ plot(
   x = seq(from = 0, to = 10, length.out = 11),
   y = seq(from = 0, to = 1, length.out = 11),
   type = "n", ann = FALSE, panel.first = grid(),
-  family = "Noto Sans"
+  family = "sans"
 )
-title(xlab = "成功次数", ylab = "比例", family = "Noto Serif SC")
+title(xlab = "成功次数", ylab = "比例", family = "source-han-serif-cn")
 lines(x = 0:10, y = p, type = "s") # 朝下的阶梯线
 lines(x = 0:10, y = p, type = "l") # 折线
 # points(x = 0:10, y = p, pch = 16, cex = .8) # 散点
 
 # abline(a = 0, b = 0.1, col = "gray", lwd = 2, lty = 2) # 添加对称线
-text(x = 5, y = 0.5, label = "置信带", cex = 1.5, srt = 45, family = "Noto Serif SC")
+text(x = 5, y = 0.5, label = "置信带", cex = 1.5, srt = 45, family = "source-han-serif-cn")
 # points(x = 5, y = 0.5, col = "black", pch = 16) # 中心对称点
 # points(x = 5, y = 0.5, col = "black", pch = 3) # 中心对称点
 
@@ -87,5 +159,6 @@ text(x = 2, y = 0.55, labels = "p2", pos = 1)
 text(x = 2, y = 0.03, labels = "p1", pos = 3)
 ```
 
+## 假设检验 {#fisher-test}
 
 [Fisher 精确检验](https://en.wikipedia.org/wiki/Fisher's_exact_test)

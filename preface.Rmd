@@ -3,8 +3,6 @@
 
 ```{r setup-preface, echo=FALSE}
 source(file = "_common.R")
-sysfonts::font_add_google(name = "Noto Sans")
-sysfonts::font_add_google(name = "Noto Serif SC")
 # library(showtext)
 # showtext_auto()
 ```
@@ -51,13 +49,13 @@ R 语言在统计图形方面不仅走得早还走的远，当然，Python 语�
 opar <- par(no.readonly = TRUE)
 on.exit(par(opar), add = TRUE)
 par(mar = c(4, 4, 1.1, 2.5))
-plot(weight ~ group, data = PlantGrowth, family = "Noto Sans", ann = FALSE)
-title(xlab = "组", ylab = "植物干重", family = "Noto Serif SC")
+plot(weight ~ group, data = PlantGrowth, family = "sans", ann = FALSE)
+title(xlab = "组", ylab = "植物干重", family = "source-han-serif-cn")
 plot(cut(weight, 2) ~ group,
   data = PlantGrowth, # ann = FALSE 不能去掉坐标轴标签
-  family = "Noto Sans", xlab = "", ylab = ""
+  family = "sans", xlab = "", ylab = ""
 )
-title(xlab = "组", ylab = "植物干重", family = "Noto Serif SC")
+title(xlab = "组", ylab = "植物干重", family = "source-han-serif-cn")
 ```
 
 所以，直接调用相应的绘图函数也是可以的，如下：
@@ -109,37 +107,55 @@ for (i in 1:4) {
     pch = 20, xlim = c(3, 19), ylim = c(3, 13),
     xlab = as.expression(substitute(x[i], list(i = i))),
     ylab = as.expression(substitute(y[i], list(i = i))),
-    family = "Noto Sans"
+    family = "sans"
   )
   abline(fit[[i]], col = "black")
   text(
-    x = 7, y = 12, family = "Noto Sans",
+    x = 7, y = 12, family = "sans",
     labels = bquote(R^2 == .(round(summary(fit[[i]])$r.squared, 3)))
   )
 }
-mtext("数据集的四重奏", outer = TRUE, family = "Noto Serif SC")
+mtext("数据集的四重奏", outer = TRUE, family = "source-han-serif-cn")
 ```
 
 > 你觉得 Base R 作图的不足之处有哪些？
 
 值得一提的是，**plotrix** [@plotrix2006]、**scatterplot3d** [@scatterplot3d2003]、**misc3d** [@misc3d2008] 和 **plot3D** [@plot3D2021] 加强了 Base R 在制作三维图形方面的能力。但归根结底，很多时候束缚住自己的不是工具，而是视野和思维。
 
-```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='60%', fig.width=6, fig.height=5.5, fig.showtext=TRUE, echo=FALSE, warning=FALSE}
-library(plot3D)
-image2D(volcano,
-  shade = 0.2, rasterImage = TRUE,
-  xlab = "南北方向", ylab = "东西方向",
-  main = "Maunga Whau 地形图",
-  contour = FALSE,
-  colkey = list(
-    at = seq(90, 190, by = 20),
-    labels = seq(90, 190, by = 20), 
-    length = 1, width = 1
+```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='65%', fig.width=5, fig.height=3.5, fig.showtext=TRUE, echo=FALSE}
+library(lattice)
+levelplot(volcano,
+  col.regions = hcl.colors,
+  # col.regions = gray.colors,
+  # 去掉图形上、右边多余的刻度线
+  scales = list(
+    x = list(alternating = 1, tck = c(1, 0)),
+    y = list(alternating = 1, tck = c(1, 0))
   ),
-  family = "Noto Serif SC",
-  clab = "高度\n(米)",
-  col = gray.colors(100)
+  par.settings = list(
+    # x/y 轴标签字体，刻度标签字体
+    par.xlab.text = list(fontfamily = "source-han-serif-cn"),
+    par.ylab.text = list(fontfamily = "source-han-serif-cn"),
+    axis.text = list(fontfamily = "sans")
+  ),
+  useRaster = TRUE,
+  xlab = "南北方向", ylab = "东西方向"
 )
+# library(plot3D)
+# image2D(volcano,
+#   shade = 0.2, rasterImage = TRUE,
+#   xlab = "南北方向", ylab = "东西方向",
+#   main = "Maunga Whau 地形图",
+#   contour = FALSE,
+#   colkey = list(
+#     at = seq(90, 190, by = 20),
+#     labels = seq(90, 190, by = 20),
+#     length = 1, width = 1
+#   ),
+#   family = "source-han-serif-cn",
+#   clab = "高度\n(米)",
+#   col = gray.colors(100)
+# )
 ```
 
 正因为有所不足，所以我也不会纠结于工具层面的东西，什么好用用什么！三维图\@ref(fig:plot3d-tikz) 是用 LaTeX 里的优秀绘图工具 TikZ 制作的，细心的读者会发现本书多次用到这个工具。
@@ -161,8 +177,24 @@ image2D(volcano,
 \end{tikzpicture}
 ```
 
+另一个值得一提的是 **lattice** 的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及
+
+```{r lattice-theme-settings, fig.cap="lattice 主题设置", echo=FALSE, out.width="95%", fig.width=6.5, fig.height=6.5, fig.showtext=TRUE}
+library(lattice)
+show.settings(x = trellis.par.set(list(
+  axis.text = list(fontfamily = "sans"), # 轴标签
+  add.text = list(fontfamily = "mono"),
+  par.main.text = list(fontfamily = "serif"), # 主标题
+  par.sub.text = list(fontfamily = "serif") # 副标题
+)))
+```
+
+
+`r if (identical(Sys.getenv("CI"), FALSE)) '<!--'` 
 
 > 创作本书的过程中，有什么值得借鉴和学习的地方？
+
+写完一本书的关键因素有很多，我不想谈哪个因素更重要，因为在创作过程中都离不开它们，首当其冲就是时间和精力，继而是如何高效地分配，分配必须目标导向，因而写书的规划是关键的，规划之后就是执行，执行的关键是持续和质量，必须以终为始，不然书和流水账式的便利贴没有本质的区别。
 
 自 2021 年 8 月 22 日以来，累计提交量随时间的变化情况如图 \@ref(fig:book-commit)，记录了作者创作的历程。
 
@@ -190,10 +222,14 @@ dat <- aggregate(formula = commit ~ year + month, data = dat, FUN = length)
 ggplot(data = dat, aes(x = month, y = cumsum(commit), fill = year)) +
   geom_bar(stat = "identity", position = "dodge2") +
   scale_fill_grey() +
+  # scale_fill_brewer(palette = "Spectral") +
   labs(x = "月份", y = "累计提交量", fill = "年份") +
-  theme_bw(base_size = 13, base_family = "Noto Sans") +
-  theme(title = element_text(family = "Noto Serif SC"))
+  theme_bw(base_size = 13, base_family = "sans") +
+  theme(title = element_text(family = "source-han-serif-cn"))
 ```
+
+`r if (identical(Sys.getenv("CI"), FALSE)) '-->'`
+
 
 > 你也认为饼图很糟糕吗？
 
@@ -209,11 +245,11 @@ ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
   scale_y_continuous(labels = scales::percent_format()) +
   scale_fill_grey(start = 0.8, end = 0.2) +
   facet_wrap(~site, ncol = 1) +
-  theme_bw(base_size = 13, base_family = "Noto Serif SC") +
+  theme_bw(base_size = 13, base_family = "source-han-serif-cn") +
   labs(x = "性别", y = "死亡率", fill = "年龄") +
   theme(
-    axis.text.y = element_text(family = "Noto Sans"),
-    legend.text = element_text(family = "Noto Sans")
+    axis.text.y = element_text(family = "sans"),
+    legend.text = element_text(family = "sans")
   )
 ```
 
@@ -245,8 +281,8 @@ ggplot(
     x = "国民生产总值（美元，对数尺度）", y = "寿命（年）",
     size = "人口数量\n（百万）", color = "地区"
   ) +
-  theme_bw(base_size = 13, base_family = "Noto Sans") +
-  theme(title = element_text(family = "Noto Serif SC"))
+  theme_bw(base_size = 13, base_family = "sans") +
+  theme(title = element_text(family = "source-han-serif-cn"))
 ```
 
 > 你准备在书里介绍统计理论，范围是什么？深度如何？
@@ -274,7 +310,7 @@ ggplot(
 
 我很多人都看过 Hadley Wickham 和 Garrett Grolemund 合著的《R for Data Science》[@Hadley2017]，书里对数据科学的描述大致如图 \@ref(fig:data-science) 所示，实际上数据收集可不是调几个 R 包，不同学科，如经济管理会发问卷，物理做实体或模拟实验，互联网在 App 内埋点收集数据。收集数据之前要做好试验设计，试验设计之前要提出好问题，如何发现、定义和界定问题其实是最难的部分，不仅需要熟悉全链路的技术环节，还要知晓各个岗位的职责边界，既要像万花筒那样深根自己的领域，又要学会像八抓鱼那样获取团队、部门和公司内外的有效输入，还要以强大的执行力推动问题解决。
 
-```{r data-science, engine="tikz", echo=FALSE, cache=TRUE, fig.cap="数据科学", engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usetikzlibrary{mindmap}"))}
+```{r data-science, engine="tikz", echo=FALSE, cache=TRUE, fig.cap="数据科学", engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usetikzlibrary{mindmap}")), out.width="95%"}
 \begin{tikzpicture}[scale=1,transform shape]
   \path[mindmap,concept color=blue,text=white]
     node[concept] {\Large 数据科学}
@@ -294,14 +330,14 @@ ggplot(
       child { node[concept] {xgboost} }
       child { node[concept] {lightgbm} }
     }
-    child[concept color=red] { 
-      node[concept] {数据收集} 
+    child[concept color=red] {
+      node[concept] {数据收集}
       [clockwise from=-90]
       child { node[concept] {readr} }
       child { node[concept] {readxl} }
     }
-    child[concept color=orange] { 
-      node[concept] {数据清洗} 
+    child[concept color=orange] {
+      node[concept] {数据清洗}
       [clockwise from=-90]
       child { node[concept] {stringr} }
       child { node[concept] {rvest} }
@@ -363,4 +399,14 @@ ggplot(
 
 > 你为什么要讲创作的心路历程？
 
-因为我觉得过程比结果重要，身临其境才有感同身受，培养延迟满足感很重要，2019年我在论坛发问：[书应该怎么写才符合素质教育的理念？](https://d.cosx.org/d/421159)。国内外有大量非常好的书籍介绍统计学史，一些基本概念的来龙去脉，比如《Past, Present, and Future of Statistical Science》[@Lin2014]、《Fisher, Neyman, and the Creation of Classical Statistics》[@Lehmann2011]、《The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century》[@Salsburg2001]、《Statisticians of the Centuries》[@Heyde2001] 和《Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present》 [@Johnson1997]，国内也有很多，比如陈希孺先生的《统计学漫话》[@Chen2016] 和《数理统计学简史》[@Chen2000]，还有人物传记类，比如《Neyman》[@Reid1982]、《漫漫修远攻算路：方开泰自述》 [@Fang2016] 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 [@Xu2010]，还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》[@Jeff1986]和《统计学者的工作及风范：灵感、抱负、雄心》[@Jeff2011]，以及他 2018 年在北大的讲座 [对中国统计发展的一些浅见](https://www.stat.pku.edu.cn/xwzx/xw/98359.htm)，还有2010年新办的杂志[《数学文化》](https://www.global-sci.com/mc.html)，统计之都也有大量访谈形式的文章，非常值得一读。真是篇幅所限，没法一一列举。培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！
+因为我觉得过程比结果重要，身临其境才有感同身受，培养延迟满足感很重要，
+2019年我在论坛发问：[书应该怎么写才符合素质教育的理念？](https://d.cosx.org/d/421159)。
+国内外有大量非常好的书籍介绍统计学史，一些基本概念的来龙去脉，
+比如《Past, Present, and Future of Statistical Science》[@Lin2014]、
+《Fisher, Neyman, and the Creation of Classical Statistics》[@Lehmann2011]、
+《The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century》[@Salsburg2001]、
+《Statisticians of the Centuries》[@Heyde2001] 和
+《Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present》 [@Johnson1997]，
+国内也有很多，比如《统计发展史》[@Chen1987]、《数理统计学简史》[@Chen2000] 和《统计学漫话》[@Chen2016]，
+还有人物传记类，比如《Neyman》[@Reid1982] 及其译作[@Neyman1987]、《漫漫修远攻算路：方开泰自述》 [@Fang2016] 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 [@Xu2010]，
+还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》[@Jeff1986]和《统计学者的工作及风范：灵感、抱负、雄心》[@Jeff2011]，以及他 2018 年在北大的讲座 [对中国统计发展的一些浅见](https://www.stat.pku.edu.cn/xwzx/xw/98359.htm)，还有 2010年新办的杂志[《数学文化》](https://www.global-sci.com/mc.html)，2009年丘成桐、杨乐等主编的[《数学与人文》](http://www.intlpress.net/mh/)丛书等，[统计之都](https://cosx.org/)也有大量访谈形式的文章，非常值得一读。真是篇幅所限，没法一一列举。培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！

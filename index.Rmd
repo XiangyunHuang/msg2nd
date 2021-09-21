@@ -64,11 +64,11 @@ source(file = "_common.R")
 
 ```{r noto-fonts, par=TRUE, fig.cap="中英文字体设置", fig.subcap=c('Base R 图形', 'ggplot2 图形'), out.width='50%', fig.width=4.5, fig.height=3.5, fig.alt='汞蒸气的压力随温度的指数级变化', fig.showtext=TRUE, fig.ncol=2}
 # 准备 Noto 中英文字体
-sysfonts::font_add_google(name = "Noto Sans")
-sysfonts::font_add_google(name = "Noto Serif SC")
+# sysfonts::font_add_google(name = "Noto Sans")
+# sysfonts::font_add_google(name = "Noto Serif SC")
 # 在 Base R 图形中使用 Noto 字体
-plot(pressure, type = "b", pch = 19, ann = FALSE, family = "Noto Sans")
-title(xlab = "温度", ylab = "压力", family = "Noto Serif SC")
+plot(pressure, type = "b", pch = 19, ann = FALSE, family = "sans")
+title(xlab = "温度", ylab = "压力", family = "source-han-serif-cn")
 # 在 ggplot2 图形中使用 Noto 字体
 library(ggplot2)
 ggplot(data = pressure, aes(x = temperature, y = pressure)) +
@@ -78,7 +78,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   scale_x_continuous(breaks = seq(0, 400, by = 50)) +
   theme_bw(base_size = 13) +
   theme(
-    axis.title = element_text(family = "Noto Serif SC"),
+    axis.title = element_text(family = "source-han-serif-cn"),
     axis.title.x = element_text(
       margin = margin(b = 0, l = 0, t = 20, r = 0)
     ),
@@ -89,11 +89,11 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
     panel.grid = element_blank(),
     axis.ticks.length = unit(0.25, "cm"),
     axis.text.x = element_text(
-      family = "Noto Sans", color = "black",
+      family = "sans", color = "black",
       vjust = -1.5, size = rel(1.25)
     ),
     axis.text.y = element_text(
-      family = "Noto Sans", color = "black",
+      family = "sans", color = "black",
       angle = 90, vjust = 1.5, hjust = 0.5,
       size = rel(1.25)
     )
@@ -110,8 +110,8 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   geom_point() +
   labs(x = "温度", y = "压力") +
   theme(
-    axis.title = element_text(family = "Noto Serif SC"),
-    axis.text = element_text(family = "Noto Sans")
+    axis.title = element_text(family = "source-han-serif-cn"),
+    axis.text = element_text(family = "sans")
   )
 ```
 
@@ -139,6 +139,7 @@ ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
 
 <!-- 
 TODO：区间估计，置信带、检验的功效曲线 
+列联分析 [@Fagerland2017]
 -->
 
 (ref:coverage) 二项分布 $\mathrm{Bin}(n,p)$ 参数 $p$ 的区间估计：覆盖概率随成功概率的变化
@@ -179,8 +180,8 @@ ggplot(data = sim_dat, aes(x = p, y = prob, color = nsample)) +
   scale_color_grey() +
   facet_wrap(vars(methods), ncol = 1, scales = "free_y") +
   labs(x = "成功概率", y = "覆盖概率", color = "样本量") +
-  theme_bw(base_size = 13, base_family = "Noto Sans") +
-  theme(title = element_text(family = "Noto Serif SC"))
+  theme_bw(base_size = 13, base_family = "sans") +
+  theme(title = element_text(family = "source-han-serif-cn"))
 ```
 
 ::: {.rmdtip data-latex="{提示}"}
@@ -201,7 +202,7 @@ plot(faithful,
   col = densCols(faithful, bandwidth = c(0.7, 7), nbin = c(51L, 51L), colramp = gray.colors)
 )
 contour(den$x1, den$x2, den$fhat, add = TRUE)
-title(xlab = "喷发时间", ylab = "等待时间", family = "Noto Serif SC")
+title(xlab = "喷发时间", ylab = "等待时间", family = "source-han-serif-cn")
 
 library(ggplot2)
 library(colorspace)
@@ -215,8 +216,8 @@ ggplot() +
   labs(x = "喷发时间", y = "等待时间", colour = "核密度值") +
   theme_bw(base_size = 13) +
   theme(
-    legend.title = element_text(family = "Noto Serif SC"),
-    axis.title = element_text(family = "Noto Serif SC"),
+    legend.title = element_text(family = "source-han-serif-cn"),
+    axis.title = element_text(family = "source-han-serif-cn"),
     axis.title.x = element_text(
       margin = margin(b = 0, l = 0, t = 20, r = 0)
     ),
@@ -227,11 +228,11 @@ ggplot() +
     panel.grid = element_blank(),
     axis.ticks.length = unit(0.25, "cm"),
     axis.text.x = element_text(
-      family = "Noto Sans", color = "black",
+      family = "sans", color = "black",
       vjust = -1.5, size = rel(1.25)
     ),
     axis.text.y = element_text(
-      family = "Noto Sans", color = "black",
+      family = "sans", color = "black",
       angle = 90, vjust = 1.5, hjust = 0.5,
       size = rel(1.25)
     )
@@ -241,8 +242,71 @@ ggplot() +
 
 <!-- 
 书籍第一版没有介绍 核密度估计 的原理，第二版中要予以介绍，做到知其然且知其所以然，
-核密度估计方法在可视化中应用是相当广泛的
+核密度估计方法在可视化中应用是相当广泛的 多维核平滑方法 [@Chacon2018]
+计算统计
+密度估计和二维平滑方法 https://cswr.nrhstat.org/
+EM 算法、数值优化、随机优化等内容
+Computational Statistics with R
+
+https://msg2nd.netlify.app/data/Stephens.csv
+https://msg2nd.netlify.app/data/Taylor.csv
 -->
+
+图 \@ref(fig:topo) 描述海拔高度随横纵坐标的变化，采样点是随机的，左图是散点图，右图是拟合曲面
+
+```{r topo, fig.cap="海拔高度的变化", fig.subcap=c("三维散点图", "空间曲面"), fig.width=5.5, fig.height=5, fig.ncol=2, out.width="45%", echo=FALSE, fig.showtext=TRUE}
+library(MASS)
+library(lattice)
+# 减少三维图形的边空
+lattice.options(
+  layout.widths = list(
+    left.padding = list(x = -.6, units = "inches"),
+    right.padding = list(x = -1.0, units = "inches")
+  ),
+  layout.heights = list(
+    bottom.padding = list(x = -.8, units = "inches"),
+    top.padding = list(x = -1.0, units = "inches")
+  )
+)
+
+# trellis.par.get()
+cloud(z ~ x * y,
+  data = topo, pch = 19, col = "black",
+  scales = list(arrows = FALSE, col = "black", z = list(rot = 90)),
+  par.settings = list(
+    axis.line = list(col = "transparent"),
+    fontsize = list(text = 20, points = 10)
+  ),
+  screen = list(z = 120, x = -65, y = 0)
+)
+
+with(topo, {
+  topo.lo <- loess(z ~ x * y,
+    span = 1 / 3, parametric = "x",
+    drop.square = "x", family = "symmetric"
+  )
+  topo.marginal <- list(
+    x = seq(min(x), max(x), length.out = 25),
+    y = seq(min(y), max(y), length.out = 25)
+  )
+  topo.grid <- expand.grid(topo.marginal)
+  topo.fit <- predict(topo.lo, topo.grid)
+  wireframe(topo.fit ~ topo.grid$x * topo.grid$y,
+    shade = TRUE,
+    screen = list(z = 120, x = -65, y = 0),
+    scales = list(
+      arrows = FALSE, col = "black",
+      z = list(tick.number = 4, rot = 90)
+    ),
+    par.settings = list(
+      axis.line = list(col = "transparent"),
+      fontsize = list(text = 20, points = 10)
+    ),
+    xlab = "x", ylab = "y", zlab = "z"
+  )
+})
+```
+
 
 如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 \@ref(fig:linear-model)，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，到达「道」与「术」和谐统一的境界。
 
@@ -279,6 +343,40 @@ legend("bottomright",
 )
 ```
 
+`r if (knitr::is_latex_output()) '<!--'` 
+Base R 内置的 R 包含有丰富的数据集，非常适合演示图形和阐述统计理论，后面技术和理论部分的介绍大多围绕内置的数据集展开，数据集及其描述如下表所示：
+
+```{r core-datasets, echo=FALSE}
+# 抽取 R 包信息
+Pkgs <- sapply(list.files(R.home("library")), function(x) {
+  packageDescription(pkg = x, fields = "Priority")
+})
+# 抽取内置 R 包列表
+CorePkgs <- names(Pkgs[Pkgs %in% c("base", "recommended") & !is.na(Pkgs)])
+# 抽取 R 包的数据集
+BaseDataSets <- data(package = CorePkgs)$results[, c("Package", "Item", "Title")]
+
+library(DT)
+datatable(BaseDataSets,
+  rownames = FALSE, # 不显示行名
+  extensions = c("Buttons", "RowGroup"),
+  options = list(
+    pageLength = 10, # 每页显示的行数
+    language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Chinese.json"), # 汉化
+    dom = "Bfrtp", # 去掉显示行数 i、过滤 f 的能力，翻页用 p 表示
+    ordering = F, # 去掉列排序
+    buttons = c("copy", "csv", "excel", "print"), # 提供打印按钮
+    rowGroup = list(dataSrc = 0), # 按 Package 列分组
+    columnDefs = list(
+      list(className = "dt-center", targets = 0), # 不显示行名，则 targets 从 0 开始，否则从 1 开始
+      list(visible = FALSE, targets = 0) # 不显示 Package 列
+    )
+  ),
+  caption = "Base R 包内置的数据集"
+)
+```
+
+`r if (knitr::is_latex_output()) '-->'`
 
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 

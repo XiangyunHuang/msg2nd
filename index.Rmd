@@ -352,7 +352,7 @@ legend("bottomright",
 )
 ```
 
-`r if (knitr::is_latex_output()) '<!--'` 
+`r if (!knitr::is_html_output()) '<!--'` 
 Base R 内置的 R 包含有丰富的数据集，非常适合演示图形和阐述统计理论，后面技术和理论部分的介绍大多围绕内置的数据集展开，数据集及其描述如下表所示：
 
 ```{r core-datasets, echo=FALSE}

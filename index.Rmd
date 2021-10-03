@@ -353,6 +353,7 @@ legend("bottomright",
 ```
 
 `r if (!knitr::is_html_output()) '<!--'` 
+
 Base R 内置的 R 包含有丰富的数据集，非常适合演示图形和阐述统计理论，后面技术和理论部分的介绍大多围绕内置的数据集展开，数据集及其描述如下表所示：
 
 ```{r core-datasets, echo=FALSE}
@@ -385,7 +386,7 @@ datatable(BaseDataSets,
 )
 ```
 
-`r if (knitr::is_latex_output()) '-->'`
+`r if (!knitr::is_html_output()) '-->'`
 
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 

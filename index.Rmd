@@ -31,12 +31,8 @@ url: https://bookdown.org/xiangyun/msg2
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
   这里是本书摘要.
-biblio-style: gb7714-2015ay
-biblatexoptions:
-  - backend=biber
-  - gbpub=true
-  - sorting=nyt
-  - gbtype=false
+biblio-style: gbt7714-numerical
+natbiboptions: "sort,compress,super,square"
 csl: china-national-standard-gb-t-7714-2015-author-date.csl
 ---
 
@@ -117,6 +113,13 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 
 图 \@ref(fig:xkcd-fonts) 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系，所用 iris 数据集也来自 Base R 自带的 **datasets** 包，由 Anderson Edgar 收集，最早见于 1935 年的文章，后被 Ronald Fisher 在研究分类问题时引用[@Fisher1936]，到如今，在机器学习的社区里，提及 iris 数据集，很多人只知 Fisher 不知 Anderson。
 
+<!-- 
+https://github.com/GuangchuangYu/ggimage 
+纯粹为了玩
+https://cosx.org/2017/03/ggimage
+https://cosx.org/2014/01/showtext-interesting-fonts-and-graphs
+-->
+
 ```{r xkcd-fonts, fig.cap="手绘漫画风格的图形", out.width="75%", fig.width=5, fig.height=3, echo=FALSE, fig.showtext=TRUE}
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd
@@ -130,7 +133,6 @@ ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
     panel.grid = element_blank()
   )
 ```
-
 
 统计图形很重要的一个作用是揭示统计概念，这就要求不拘泥于抽象的严格数学表达，借助数值模拟，可视化等手段帮助读者发散思维，加深理解复杂的逻辑概念，建立统计直觉，正如顾恺之所言「以形写神，形神兼备」。下面仅以二项分布为例讲讲区间估计及其覆盖概率。众所周知，在置信水平为 $1 - \alpha$ 的情况下，二项分布 $\mathrm{Bin}(n,p)$ 的参数 $p$ （也叫成功概率）的 Wald 区间估计为 $(\hat{p} - Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n}, \hat{p} + Z_{1-\alpha/2} \sqrt{\hat{p}*(1-\hat{p})/n})$，这里 $n$ 为样本量，$Z_{1-\alpha/2}$ 为标准正态分布 $\mathcal{N}(0,1)$ 在 $1-\alpha/2$ 处的分位点，一般 $\alpha$ 取 0.05，进而 $Z_{1-\alpha/2} \approx 1.96$。用通俗的话说，有 $1 - \alpha$ 的把握确定参数真值 $p$ 在该估计区间内，可见区间估计的意义是解决点估计可靠性问题，但是可靠性和精度往往不能兼得。统计上，通常的做法是先给定可靠性，去尽可能提升精度，即给定置信水平，使估计区间的长度尽可能短，这就涉及到区间估计的方法问题。
 
@@ -248,8 +250,15 @@ ggplot() +
 EM 算法、数值优化、随机优化等内容
 Computational Statistics with R
 
+老忠实泉全量数据集的图形补充，离线用本地数据集，在线用 netlify 数据集
+
 https://msg2nd.netlify.app/data/Stephens.csv
 https://msg2nd.netlify.app/data/Taylor.csv
+
+topo 数据集空间统计 克里金插值 image 图 透视图  三维散点图
+
+1991 年 [Jerome Friedman](https://statweb.stanford.edu/~jhf/) 提出多元适应性回归样条方法
+Multivariate Adaptive Regression Splines http://www.milbo.users.sonic.net/earth/
 -->
 
 图 \@ref(fig:topo) 描述海拔高度随横纵坐标的变化，采样点是随机的，左图是散点图，右图是拟合曲面

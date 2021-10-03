@@ -401,8 +401,10 @@ datatable(BaseDataSets,
 ```{r iris-tab, echo=FALSE}
 library(knitr)
 library(kableExtra)
-kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE)
+kable(head(iris), caption = "iris 数据集（部分）", booktabs = TRUE) |> 
+  kable_classic()
 ```
+
 
 总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，坚信优质的内容必将持续为读者提供价值！
 

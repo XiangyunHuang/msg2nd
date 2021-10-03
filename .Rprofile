@@ -6,6 +6,7 @@ options(
   tinytex.engine = 'xelatex',
   tikzDefaultEngine = "xetex",
   bookdown.clean_book = TRUE,
+  kableExtra.latex.load_packages = FALSE,
   tikzDocumentDeclaration = "\\documentclass[tikz]{standalone}\n",
   tikzXelatexPackages = c(
     "\\usepackage[fontset=fandol]{ctex}",

@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1000
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master

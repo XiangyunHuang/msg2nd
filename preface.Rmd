@@ -9,6 +9,14 @@ source(file = "_common.R")
 
 <!-- 
 作者自己写的，介绍本书内容：目标读者、内容结构、阅读方案、符号约定、可重复性
+Front Matter
+
+https://github.com/Jam3/math-as-code
+a cheat-sheet for mathematical notation in code form
+
+图形直观
+Graphic notes on Gilbert Strang's "Linear Algebra for Everyone"
+https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra
 -->
 
 > 世界上只有一种英雄主义，就是看清生活的真相之后依然热爱它。  
@@ -30,6 +38,14 @@ source(file = "_common.R")
 1. 尽量兼顾统计理论的严格和统计图形的直观，对于有明显统计意义的图形都要讲述其统计原理，做到知其然且知其所以然。
 
 1. 统计图形的历史不再单独成章介绍，而是在具体的数据分析和应用时介绍或者作为一个章节的片尾故事。
+
+1. 在介绍统计理论和可视化理论的时候，尽可能多地使用 Base R 基础数据集，基础数据集涉及的知识范围很多很广，特别是故事也多，而且稳定可靠。应用部分尽可能多地采纳开放数据，现代工业数据背景，和读者有亲近感，有实际参考价值，有经验教训可期。
+
+<!-- 
+恭亲王临终交代光绪：
+同治、光绪两朝几乎所有大事，李中堂都是躬身入局之人，有教训可鉴，有经验可期，足可就任艰危。
+fisher，横跨19和20世纪，历经统计学发展的几乎所有大事
+-->
 
 我们希望目标读者学过一点微积分、线性代数和非专业的统计学，对数据分析和可视化，乃至整个数据科学都感兴趣。本书非常适合经济管理、新闻传播、社科医学、统计专业的高年级本科生和研究生，对从事数据相关工作的商业分析师和算法工程师会非常有帮助，对有志从事数据科学的其它专业学生和已从事相关工作的人也有价值。
 
@@ -177,7 +193,11 @@ levelplot(volcano,
 \end{tikzpicture}
 ```
 
-另一个值得一提的是 **lattice** 的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及
+<!-- 
+tikz 还有哪些调色板，怎样自定义调色板 
+-->
+
+另一个值得一提的是 **lattice** 的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及。
 
 ```{r lattice-theme-settings, fig.cap="lattice 主题设置", echo=FALSE, out.width="95%", fig.width=6.5, fig.height=6.5, fig.showtext=TRUE}
 library(lattice)
@@ -189,10 +209,20 @@ show.settings(x = trellis.par.set(list(
 )))
 ```
 
+<!-- 
+3D 图形要慎用，教父第三部里有句经典台词，Handsome, but useless 绣花枕头，翻译过来应该叫 银样蜡枪头，中看不中用。红楼梦里林黛玉和贾宝玉在树下偷看也说过，是出自西厢记。 
+-->
+
+R 语言在数据可视化方面的主要工具是哪些？
+
+Base R 提供基础绘图系统，栅格绘图系统及其衍生的两套绘图工具 lattice 和 ggplot2，前者支持原生三维图形，此外，真三维图形由 rgl 包支持，值得一提的是 [rayrender](https://github.com/tylermorganwall/rayrender) 包。
+
 
 `r if (identical(Sys.getenv("CI"), FALSE)) '<!--'` 
 
 > 创作本书的过程中，有什么值得借鉴和学习的地方？
+
+也有人写了心路历程 <https://jnolis.com/blog/data_science_on_book/>
 
 写完一本书的关键因素有很多，我不想谈哪个因素更重要，因为在创作过程中都离不开它们，首当其冲就是时间和精力，继而是如何高效地分配，分配必须目标导向，因而写书的规划是关键的，规划之后就是执行，执行的关键是持续和质量，必须以终为始，不然书和流水账式的便利贴没有本质的区别。
 
@@ -243,7 +273,9 @@ dat <- transform(expand.grid(
 ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
   geom_col(position = "dodge2") +
   scale_y_continuous(labels = scales::percent_format()) +
-  scale_fill_grey(start = 0.8, end = 0.2) +
+  # scale_fill_grey(start = 0.8, end = 0.2) +
+  scale_fill_brewer(palette = "Spectral") +
+  # scale_fill_viridis_d() +
   facet_wrap(~site, ncol = 1) +
   theme_bw(base_size = 13, base_family = "source-han-serif-cn") +
   labs(x = "性别", y = "死亡率", fill = "年龄") +
@@ -257,6 +289,58 @@ ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
 
 向优秀的作品学习，然后在实践中锤炼，总结属于自己的经验，提炼属于自己的方法论。
 [SciPy](https://www.scipy2020.scipy.org/plotting-contest) 每年都会举办绘图比赛，为了纪念 [matplotlib](https://matplotlib.org/) 的创建者 John Hunter，旨在强调科学探索过程中数据可视化的重要性和展示开源软件的可视化能力。
+
+
+
+> 数据可视化中的陷阱
+
+数据可视化陷阱[@Cairo2019;@Pu2020]，点出图 \@ref(fig:charts-lie) 中含义不明确的地方，错误的地方，边际概率、条件概率和全概率的关系。
+
+
+```{r charts-lie, echo=FALSE, fig.cap="统计图形是如何说谎的", fig.width=5, fig.height=6, out.width="85%", fig.showtext=TRUE}
+library(ggplot2)
+library(patchwork)
+
+p1 <- ggplot(diamonds, aes(x = price, y = stat(density), fill = cut)) +
+  geom_density(position = "stack", colour = "white") +
+  scale_fill_brewer(palette = "Spectral") +
+  scale_y_continuous(
+    labels = expression(0, 5~"·"~10^-4, 10 ~ "·" ~ 10^-4, 15 ~ "·" ~ 10^-4),
+    breaks = c(0, 5, 10, 15) * 10^(-4)
+  ) +
+  theme_bw(base_family = "source-han-serif-cn") +
+  labs(x = "价格", y = "概率密度", fill = "切工", tag = "坏") +
+  theme(
+    axis.text.x = element_text(family = "sans", color = "black"),
+    axis.text.y = element_text(
+      family = "sans", color = "black",
+      angle = 90, vjust = 1.5, hjust = 0.5
+    ),
+    legend.text = element_text(family = "sans"),
+    plot.tag = element_text(family = "source-han-serif-cn", color = "red"),
+    plot.tag.position = "topright"
+  )
+
+p2 <- ggplot(diamonds, aes(x = price, y = stat(density * n), fill = cut)) +
+  geom_density(position = "stack", colour = "white") +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_bw(base_family = "source-han-serif-cn") +
+  labs(x = "价格", y = "概率质量", fill = "切工", tag = "好") +
+  theme(
+    axis.text.x = element_text(family = "sans", color = "black"),
+    axis.text.y = element_text(
+      family = "sans", color = "black",
+      angle = 90, vjust = 1.5, hjust = 0.5
+    ),
+    legend.text = element_text(family = "sans"),
+    plot.tag = element_text(family = "source-han-serif-cn", color = "black"),
+    plot.tag.position = "topright"
+  )
+
+p1 / p2
+```
+
+
 
 > 最令你印象深刻的可视化作品是哪个？
 
@@ -301,10 +385,13 @@ ggplot(
 \end{tikzpicture}
 ```
 
+关于参数估计，我们走过了高斯时代的最小二乘估计、Karl Person 时代的矩估计和 Ronald A. Fisher 时代的极大似然估计。
+
 
 > 你准备在书里介绍机器学习，范围是什么？深度如何？
 
-结合自己在工作这几年的所见所闻，又考虑到本书的定位，理论的范围以 [Spark 的机器学习库](https://spark.apache.org/docs/latest/ml-guide.html) 为参照
+今年来机器学习和深度学习成为了国之显学，国内外教材如过江之鲫，我一学统计的，不揣浅陋列举几本，如 @Bishop2006;@Goodfellow2016;@Mohri2018。
+结合自己在工作这几年的所见所闻，又考虑到本书的定位，理论的范围以 [Spark 的机器学习库](https://spark.apache.org/docs/latest/ml-guide.html) 为参照。
 
 > 你多年从事数据相关的工作，你怎么看待数据科学？
 
@@ -397,7 +484,19 @@ ggplot(
   {执行, 精雕细琢，收集反馈和持续优化迭代}}
 ```
 
+广度是基础理论在各个应用场景开花结果，业务问题转化为数据问题、统计问题；深度是追根溯源和理清线索，找到区别和联系，以点带线，而后形成知识网；远度是回顾历史和展望未来，给出自己的预判和讨论。
+
+> 知识、技术到应用的距离？怎样的应用？相关的伦理道德问题？
+
+学校作为教学的主要场所，很多人诟病当前的教育教学与社会实际脱节。学校需要批量化地生产高知识的劳动力，剥离业务背景的知识是有限的，教学可以规模化，在3-5年内速成。进入企业，可能要明白的是业务的商业逻辑是什么，业务阶段是什么，明白探索、进攻、发展、变革阶段会有什么特点，对组织和个人的影响是什么？机遇和挑战是什么？弄清楚业务问题，将业务问题转化为数据问题、算法问题、产品问题和工程问题。
+
+另外一个，重点问题是技术应当以人为本，因为它是一把双刃剑，
+互联网行业算法的益处就不多说了，算法的害处是被严重低估和忽视的，大家知道，互联网公司的大部分收入来自广告，广告的价值却源于每个人未来时间和精力的投入。广告算法工程师应该不会希望自己生产的个性化广告让家人被反复洗脑，沉溺其中吧。
+
+
 > 你为什么要讲创作的心路历程？
+
+[^ims-talk]: <https://imstat.org/journals-and-publications/statistical-science/conversations/>
 
 因为我觉得过程比结果重要，身临其境才有感同身受，培养延迟满足感很重要，
 2019年我在论坛发问：[书应该怎么写才符合素质教育的理念？](https://d.cosx.org/d/421159)。
@@ -407,6 +506,10 @@ ggplot(
 《The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century》[@Salsburg2001]、
 《Statisticians of the Centuries》[@Heyde2001] 和
 《Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present》 [@Johnson1997]，
-国内也有很多，比如《统计发展史》[@Chen1987]、《数理统计学简史》[@Chen2000] 和《统计学漫话》[@Chen2016]，
-还有人物传记类，比如《Neyman》[@Reid1982] 及其译作[@Neyman1987]、《漫漫修远攻算路：方开泰自述》 [@Fang2016] 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 [@Xu2010]，
-还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》[@Jeff1986]和《统计学者的工作及风范：灵感、抱负、雄心》[@Jeff2011]，以及他 2018 年在北大的讲座 [对中国统计发展的一些浅见](https://www.stat.pku.edu.cn/xwzx/xw/98359.htm)，还有 2010年新办的杂志[《数学文化》](https://www.global-sci.com/mc.html)，2009年丘成桐、杨乐等主编的[《数学与人文》](http://www.intlpress.net/mh/)丛书等，[统计之都](https://cosx.org/)也有大量访谈形式的文章，非常值得一读。真是篇幅所限，没法一一列举。培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！
+国内也有很多，比如《统计发展史》[@Chen1987]、《数理统计学简史》[@Chen2000] 和《统计学漫话》[@Chen2016]等，
+还有人物传记类，比如《Neyman》[@Reid1982] 及其译作[@Neyman1987]、《漫漫修远攻算路：方开泰自述》 [@Fang2016] 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 [@Xu2010]，IMS 的统计科学访谈文章[^ims-talk]，
+还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》[@Jeff1986]和《统计学者的工作及风范：灵感、抱负、雄心》[@Jeff2011]，还有 2010年新办的杂志[《数学文化》](https://www.global-sci.com/mc.html)，2009年丘成桐、杨乐等主编的[《数学与人文》](http://www.intlpress.net/mh/) 丛书等，[统计之都](https://cosx.org/) 也有大量访谈形式的文章，非常值得一读。更多统计历史相关的材料见 <https://github.com/sctyner/history_of_statistics>，真是篇幅所限，没法一一列举。
+
+培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！
+
+最后，给一个开放的思考：Bernoulli 家族的教育教学有哪些值得学习的地方？他们的生平经历如何？是在什么样的成长环境下孕育如此之多的科学家？在历史的长河之中，一个家族中有一两位科学家不足为奇，但是好几代人，连续出现10多位科学家就很值得研究了。

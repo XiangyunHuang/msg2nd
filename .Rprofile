@@ -6,6 +6,8 @@ options(
   tinytex.engine = 'xelatex',
   tikzDefaultEngine = "xetex",
   bookdown.clean_book = TRUE,
+  formatR.indent = 2,
+  width = 69,
   kableExtra.latex.load_packages = FALSE,
   tikzDocumentDeclaration = "\\documentclass[tikz]{standalone}\n",
   tikzXelatexPackages = c(

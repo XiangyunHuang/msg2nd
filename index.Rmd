@@ -427,10 +427,26 @@ ci <- identical(Sys.getenv("CI"), "true")
 
 R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 `plot()`，函数的参数名同理。代码块内注释用 `#` 表示，运行结果每一行开头以 `#>` 标记。本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018] 和 **bookdown** [@xie2016] 等众多 R 包，为方便管理，引入 [**renv**](https://github.com/rstudio/renv) 包将 R 包信息快照下来，存成一个 `renv.lock` 文件，同书稿一起存储在 Github 仓库内，方便读者复现本书内容。目前，书稿使用 `r R.version.string` 编译，你现在看到的是`r ifelse(ci, '在线', '离线')`编译版本，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，直接使用的 R 包如下：
 
-```{r package-info}
+```{r package-info, tidy=TRUE, tidy.opts=list(width.cutoff=50)}
 xfun::session_info(packages = c(
   "knitr", "rmarkdown", "bookdown", "ggplot2", "kableExtra", 
   "showtext", "tikzDevice", "magick", "pdftools", "renv",
   "gapminder", "ggrepel", "rootSolve"
 ), dependencies = TRUE)
+```
+
+
+```{r ruler, echo=FALSE}
+# modified from https://github.com/hadley/adv-r/blob/4915e2984168da50671491db238d351e5590c07b/Introduction.Rmd#L264
+ruler <- function(width = getOption("width")) {
+  x <- seq_len(width)
+  y <- ifelse(x %% 10 == 0, as.character((x %/% 10) %% 10),
+    ifelse(x %% 5 == 0, "+", "-")
+  )
+  cat(y, "\n", sep = "")
+  cat(x %% 10, "\n", sep = "")
+}
+```
+```{r, comment=NA}
+ruler()
 ```

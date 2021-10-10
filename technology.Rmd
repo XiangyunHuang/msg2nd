@@ -16,6 +16,12 @@ if (!is.na(Sys.getenv("CI", NA))) {
 }
 ```
 
+```{css, echo=FALSE}
+.modebar {
+  display: none !important;
+}
+```
+
 <!-- 
 https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
 http://motioninsocial.com/tufte/
@@ -27,8 +33,9 @@ http://karolis.koncevicius.lt/posts/lesser_known_r_features/
 https://github.com/karoliskoncevicius/basetheme
 -->
 
+图 \@ref(fig:matplotlib) 是一个迷你的 matplotlib 示例
 
-```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(), 'svg', ifelse(knitr::is_latex_output(), 'pdf', 'png')), out.width='75%', fig.width=4, fig.height=3, collapse=TRUE}
+```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(),'svg', ifelse(knitr::is_latex_output(),'pdf','png')), out.width='45%', fig.width=4, fig.height=4, collapse=TRUE}
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
@@ -47,6 +54,30 @@ plt.tight_layout()
 plt.show()
 ```
 
+`r if (!knitr::is_html_output()) '<!--'` 
+
+JavaScript 库 Plotly 的 Python 接口，如图\@ref(fig:python-plotly)所示，iris 鸢尾花数据集按花种类分组线性回归，展示相关性。
+
+```{python, python-plotly, fig.cap="JavaScript 库 Plotly 的 Python 接口", echo=FALSE, eval=knitr::is_html_output()}
+import plotly.express as px
+px.scatter(
+    px.data.iris(),
+    x="sepal_width",
+    y="sepal_length",
+    color="species",
+    trendline="ols",
+    template="simple_white",
+    labels={
+        "sepal_length": "Sepal Length (cm)",
+        "sepal_width": "Sepal Width (cm)",
+        "species": "Species of Iris",
+    },
+    title="Edgar Anderson's Iris Data",
+    color_discrete_sequence=px.colors.qualitative.Set2
+)
+```
+
+`r if (!knitr::is_html_output()) '-->'`
 
 展示辛普森悖论的数据，性别歧视，公平，如何解读数据，数据会说谎。列联分析和展示。相比于 mosaicplot 有某种更加直观的含义，有人一堆堆排在那的既视感。
 1973 年加州伯克利大学6个最大的院系分男女性别和是否录取统计人数，见下表
@@ -91,9 +122,10 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
 
 
 
-## 词云图 {#word-cloud}
+
 
 <!-- 
+## 词云图 {#word-cloud}
 tcltk 
 
 ## 地平线图 {#horizon-plot}

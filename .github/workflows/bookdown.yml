@@ -124,7 +124,7 @@ jobs:
       - name: Check Python Env
         run: |
           reticulate::py_discover_config()
-          reticulate::use_miniconda(condaenv = 'r-reticulate', required = TRUE)
+          reticulate::use_condaenv(condaenv = 'r-reticulate', required = TRUE)
         shell: Rscript {0}
 
       - name: Install fonts

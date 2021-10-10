@@ -3,4 +3,105 @@
 # 介绍 {#part-technology .unnumbered}
 \chaptermark{介绍}
 
-技术专题
+```{r setup-python, echo=FALSE}
+knitr::opts_chunk$set(
+  python.reticulate = TRUE
+)
+if (!is.na(Sys.getenv("CI", NA))) {
+  # Remote macOS CI 环境
+  reticulate::use_condaenv("r-reticulate", required = TRUE)
+} else {
+  # reticulate::use_python(python = Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
+  reticulate::use_virtualenv(virtualenv = Sys.getenv("RETICULATE_PYTHON_ENV"), required = TRUE)
+}
+```
+
+<!-- 
+https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
+http://motioninsocial.com/tufte/
+
+https://stackoverflow.com/questions/27934840/reproducing-the-style-of-a-histogram-plot-in-r
+https://stackoverflow.com/questions/3932038/plot-a-legend-outside-of-the-plotting-area-in-base-graphics/49501243#49501243
+http://karolis.koncevicius.lt/posts/lesser_known_r_features/
+
+https://github.com/karoliskoncevicius/basetheme
+-->
+
+
+```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(), 'svg', ifelse(knitr::is_latex_output(), 'pdf', 'png')), out.width='75%', fig.width=4, fig.height=3, collapse=TRUE}
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
+
+rcParams.update({
+  'font.size': 10, 
+  'text.usetex': True,
+  'text.latex.preamble': r'\usepackage[sfdefault]{sourcesanspro}'
+  })
+
+plt.switch_backend('agg')
+plt.plot([0, 2, 1, 4])
+plt.xlabel(r'Coord $x$')
+plt.ylabel(r'Coord $y$')
+plt.title("Test matplotlib")
+plt.tight_layout()
+plt.show()
+```
+
+
+展示辛普森悖论的数据，性别歧视，公平，如何解读数据，数据会说谎。列联分析和展示。相比于 mosaicplot 有某种更加直观的含义，有人一堆堆排在那的既视感。
+1973 年加州伯克利大学6个最大的院系分男女性别和是否录取统计人数，见下表
+
+```{r}
+margin.table(x = UCBAdmissions, margin = 2:1)
+```
+
+**aplpack** [@aplpack2021] 用函数 `iconplot()` 展示列联表数据，图 \@ref(fig:pictogram) 每个格子代表 100 人。
+
+```{r pictogram, fig.width=6, fig.height=5, out.width="65%", fig.cap="加州伯克利大学的录取情况", fig.showtext=TRUE, echo=FALSE}
+# library(jpeg)
+# rlogo <- jpeg::readJPEG(source = system.file(package = "jpeg", "img", "Rlogo.jpg"))
+# 使用 icon 替代格子
+# library(aplpack)
+# iconplot(
+#   data = UCBAdmissions / 100, grp.color = Gender,
+#   colors = c("#636363", "#BDBDBD"),
+#   icons = as.raster(rlogo), 
+#   main = "Student Admissions at UC Berkeley"
+# )
+
+library(aplpack)
+iconplot(
+  data = UCBAdmissions / 100, grp.color = Gender,
+  colors = c("#636363", "#BDBDBD"),
+  main = "Student Admissions at UC Berkeley"
+)
+```
+
+内容上，对第一版中未介绍的部分图形予以补充，比如岭线图\@ref(fig:ridge)，单独作为技术专题的一部分。
+
+
+```{r ridge, fig.width=8, fig.height=5, fig.showtext=TRUE, fig.cap="岭线图", out.width="65%", echo=FALSE}
+library(ggplot2)
+library(ggridges)
+ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
+  scale_fill_brewer(palette = "Greys") +
+  geom_density_ridges(bandwidth = 0.2) +
+  theme_ridges(font_size = 20, font_family = "sans")
+```
+
+
+
+## 词云图 {#word-cloud}
+
+<!-- 
+tcltk 
+
+## 地平线图 {#horizon-plot}
+
+lattice 
+[ggHoriPlot](https://github.com/rivasiker/ggHoriPlot)
+
+用 RCurl/XML 抓取吴越的小说《当时已枉然》的豆瓣书评 <https://book.douban.com/subject/2119444/>，制作词云图描述大家讨论的内容。
+
+豆瓣书评，获取词云图 https://github.com/leovan/leovan.me/blob/master/scripts/share/douban-utils.R 
+-->

@@ -7,6 +7,36 @@ source(file = "_common.R")
 # showtext_auto()
 ```
 
+```{r setup-noto-fonts, echo=FALSE}
+# 准备 Noto 中英文字体
+## 宋体
+sysfonts::font_add(
+  family = "Noto Serif CJK SC",
+  regular = "~/Library/Fonts/NotoSerifCJKsc-Regular.otf",
+  bold = "~/Library/Fonts/NotoSerifCJKsc-Bold.otf"
+)
+## 黑体
+sysfonts::font_add(
+  family = "Noto Sans CJK SC",
+  regular = "~/Library/Fonts/NotoSansCJKsc-Regular.otf",
+  bold = "~/Library/Fonts/NotoSansCJKsc-Bold.otf"
+)
+sysfonts::font_add(
+  family = "Noto Serif",
+  regular = "~/Library/Fonts/NotoSerif-Regular.ttf",
+  bold = "~/Library/Fonts/NotoSerif-Bold.ttf",
+  italic = "~/Library/Fonts/NotoSerif-Italic.ttf",
+  bolditalic = "~/Library/Fonts/NotoSerif-BoldItalic.ttf"
+)
+sysfonts::font_add(
+  family = "Noto Sans",
+  regular = "~/Library/Fonts/NotoSans-Regular.ttf",
+  bold = "~/Library/Fonts/NotoSans-Bold.ttf",
+  italic = "~/Library/Fonts/NotoSans-Italic.ttf",
+  bolditalic = "~/Library/Fonts/NotoSans-BoldItalic.ttf"
+)
+```
+
 <!-- 
 作者自己写的，介绍本书内容：目标读者、内容结构、阅读方案、符号约定、可重复性
 Front Matter
@@ -41,6 +71,9 @@ https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra
 
 1. 在介绍统计理论和可视化理论的时候，尽可能多地使用 Base R 基础数据集，基础数据集涉及的知识范围很多很广，特别是故事也多，而且稳定可靠。应用部分尽可能多地采纳开放数据，现代工业数据背景，和读者有亲近感，有实际参考价值，有经验教训可期。
 
+1. 应用部分，数据集取材于BBC，经济学人，尽可能来源于真实场景，比如 kaggle
+数学建模，天池比赛，黑子活动这样的 R 内置数据集也可以扩展的如今，分析的对象不做限制。目的：一是紧跟时代，二是加强读者对统计学的了解，向来从历史和人物的角度引入比较容易让人接受。
+
 <!-- 
 恭亲王临终交代光绪：
 同治、光绪两朝几乎所有大事，李中堂都是躬身入局之人，有教训可鉴，有经验可期，足可就任艰危。
@@ -59,19 +92,27 @@ fisher，横跨19和20世纪，历经统计学发展的几乎所有大事
 
 > 你为什么选择 R 语言？
 
+<!-- 
+Python 语言、Julia 语言在数据可视化方面的能力介绍
+https://seaborn.pydata.org/ 
+https://matplotlib.org/stable/
+一两年后，RStudio IDE 和 reticulate 对 Python 的支持足够好了后，再写这部分
+https://github.com/JuliaPlots/Plots.jl
+-->
+
 R 语言在统计图形方面不仅走得早还走的远，当然，Python 语言也不错，近年来新起的 Julia 语言也很好。R 语言在统计图形方面的沉淀是非常深厚的，近年来，我发现越是简洁的越是优美，灵活的东西使用起来还非常简单，以 R 包 **datasets**内的数据集 PlantGrowth 为例，一般地，展示数据的分布会想到箱线图、直方图、密度图等，R 函数的泛型设计可以根据数据对象和变量的类型自动选择合适的图形，图\@ref(fig:plant-growth) 是泛型函数 `plot()` 调用普通函数 `boxplot()` 和 `spineplot()` 绘制的。
 
 ```{r plant-growth, fig.cap="影响植物生长的因素", fig.subcap=c("箱线图", "脊柱图"), out.width='50%', fig.width=4.5, fig.height=4, fig.showtext=TRUE, fig.ncol=2, echo=FALSE}
 opar <- par(no.readonly = TRUE)
 on.exit(par(opar), add = TRUE)
 par(mar = c(4, 4, 1.1, 2.5))
-plot(weight ~ group, data = PlantGrowth, family = "sans", ann = FALSE)
-title(xlab = "组", ylab = "植物干重", family = "source-han-serif-cn")
+plot(weight ~ group, data = PlantGrowth, family = "Noto Sans", ann = FALSE)
+title(xlab = "组", ylab = "植物干重", family = "Noto Serif CJK SC")
 plot(cut(weight, 2) ~ group,
   data = PlantGrowth, # ann = FALSE 不能去掉坐标轴标签
-  family = "sans", xlab = "", ylab = ""
+  family = "Noto Sans", xlab = "", ylab = ""
 )
-title(xlab = "组", ylab = "植物干重", family = "source-han-serif-cn")
+title(xlab = "组", ylab = "植物干重", family = "Noto Serif CJK SC")
 ```
 
 所以，直接调用相应的绘图函数也是可以的，如下：
@@ -123,15 +164,15 @@ for (i in 1:4) {
     pch = 20, xlim = c(3, 19), ylim = c(3, 13),
     xlab = as.expression(substitute(x[i], list(i = i))),
     ylab = as.expression(substitute(y[i], list(i = i))),
-    family = "sans"
+    family = "Noto Sans"
   )
   abline(fit[[i]], col = "black")
   text(
-    x = 7, y = 12, family = "sans",
+    x = 7, y = 12, family = "Noto Sans",
     labels = bquote(R^2 == .(round(summary(fit[[i]])$r.squared, 3)))
   )
 }
-mtext("数据集的四重奏", outer = TRUE, family = "source-han-serif-cn")
+mtext("数据集的四重奏", outer = TRUE, family = "Noto Serif CJK SC")
 ```
 
 > 你觉得 Base R 作图的不足之处有哪些？
@@ -150,9 +191,9 @@ levelplot(volcano,
   ),
   par.settings = list(
     # x/y 轴标签字体，刻度标签字体
-    par.xlab.text = list(fontfamily = "source-han-serif-cn"),
-    par.ylab.text = list(fontfamily = "source-han-serif-cn"),
-    axis.text = list(fontfamily = "sans")
+    par.xlab.text = list(fontfamily = "Noto Serif CJK SC"),
+    par.ylab.text = list(fontfamily = "Noto Serif CJK SC"),
+    axis.text = list(fontfamily = "Noto Sans")
   ),
   useRaster = TRUE,
   xlab = "南北方向", ylab = "东西方向"
@@ -168,7 +209,7 @@ levelplot(volcano,
 #     labels = seq(90, 190, by = 20),
 #     length = 1, width = 1
 #   ),
-#   family = "source-han-serif-cn",
+#   family = "Noto Serif CJK SC",
 #   clab = "高度\n(米)",
 #   col = gray.colors(100)
 # )
@@ -180,7 +221,7 @@ levelplot(volcano,
 \begin{tikzpicture}
 \begin{axis}[
     hide axis,
-    colormap/viridis, % blackwhite
+    colormap/viridis, % blackwhite hot2
 ]
 \addplot3[
     mesh,
@@ -195,6 +236,16 @@ levelplot(volcano,
 
 <!-- 
 tikz 还有哪些调色板，怎样自定义调色板 
+https://mirror.szerverem.hu/ctan/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf#page=424
+https://tex.stackexchange.com/questions/350905/pgfplots-surf-standard-color-schemes/350927
+TikZ 绘制神经网络图
+https://github.com/mvoelk/nn_graphics
+TikZ 网站
+https://texample.net/tikz/examples/
+
+ggplot2 功能结构图
+R 闭包、环境等的关系图
+软件设计架构图
 -->
 
 另一个值得一提的是 **lattice** 的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及。
@@ -202,7 +253,7 @@ tikz 还有哪些调色板，怎样自定义调色板
 ```{r lattice-theme-settings, fig.cap="lattice 主题设置", echo=FALSE, out.width="95%", fig.width=6.5, fig.height=6.5, fig.showtext=TRUE}
 library(lattice)
 show.settings(x = trellis.par.set(list(
-  axis.text = list(fontfamily = "sans"), # 轴标签
+  axis.text = list(fontfamily = "Noto Sans"), # 轴标签
   add.text = list(fontfamily = "mono"),
   par.main.text = list(fontfamily = "serif"), # 主标题
   par.sub.text = list(fontfamily = "serif") # 副标题
@@ -254,8 +305,8 @@ ggplot(data = dat, aes(x = month, y = cumsum(commit), fill = year)) +
   scale_fill_grey() +
   # scale_fill_brewer(palette = "Spectral") +
   labs(x = "月份", y = "累计提交量", fill = "年份") +
-  theme_bw(base_size = 13, base_family = "sans") +
-  theme(title = element_text(family = "source-han-serif-cn"))
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
+  theme(title = element_text(family = "Noto Serif CJK SC"))
 ```
 
 `r if (identical(Sys.getenv("CI"), FALSE)) '-->'`
@@ -277,11 +328,11 @@ ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
   scale_fill_brewer(palette = "Spectral") +
   # scale_fill_viridis_d() +
   facet_wrap(~site, ncol = 1) +
-  theme_bw(base_size = 13, base_family = "source-han-serif-cn") +
+  theme_bw(base_size = 13, base_family = "Noto Serif CJK SC") +
   labs(x = "性别", y = "死亡率", fill = "年龄") +
   theme(
-    axis.text.y = element_text(family = "sans"),
-    legend.text = element_text(family = "sans")
+    axis.text.y = element_text(family = "Noto Sans"),
+    legend.text = element_text(family = "Noto Sans")
   )
 ```
 
@@ -308,36 +359,55 @@ p1 <- ggplot(diamonds, aes(x = price, y = stat(density), fill = cut)) +
     labels = expression(0, 5~"·"~10^-4, 10 ~ "·" ~ 10^-4, 15 ~ "·" ~ 10^-4),
     breaks = c(0, 5, 10, 15) * 10^(-4)
   ) +
-  theme_bw(base_family = "source-han-serif-cn") +
+  theme_bw(base_family = "Noto Serif CJK SC") +
   labs(x = "价格", y = "概率密度", fill = "切工", tag = "坏") +
   theme(
-    axis.text.x = element_text(family = "sans", color = "black"),
+    axis.text.x = element_text(family = "Noto Sans", color = "black"),
     axis.text.y = element_text(
-      family = "sans", color = "black",
+      family = "Noto Sans", color = "black",
       angle = 90, vjust = 1.5, hjust = 0.5
     ),
-    legend.text = element_text(family = "sans"),
-    plot.tag = element_text(family = "source-han-serif-cn", color = "red"),
+    legend.text = element_text(family = "Noto Sans"),
+    plot.tag = element_text(family = "Noto Serif CJK SC", color = "red"),
     plot.tag.position = "topright"
   )
 
 p2 <- ggplot(diamonds, aes(x = price, y = stat(density * n), fill = cut)) +
   geom_density(position = "stack", colour = "white") +
   scale_fill_brewer(palette = "Spectral") +
-  theme_bw(base_family = "source-han-serif-cn") +
+  theme_bw(base_family = "Noto Serif CJK SC") +
   labs(x = "价格", y = "概率质量", fill = "切工", tag = "好") +
   theme(
-    axis.text.x = element_text(family = "sans", color = "black"),
+    axis.text.x = element_text(family = "Noto Sans", color = "black"),
     axis.text.y = element_text(
-      family = "sans", color = "black",
+      family = "Noto Sans", color = "black",
       angle = 90, vjust = 1.5, hjust = 0.5
     ),
-    legend.text = element_text(family = "sans"),
-    plot.tag = element_text(family = "source-han-serif-cn", color = "black"),
+    legend.text = element_text(family = "Noto Sans"),
+    plot.tag = element_text(family = "Noto Serif CJK SC", color = "black"),
     plot.tag.position = "topright"
   )
 
 p1 / p2
+```
+
+另一个常见的陷阱是用色不够准确，如图 \@ref(fig:color-traps)， 需要参考颇具商业化的数据表达，在于细节的打磨和诠释 [bbplot](https://github.com/bbc/bbplot)
+
+```{r color-traps, fig.width=8, fig.height=3, fig.cap="二维密度估计", out.width="85%", echo=FALSE, fig.showtext=TRUE}
+library(ggplot2)
+library(patchwork)
+
+p1 <- ggplot(faithfuld, aes(waiting, eruptions)) +
+  geom_raster(aes(fill = density)) +
+  scale_fill_continuous() +
+  theme_bw(base_family = "Noto Sans")
+
+p2 <- ggplot(faithfuld, aes(waiting, eruptions)) +
+  geom_raster(aes(fill = density)) +
+  scale_fill_binned() +
+  theme_bw(base_family = "Noto Sans")
+
+p1 + p2
 ```
 
 
@@ -365,8 +435,8 @@ ggplot(
     x = "国民生产总值（美元，对数尺度）", y = "寿命（年）",
     size = "人口数量\n（百万）", color = "地区"
   ) +
-  theme_bw(base_size = 13, base_family = "sans") +
-  theme(title = element_text(family = "source-han-serif-cn"))
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
+  theme(title = element_text(family = "Noto Serif CJK SC"))
 ```
 
 > 你准备在书里介绍统计理论，范围是什么？深度如何？
@@ -488,10 +558,11 @@ ggplot(
 
 > 知识、技术到应用的距离？怎样的应用？相关的伦理道德问题？
 
-学校作为教学的主要场所，很多人诟病当前的教育教学与社会实际脱节。学校需要批量化地生产高知识的劳动力，剥离业务背景的知识是有限的，教学可以规模化，在3-5年内速成。进入企业，可能要明白的是业务的商业逻辑是什么，业务阶段是什么，明白探索、进攻、发展、变革阶段会有什么特点，对组织和个人的影响是什么？机遇和挑战是什么？弄清楚业务问题，将业务问题转化为数据问题、算法问题、产品问题和工程问题。
+学校作为教学的主要场所，很多人诟病当前的教育教学与社会实际脱节。学校需要批量化地生产高知识的劳动力，剥离业务背景的知识是有限的，教学可以规模化，在3-5年内速成。进入企业，可能要明白的是业务的商业逻辑是什么，业务阶段是什么，明白探索、进攻、发展、变革阶段会有什么特点，对组织和个人的影响是什么？机遇和挑战是什么？弄清楚业务问题，将业务问题转化为数据问题、统计问题、算法问题、产品问题和工程问题。
 
 另外一个，重点问题是技术应当以人为本，因为它是一把双刃剑，
-互联网行业算法的益处就不多说了，算法的害处是被严重低估和忽视的，大家知道，互联网公司的大部分收入来自广告，广告的价值却源于每个人未来时间和精力的投入。广告算法工程师应该不会希望自己生产的个性化广告让家人被反复洗脑，沉溺其中吧。
+互联网行业算法的益处就不多说了，算法的害处是被严重低估和忽视的，大家知道，互联网公司的大部分收入来自广告，广告的价值却源于每个人未来时间精力的投入。广告算法工程师应该不会希望将个性化广告投放技术应用到自己的家人身上，给自己、家庭和社会带来给多的焦虑吧！
+市面上很多的书籍教你如何掌握统计学习、机器学习、深度学习、大数据技术，而技术的好坏是由其应用的场景决定的。[The Social Dilem](https://www.acfun.cn/v/ac18902556) 详细讲了算法智能的陷阱。最近，国家有关监管部门也派人到各大主要互联网公司调研个性化广告、推荐和搜索算法！
 
 
 > 你为什么要讲创作的心路历程？

@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-11, r: '4.1.1'}
+          - {os: macos-11, r: '4.1.1', python: '3.8'}
 
     env:
       LANG: "en_US.UTF-8"
@@ -44,6 +44,26 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
+      - name: Cache conda
+        uses: actions/cache@v2
+        env:
+          # Increase this value to reset cache if environment.yml has not changed
+          CACHE_NUMBER: 0
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.config.python }}
+          miniconda-version: "latest"
+          activate-environment: 'r-reticulate'
+          channel-priority: flexible
+          show-channel-urls: true
+          environment-file: environment.yml
+          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+
       - name: Install Pandoc
         uses: r-lib/actions/setup-pandoc@v1
         with:
@@ -56,6 +76,8 @@ jobs:
           brew install --cask phantomjs
           brew tap homebrew/cask-fonts
           brew install --cask font-xkcd
+          brew install --cask font-noto-sans font-noto-serif
+          brew install --cask font-noto-sans-cjk-sc font-noto-serif-cjk-sc
           fc-list :lang=zh | sort
           fc-list :lang=en | sort
           fc-list : family | sort -f
@@ -97,6 +119,12 @@ jobs:
         run: |
           tinytex::tlmgr_install(readLines("texlive.txt"))
           tinytex::tl_pkgs()
+        shell: Rscript {0}
+
+      - name: Check Python Env
+        run: |
+          reticulate::py_discover_config()
+          reticulate::use_miniconda(condaenv = 'r-reticulate', required = TRUE)
         shell: Rscript {0}
 
       - name: Install fonts

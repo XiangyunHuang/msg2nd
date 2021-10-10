@@ -6,6 +6,36 @@
 source(file = "_common.R")
 ```
 
+```{r setup-noto-fonts, echo=FALSE}
+# 准备 Noto 中英文字体
+## 宋体
+sysfonts::font_add(
+  family = "Noto Serif CJK SC",
+  regular = "~/Library/Fonts/NotoSerifCJKsc-Regular.otf",
+  bold = "~/Library/Fonts/NotoSerifCJKsc-Bold.otf"
+)
+## 黑体
+sysfonts::font_add(
+  family = "Noto Sans CJK SC",
+  regular = "~/Library/Fonts/NotoSansCJKsc-Regular.otf",
+  bold = "~/Library/Fonts/NotoSansCJKsc-Bold.otf"
+)
+sysfonts::font_add(
+  family = "Noto Serif",
+  regular = "~/Library/Fonts/NotoSerif-Regular.ttf",
+  bold = "~/Library/Fonts/NotoSerif-Bold.ttf",
+  italic = "~/Library/Fonts/NotoSerif-Italic.ttf",
+  bolditalic = "~/Library/Fonts/NotoSerif-BoldItalic.ttf"
+)
+sysfonts::font_add(
+  family = "Noto Sans",
+  regular = "~/Library/Fonts/NotoSans-Regular.ttf",
+  bold = "~/Library/Fonts/NotoSans-Bold.ttf",
+  italic = "~/Library/Fonts/NotoSans-Italic.ttf",
+  bolditalic = "~/Library/Fonts/NotoSans-BoldItalic.ttf"
+)
+```
+
 <!-- 
 https://github.com/XiangyunHuang/masr/issues/19
 Epilogue 结语 后记 afterword postscript backmatter
@@ -27,6 +57,19 @@ Epilogue 结语 后记 afterword postscript backmatter
 描述性统计分析
 
 深度学习软件的发展
+
+分析是不断提出假设和验证假设的过程
+探索性数据分析：什么样的数据是正态的，理论上是清楚的，对统计建模来说，更实际的问题是什么样的数据是够正态的！
+
+空间建模分析与随机森林
+https://github.com/BlasBenito/spatialRF
+
+spatialRF 使用了 ranger 做随机森林
+https://arxiv.org/abs/1508.04409
+https://github.com/imbs-hl/ranger
+
+Machine Learning algorithms for spatial and spatiotemporal data
+https://github.com/thengl/GeoMLA
 -->
 
 数据分析是未来，涉及一系列的问题，如何出发，如何分析，如何理论，如何收获，如何应用，如何推广。用 R 语言讲好数据故事 [@Machlis2018]。
@@ -36,15 +79,23 @@ Karl Pearson 那个时代，生物统计系，达尔文进化论能被人所接�
 <!--
 An Interview with Bradley Efron and Trevor Hastie, authors of Computer Age Statistical Inference
 https://youtu.be/quoU5fjKBqo 结合历史资料给出一个时间轴图
+
+数据原则 [@fivethirtyeight2018]
+数据驱动的杂志网站 https://fivethirtyeight.com/ 设计政治、经济、体育和其它事件
+杂志背后的数据代码见 https://github.com/fivethirtyeight/data
 -->
 
 数据分析、可视化、探索性分析、可解释性、可重复性的关注度越来越高，其重要性不言而喻[@Tukey1977]，
 方差分析从一开始就是数据分析[@Scheffe1959]，数据分析的未来 [@Tukey1962]，数据分析设计原则 [@McGowan2021]，数据科学的50年 [@Donoho2017]，统计建模：两种文化 [@Breiman2001]，[过去50年最重要的8个统计概念](https://arxiv.org/abs/2012.00174)，数据科学的统计原则[@Cressie2021]。借助 R 语言这一优秀的统计分析和计算环境，过渡到现代数据科学 [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/)，数据科学导论：数据分析和预测算法[@Irizarry2019]。Gabriel Peyré 的著作数据科学的数学基础 [Mathematical Foundations of Data Sciences](https://mathematical-tours.github.io/book/)，提供很多个语言版本的实现 [Numerical Tours of Data Sciences](https://www.numerical-tours.com/)。数据科学基石 [@Blum2020]。
 
+数据收集和组织管理是打造数据产品的基石，数据源头的可靠性，收集过程的规范性，组织的科学性，管理的合理性直接决定开发数据产品的效率和价值。数据可视化是相对靠后的一环，也是关键的一环！
+
 
 - 稳定性：可重复性对任何科学发现都是至关重要的，是稳定性的重要方面，实现稳定性从数据扰动入手的有 Jacknife、bootstrap、交叉验证，从模型扰动入手有稳健统计 [@Yu2013]。可重复性危机是使用方式不当，甚至是滥用所致，Russell A. Poldrack 深有感触，故而回到写书的教育工作[@Poldrack2021]。
 
 - 可视化：受 [Michael Friendly](https://www.datavis.ca/) 的著作《Visualizing Categorical Data》[@Friendly2000] 的启发，David Meyer 开发了 R 包 **vcd** [@Meyer06]，而后，二人一起合著《Discrete Data Analysis with R》[@Friendly2016]，Michael Friendly 继续开发了 [vcdExtra](https://github.com/friendly/vcdExtra) 包，扩展很多绘图能力。Antony Unwin 的《Graphical Data Analysis with R》[@Unwin2015] 和 Robert Kabacoff 的[Data Visualization with R](https://rkabacoff.github.io/datavis/) 非常适合入门。
+
+- 可视化技术：将高维空间的数据映射到低维空间，即投影寻踪技术[@tourr2011;@tourr2020]
 
 - 统计分析：贝叶斯数据分析经典教材当属 Andrew Gelman 等人合著的《Bayesian Data Analysis》 [@Gelman2013]，读者可跟随 [Aki Vehtari](https://avehtari.github.io/) 的课程 [Bayesian Data Analysis](https://avehtari.github.io/BDA_course_Aalto/) 一起学习。Robert Kabacoff 的《R in Action: Data Analysis and Graphics with R》目前已经出到[第三版](https://github.com/Rkabacoff/RiA3)了。
 
@@ -73,7 +124,7 @@ cAIC4 计算 AIC [@Benjamin2021]。广义可加模型[@Wood2017;@Fasiolo2019]，
 
 - 深度学习框架：继 [Tensorflow](https://github.com/tensorflow/tensorflow)、 [PyTorch](https://github.com/pytorch/pytorch)、 [MXNet](https://github.com/apache/incubator-mxnet) 之后，深度学习框架开始涌现，大厂和创业公司都在涉足，比如百度的[PaddlePaddle](https://github.com/PaddlePaddle)、奇虎360的[XLearning](https://github.com/Qihoo360/XLearning)、旷视科技的[MegEngine](https://github.com/MegEngine/MegEngine)、一流科技的 [oneflow](https://github.com/Oneflow-Inc/oneflow)。
 
-- 机器学习框架：[h2o-3](https://github.com/h2oai/h2o-3)、 [keras](https://github.com/keras-team/keras)、[weka-3.8](https://github.com/Waikato/weka-3.8)、[caret](https://github.com/topepo/caret)、[mlr](https://github.com/mlr-org/mlr3) 和 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 等。梯度提升框架有[xgboost](https://github.com/dmlc/xgboost)、[LightGBM](https://github.com/microsoft/LightGBM) 和[catboost](https://github.com/catboost/catboost) 等，大部分都有 R 语言接口，如 RWeka [@Hornik2009]，mlr3 [@Michel2019]等。
+- 机器学习框架：[h2o-3](https://github.com/h2oai/h2o-3)、 [keras](https://github.com/keras-team/keras)、[weka-3.8](https://github.com/Waikato/weka-3.8)、[caret](https://github.com/topepo/caret)、[mlr](https://github.com/mlr-org/mlr3) 和 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 等。梯度提升框架有[xgboost](https://github.com/dmlc/xgboost)[@xgboost2021]、[LightGBM](https://github.com/microsoft/LightGBM)[@lightgbm2021]和[catboost](https://github.com/catboost/catboost) 等，大部分都有 R 语言接口，如 RWeka [@Hornik2009]，mlr3 [@Michel2019]等。
 
 - 统计图形框架：Python 的 [matplotlib](https://github.com/matplotlib/matplotlib)、LaTeX 的 [pgf](https://github.com/pgf-tikz/pgf)、JavaScript 的 [echarts](https://github.com/apache/echarts)、[plotly](https://github.com/plotly/plotly.js)和[bokeh](https://github.com/bokeh/bokeh) 等。
 
@@ -84,6 +135,8 @@ cAIC4 计算 AIC [@Benjamin2021]。广义可加模型[@Wood2017;@Fasiolo2019]，
 - 会议期刊：[推荐系统会议](https://recsys.acm.org/)
 
 - 开放数据集：推荐系统 [影评数据](https://grouplens.org/datasets/movielens/)
+
+- 缺失数据处理：缺失数据探索和可视化，缺失评估[@Tierney2020]，使用图形用户界面探查多元缺失数据[@Cheng2015]
 
 R 语言应用到各行各业的数据分析，比如
 
@@ -101,7 +154,7 @@ R 语言应用到各行各业的数据分析，比如
 
 - 社会人口分析：每次人口普查相关的数据公布，都会引发热烈的关注，2021 年完成第七次全国人口普查，发布了一批数据，自古以来，人口和土地是非常重要的资源，如何系统地分析和挖掘其中的信息非常重要。Kyle Walker 以美国的普查数据为分析对象，从方法、地图和模型等多角度，想必是很有参考价值的[@Walker2022]。
 
-- 空间数据分析：空间采样[@Cressie1993;@Brus2021]
+- 空间数据分析：空间数据统计[@Cressie1993] 空间采样[@Brus2021]
 
 - 教育行业分析：教育行业的数据科学[@Estrellado2020]
 
@@ -109,14 +162,15 @@ R 语言应用到各行各业的数据分析，比如
 
 一些有意思的思考方向：
 
-- 国家层面关注的重大问题：人口数、出生率、死亡率、增长率、物价指数、消费指数、恩格尔系数、国民收入
-艾宾豪斯记忆曲线、道格拉斯生产函数、Gini 系数。
+- 国家层面关注的重大问题：人口数、出生率、死亡率、增长率、物价指数、消费指数、恩格尔系数、国民收入、道格拉斯生产函数、Gini 系数。
 
 - 中国经济社会发展： 1983 年以来的中国统计年鉴分析。
 
 - 就某一指标，300 年来数据收集、统计、分析的工具和方法的变迁。也会很有意思，找一条线串起来介绍相关统计理论的发展。
 
-- 统计概念的首次提出者及其国家，年龄、年月，估计是一个很有意思的事情，但是数据收集和整理的工作量会很大。最终要说明什么呢？为什么国际统计中心会从英国转移到美国？
+- 统计概念的首次提出者及其国家，年龄、年月，估计是一个很有意思的事情，但是数据收集和整理的工作量会很大。最终要说明什么呢？除去战争因素，国际统计中心为什么会从英国转移到美国？
+
+- 历届COPSS奖得主的获奖时候年龄分布，现在的年龄，21世纪100位统计大师
 
 
 ## 区间估计 {#cp-estimator}
@@ -177,15 +231,15 @@ plot(
   x = seq(from = 0, to = 10, length.out = 11),
   y = seq(from = 0, to = 1, length.out = 11),
   type = "n", ann = FALSE, panel.first = grid(),
-  family = "sans"
+  family = "Noto Sans"
 )
-title(xlab = "成功次数", ylab = "比例", family = "source-han-serif-cn")
+title(xlab = "成功次数", ylab = "比例", family = "Noto Serif CJK SC")
 lines(x = 0:10, y = p, type = "s") # 朝下的阶梯线
 lines(x = 0:10, y = p, type = "l") # 折线
 # points(x = 0:10, y = p, pch = 16, cex = .8) # 散点
 
 # abline(a = 0, b = 0.1, col = "gray", lwd = 2, lty = 2) # 添加对称线
-text(x = 5, y = 0.5, label = "置信带", cex = 1.5, srt = 45, family = "source-han-serif-cn")
+text(x = 5, y = 0.5, label = "置信带", cex = 1.5, srt = 45, family = "Noto Serif CJK SC")
 # points(x = 5, y = 0.5, col = "black", pch = 16) # 中心对称点
 # points(x = 5, y = 0.5, col = "black", pch = 3) # 中心对称点
 
@@ -216,5 +270,23 @@ https://github.com/probml/pyprobml/blob/master/scripts/iris_logreg.py#L115
 回归模型的结果，用 SQL 转义出来，放在数据库上高性能地执行分类预测
 -->
 
+<!-- 局限
+新的语法目前不支持 EPUB 格式输出
+https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#theorem-engine
+编译 EPUB 伴随有警告
+Warning message:
+The label(s) thm:pyth not found
+
+见定理 \@ref(thm:pyth)
+
+::: {.theorem #pyth name="Pythagorean theorem"}
+This is a `theorem` environment that can contain **any**
+_Markdown_ syntax.
+
+For a right triangle, if $c$ denotes the length of the hypotenuse
+and $a$ and $b$ denote the lengths of the other two sides, we have
+$$a^2 + b^2 = c^2$$
+:::
+-->
 
 

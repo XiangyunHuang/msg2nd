@@ -4,6 +4,7 @@
 \chaptermark{介绍}
 
 ```{r setup-python, echo=FALSE}
+source(file = "_common.R")
 knitr::opts_chunk$set(
   python.reticulate = TRUE
 )
@@ -35,12 +36,12 @@ https://github.com/karoliskoncevicius/basetheme
 
 图 \@ref(fig:matplotlib) 是一个迷你的 matplotlib 示例
 
-```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(),'svg', ifelse(knitr::is_latex_output(),'pdf','png')), out.width='45%', fig.width=4, fig.height=4, collapse=TRUE}
+```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(),'svg', ifelse(knitr::is_latex_output(),'pdf','png')), out.width='45%', fig.width=4, fig.height=3.5, collapse=TRUE}
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
 rcParams.update({
-  'font.size': 10, 
+  'font.size': 14, 
   'text.usetex': True,
   'text.latex.preamble': r'\usepackage[sfdefault]{sourcesanspro}'
   })
@@ -54,11 +55,11 @@ plt.tight_layout()
 plt.show()
 ```
 
-`r if (!knitr::is_html_output()) '<!--'` 
+`r if (knitr::is_latex_output()) '<!--'` 
 
-JavaScript 库 Plotly 的 Python 接口，如图\@ref(fig:python-plotly)所示，iris 鸢尾花数据集按花种类分组线性回归，展示相关性。
+JavaScript 库 Plotly 的 Python 接口，如图\@ref(fig:plotly-ols)所示，iris 鸢尾花数据集按花种类分组线性回归，展示相关性。
 
-```{python, python-plotly, fig.cap="JavaScript 库 Plotly 的 Python 接口", echo=FALSE, eval=knitr::is_html_output()}
+```{python plotly-ols, fig.cap="JavaScript 库 Plotly 的 Python 接口", echo=FALSE, out.width='65%', eval=knitr::is_html_output()}
 import plotly.express as px
 px.scatter(
     px.data.iris(),
@@ -68,16 +69,28 @@ px.scatter(
     trendline="ols",
     template="simple_white",
     labels={
-        "sepal_length": "Sepal Length (cm)",
-        "sepal_width": "Sepal Width (cm)",
-        "species": "Species of Iris",
+        "sepal_length": "萼片长度 (cm)",
+        "sepal_width": "萼片宽度 (cm)",
+        "species": "种类",
     },
-    title="Edgar Anderson's Iris Data",
+    title="Edgar Anderson 的鸢尾花数据",
     color_discrete_sequence=px.colors.qualitative.Set2
 )
 ```
 
-`r if (!knitr::is_html_output()) '-->'`
+
+
+```{r iris-ggplot2, fig.cap="Edgar Anderson 的鸢尾花数据", fig.showtext=TRUE, fig.width=5, fig.height=3, out.width="65%", echo=FALSE}
+library(ggplot2)
+ggplot(data = iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y~x, se = FALSE) +
+  labs(x = "萼片长度", y = "萼片宽度", color = "种类") +
+  theme_bw(base_size = 13, base_family = "Noto Sans") +
+  theme(title = element_text(family = "Noto Serif CJK SC"))
+```
+
+`r if (knitr::is_latex_output()) '-->'`
 
 展示辛普森悖论的数据，性别歧视，公平，如何解读数据，数据会说谎。列联分析和展示。相比于 mosaicplot 有某种更加直观的含义，有人一堆堆排在那的既视感。
 1973 年加州伯克利大学6个最大的院系分男女性别和是否录取统计人数，见下表
@@ -88,7 +101,7 @@ margin.table(x = UCBAdmissions, margin = 2:1)
 
 **aplpack** [@aplpack2021] 用函数 `iconplot()` 展示列联表数据，图 \@ref(fig:pictogram) 每个格子代表 100 人。
 
-```{r pictogram, fig.width=6, fig.height=5, out.width="65%", fig.cap="加州伯克利大学的录取情况", fig.showtext=TRUE, echo=FALSE}
+```{r pictogram, fig.width=6, fig.height=5, out.width="65%", fig.cap="加州伯克利大学的录取情况", fig.showtext=TRUE, echo=FALSE, warning=FALSE}
 # library(jpeg)
 # rlogo <- jpeg::readJPEG(source = system.file(package = "jpeg", "img", "Rlogo.jpg"))
 # 使用 icon 替代格子
@@ -117,7 +130,7 @@ library(ggridges)
 ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
   scale_fill_brewer(palette = "Greys") +
   geom_density_ridges(bandwidth = 0.2) +
-  theme_ridges(font_size = 20, font_family = "sans")
+  theme_ridges(font_size = 20, font_family = "Noto Sans")
 ```
 
 

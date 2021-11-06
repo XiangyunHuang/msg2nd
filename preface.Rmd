@@ -7,36 +7,6 @@ source(file = "_common.R")
 # showtext_auto()
 ```
 
-```{r setup-noto-fonts, echo=FALSE}
-# 准备 Noto 中英文字体
-## 宋体
-sysfonts::font_add(
-  family = "Noto Serif CJK SC",
-  regular = "~/Library/Fonts/NotoSerifCJKsc-Regular.otf",
-  bold = "~/Library/Fonts/NotoSerifCJKsc-Bold.otf"
-)
-## 黑体
-sysfonts::font_add(
-  family = "Noto Sans CJK SC",
-  regular = "~/Library/Fonts/NotoSansCJKsc-Regular.otf",
-  bold = "~/Library/Fonts/NotoSansCJKsc-Bold.otf"
-)
-sysfonts::font_add(
-  family = "Noto Serif",
-  regular = "~/Library/Fonts/NotoSerif-Regular.ttf",
-  bold = "~/Library/Fonts/NotoSerif-Bold.ttf",
-  italic = "~/Library/Fonts/NotoSerif-Italic.ttf",
-  bolditalic = "~/Library/Fonts/NotoSerif-BoldItalic.ttf"
-)
-sysfonts::font_add(
-  family = "Noto Sans",
-  regular = "~/Library/Fonts/NotoSans-Regular.ttf",
-  bold = "~/Library/Fonts/NotoSans-Bold.ttf",
-  italic = "~/Library/Fonts/NotoSans-Italic.ttf",
-  bolditalic = "~/Library/Fonts/NotoSans-BoldItalic.ttf"
-)
-```
-
 <!-- 
 作者自己写的，介绍本书内容：目标读者、内容结构、阅读方案、符号约定、可重复性
 Front Matter
@@ -248,7 +218,7 @@ R 闭包、环境等的关系图
 软件设计架构图
 -->
 
-另一个值得一提的是 **lattice** 的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及。
+另一个值得一提的是 **lattice** 包，它的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及。
 
 ```{r lattice-theme-settings, fig.cap="lattice 主题设置", echo=FALSE, out.width="95%", fig.width=6.5, fig.height=6.5, fig.showtext=TRUE}
 library(lattice)

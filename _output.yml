@@ -22,3 +22,5 @@ bookdown::epub_book:
   template: "default"
   epub_version: "epub3"
   stylesheet: style.css
+bookdown::word_document2:
+  highlight: NULL

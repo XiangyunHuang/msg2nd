@@ -23,7 +23,7 @@ knitr::knit_hooks$set(chunk = local({
     ifelse(options$size != "normalsize", paste0("\n \\", options$size, "\n\n", x, "\n\n \\normalsize"), x)
   }
 }))
-
+# Convert PDF to PNG
 to_png <- function(fig_path) {
   png_path <- sub("\\.pdf$", ".png", fig_path)
   magick::image_write(magick::image_read_pdf(fig_path),
@@ -32,6 +32,10 @@ to_png <- function(fig_path) {
   )
   return(png_path)
 }
+
+knitr::opts_chunk$set(webshot = "webshot")
+# screenshot HTML widgets
+if (is.null(webshot:::find_phantom())) webshot::install_phantomjs()
 
 knitr::knit_hooks$set(par = function(before, options, envir) {
   if (before && options$fig.show != "none") {
@@ -46,4 +50,33 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   size = "footnotesize",
   fig.align = "center"
+)
+
+# 准备 Noto 中英文字体
+# sysfonts::font_paths(new = "~/Library/Fonts/")
+## 宋体
+sysfonts::font_add(
+  family = "Noto Serif CJK SC",
+  regular = "NotoSerifCJKsc-Regular.otf",
+  bold = "NotoSerifCJKsc-Bold.otf"
+)
+## 黑体
+sysfonts::font_add(
+  family = "Noto Sans CJK SC",
+  regular = "NotoSansCJKsc-Regular.otf",
+  bold = "NotoSansCJKsc-Bold.otf"
+)
+sysfonts::font_add(
+  family = "Noto Serif",
+  regular = "NotoSerif-Regular.ttf",
+  bold = "NotoSerif-Bold.ttf",
+  italic = "NotoSerif-Italic.ttf",
+  bolditalic = "NotoSerif-BoldItalic.ttf"
+)
+sysfonts::font_add(
+  family = "Noto Sans",
+  regular = "NotoSans-Regular.ttf",
+  bold = "NotoSans-Bold.ttf",
+  italic = "NotoSans-Italic.ttf",
+  bolditalic = "NotoSans-BoldItalic.ttf"
 )

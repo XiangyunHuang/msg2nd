@@ -46,36 +46,6 @@ source(file = "_common.R")
 # 欢迎 {#welcome .unnumbered}
 \chaptermark{欢迎}
 
-```{r setup-noto-fonts, echo=FALSE}
-# 准备 Noto 中英文字体
-## 宋体
-sysfonts::font_add(
-  family = "Noto Serif CJK SC",
-  regular = "~/Library/Fonts/NotoSerifCJKsc-Regular.otf",
-  bold = "~/Library/Fonts/NotoSerifCJKsc-Bold.otf"
-)
-## 黑体
-sysfonts::font_add(
-  family = "Noto Sans CJK SC",
-  regular = "~/Library/Fonts/NotoSansCJKsc-Regular.otf",
-  bold = "~/Library/Fonts/NotoSansCJKsc-Bold.otf"
-)
-sysfonts::font_add(
-  family = "Noto Serif",
-  regular = "~/Library/Fonts/NotoSerif-Regular.ttf",
-  bold = "~/Library/Fonts/NotoSerif-Bold.ttf",
-  italic = "~/Library/Fonts/NotoSerif-Italic.ttf",
-  bolditalic = "~/Library/Fonts/NotoSerif-BoldItalic.ttf"
-)
-sysfonts::font_add(
-  family = "Noto Sans",
-  regular = "~/Library/Fonts/NotoSans-Regular.ttf",
-  bold = "~/Library/Fonts/NotoSans-Bold.ttf",
-  italic = "~/Library/Fonts/NotoSans-Italic.ttf",
-  bolditalic = "~/Library/Fonts/NotoSans-BoldItalic.ttf"
-)
-```
-
 ::: {.rmdwarn data-latex="{警告}"}
 本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
 :::
@@ -154,7 +124,7 @@ https://cosx.org/2014/01/showtext-interesting-fonts-and-graphs
 ```{r xkcd-fonts, fig.cap="手绘漫画风格的图形", out.width="75%", fig.width=5, fig.height=3, echo=FALSE, fig.showtext=TRUE}
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd
-sysfonts::font_add("xkcd", regular = "~/Library/Fonts/xkcd.otf")
+sysfonts::font_add("xkcd", regular = "xkcd.otf")
 ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point(aes(color = Species, shape = Species)) +
   scale_color_grey() +
@@ -384,7 +354,9 @@ legend("bottomright",
 ```
 
 (ref:bessel-function) 贝塞尔函数 $\mathcal{K}_{\kappa}(u)$ 在区间 $(10^{-8}, 10^2)$ 和 $(0, 4)$ 上的图像
+
 (ref:bessel-left) 区间 $(10^{-8}, 10^2)$ 上的贝塞尔函数 $\mathcal{K}_{\kappa}(u)$
+
 (ref:bessel-right) 区间 $(0, 4)$ 上的贝塞尔函数 $\mathcal{K}_{\kappa}(u)$
 
 ```{r bessel-function, dev='tikz', fig.cap="(ref:bessel-function)", fig.subcap=c("(ref:bessel-left) ", "(ref:bessel-right)"), echo=FALSE, fig.show='hold', out.width="50%", fig.width=3.5, fig.height=3.5, cache=TRUE, fig.process=to_png}
@@ -440,6 +412,19 @@ legend("topright",
   col = hcl.colors(9, rev = T), lwd = 2, cex = 1
 )
 ```
+
+
+<!--
+贝塞尔函数的前因后果，贝塞尔方程，宝马车工程师，飞机风洞试验，曲率控制，光滑性
+修正的第三类贝塞尔函数
+空间统计 随机过程的协方差结构，核函数
+
+```r
+exp(0.5)*besselK(0.5,20)
+besselK(0.5,20, expon.scaled = T)
+```
+-->
+
 
 
 `r if (!knitr::is_html_output()) '<!--'` 

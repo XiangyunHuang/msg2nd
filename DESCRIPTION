@@ -16,5 +16,7 @@ Imports:
   showtext (>= 0.9.4),
   tikzDevice (>= 0.12.3.1),
   webshot (>= 0.5.2)
+Suggests:
+  rsconnect (>= 0.8.24)
 SystemRequirements: Gifski (<https://gif.ski/>), ImageMagick (<https://imagemagick.org/>), OptiPNG (<http://optipng.sourceforge.net/>) and Pandoc (<https://pandoc.org>)
 BugReports: https://github.com/XiangyunHuang/msg/issues

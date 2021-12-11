@@ -23,75 +23,6 @@ if (!is.na(Sys.getenv("CI", NA))) {
 }
 ```
 
-<!-- 
-https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/
-http://motioninsocial.com/tufte/
-
-https://stackoverflow.com/questions/27934840/reproducing-the-style-of-a-histogram-plot-in-r
-https://stackoverflow.com/questions/3932038/plot-a-legend-outside-of-the-plotting-area-in-base-graphics/49501243#49501243
-http://karolis.koncevicius.lt/posts/lesser_known_r_features/
-
-https://github.com/karoliskoncevicius/basetheme
--->
-
-图 \@ref(fig:matplotlib) 是一个迷你的 matplotlib 示例
-
-```{python matplotlib, fig.cap="matplotlib 示例", echo=FALSE, dev=ifelse(knitr::is_html_output(),'svg', ifelse(knitr::is_latex_output(),'pdf','png')), out.width='45%', fig.width=4, fig.height=3.5, collapse=TRUE}
-import matplotlib.pyplot as plt
-from matplotlib import rcParams
-
-rcParams.update({
-  'font.size': 14, 
-  'text.usetex': True,
-  'text.latex.preamble': r'\usepackage[sfdefault]{sourcesanspro}'
-  })
-
-plt.switch_backend('agg')
-plt.plot([0, 2, 1, 4])
-plt.xlabel(r'Coord $x$')
-plt.ylabel(r'Coord $y$')
-plt.title("Test matplotlib")
-plt.tight_layout()
-plt.show()
-```
-
-`r if (knitr::is_latex_output()) '<!--'` 
-
-JavaScript 库 Plotly 的 Python 接口，如图\@ref(fig:plotly-ols)所示，iris 鸢尾花数据集按花种类分组线性回归，展示相关性。
-
-```{python plotly-ols, fig.cap="JavaScript 库 Plotly 的 Python 接口", echo=FALSE, out.width='65%', eval=knitr::is_html_output()}
-import plotly.express as px
-px.scatter(
-    px.data.iris(),
-    x="sepal_width",
-    y="sepal_length",
-    color="species",
-    trendline="ols",
-    template="simple_white",
-    labels={
-        "sepal_length": "萼片长度 (cm)",
-        "sepal_width": "萼片宽度 (cm)",
-        "species": "种类",
-    },
-    title="Edgar Anderson 的鸢尾花数据",
-    color_discrete_sequence=px.colors.qualitative.Set2
-)
-```
-
-
-
-```{r iris-ggplot2, fig.cap="Edgar Anderson 的鸢尾花数据", fig.showtext=TRUE, fig.width=5, fig.height=3, out.width="65%", echo=FALSE}
-library(ggplot2)
-ggplot(data = iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = y~x, se = FALSE) +
-  labs(x = "萼片长度", y = "萼片宽度", color = "种类") +
-  theme_bw(base_size = 13, base_family = "Noto Sans") +
-  theme(title = element_text(family = "Noto Serif CJK SC"))
-```
-
-`r if (knitr::is_latex_output()) '-->'`
-
 展示辛普森悖论的数据，性别歧视，公平，如何解读数据，数据会说谎。列联分析和展示。相比于 mosaicplot 有某种更加直观的含义，有人一堆堆排在那的既视感。
 1973 年加州伯克利大学6个最大的院系分男女性别和是否录取统计人数，见下表
 
@@ -132,21 +63,3 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
   geom_density_ridges(bandwidth = 0.2) +
   theme_ridges(font_size = 20, font_family = "Noto Sans")
 ```
-
-
-
-
-
-<!-- 
-## 词云图 {#word-cloud}
-tcltk 
-
-## 地平线图 {#horizon-plot}
-
-lattice 
-[ggHoriPlot](https://github.com/rivasiker/ggHoriPlot)
-
-用 RCurl/XML 抓取吴越的小说《当时已枉然》的豆瓣书评 <https://book.douban.com/subject/2119444/>，制作词云图描述大家讨论的内容。
-
-豆瓣书评，获取词云图 https://github.com/leovan/leovan.me/blob/master/scripts/share/douban-utils.R 
--->

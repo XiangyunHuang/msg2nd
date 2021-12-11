@@ -216,7 +216,38 @@ https://texample.net/tikz/examples/
 ggplot2 功能结构图
 R 闭包、环境等的关系图
 软件设计架构图
+
+filled.contour 讲一讲背后的原理，相比第一版技术更加深入一些，以下面的为例
 -->
+
+```{r filled-contour, fig.cap="填充等值线图", out.width='85%', fig.width=6, fig.height=4.5, fig.showtext=TRUE, echo=FALSE}
+y <- x <- 1:12
+
+filled.contour(
+  x = x, y = y,
+  z = outer(x, y, FUN = function(x, y) sin(x * y)),
+  color.palette = hcl.colors,
+  plot.title = {
+    par(family = "Noto Serif CJK SC")
+    title(
+      main = "二维函数的填充等值线图",
+      xlab = "水平方向", ylab = "垂直方向"
+    )
+  },
+  plot.axes = {
+    par(family = "Noto Sans")
+    axis(2)
+    axis(1, at = x, labels = x)
+    grid(col = "blue")
+    points(10, 10)
+  },
+  key.axes = {
+    par(family = "Noto Sans")
+     axis(4, seq(-1, 1, length.out = 5))
+  }
+)
+```
+
 
 另一个值得一提的是 **lattice** 包，它的绘图能力被大大低估了，和 ggplot2 同出一脉，但知名度远远不及。
 

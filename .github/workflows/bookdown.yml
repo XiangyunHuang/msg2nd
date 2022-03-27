@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-11, r: '4.1.2', python: '3.9'}
+          - {os: macos-11, r: '4.1.3', python: '3.9'}
 
     env:
       LANG: "en_US.UTF-8"
@@ -35,7 +35,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 1000
 
@@ -45,7 +45,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
 
       - name: Cache conda
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           # Increase this value to reset cache if environment.yml has not changed
           CACHE_NUMBER: 0
@@ -67,9 +67,10 @@ jobs:
       - name: Install Pandoc
         uses: r-lib/actions/setup-pandoc@v2
         with:
-          pandoc-version: '2.16.1'
+          pandoc-version: '2.16.2'
 
       - name: Install ghostscript and Others
+        if: runner.os == 'macOS'
         run: |
           brew install ghostscript imagemagick poppler
           brew install --cask xquartz
@@ -83,14 +84,14 @@ jobs:
           fc-list : family | sort -f
 
       - name: Cache R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
           key: r-${{ matrix.config.os }}-${{ matrix.config.r }}-${{ hashFiles('renv.lock') }}
           restore-keys: r-${{ matrix.config.os }}-${{ matrix.config.r }}-
 
       - name: Cache bookdown results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _bookdown_files
           key: bookdown-${{ matrix.config.os }}-${{ matrix.config.r }}-${{ hashFiles('**/*Rmd') }}
@@ -169,7 +170,7 @@ jobs:
       # 先本地创建一个 Github Pages 分支推送上来才行
       # https://bookdown.org/yihui/bookdown/github.html
       - name: Checkout the gh-pages branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: gh-pages
           path: book-output

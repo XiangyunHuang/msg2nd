@@ -73,7 +73,7 @@ jobs:
       - name: Render Book
         id: render-book
         run: |
-          quarto render
+          quarto render --to html
 
       - name: Upload book folder for debug
         if: failure()

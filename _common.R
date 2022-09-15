@@ -52,20 +52,42 @@ knitr::opts_chunk$set(
   fig.align = "center"
 )
 
-# 准备 Noto 中英文字体
-# sysfonts::font_paths(new = "~/Library/Fonts/")
-## 宋体
-sysfonts::font_add(
-  family = "Noto Serif CJK SC",
-  regular = "NotoSerifCJKsc-Regular.otf",
-  bold = "NotoSerifCJKsc-Bold.otf"
-)
-## 黑体
-sysfonts::font_add(
-  family = "Noto Sans CJK SC",
-  regular = "NotoSansCJKsc-Regular.otf",
-  bold = "NotoSansCJKsc-Bold.otf"
-)
+
+if (xfun::is_macos()) {
+  # 准备 Noto 中英文字体
+  sysfonts::font_paths(new = "~/Library/Fonts/")
+  ## 宋体
+  sysfonts::font_add(
+    family = "Noto Serif CJK SC",
+    regular = "NotoSerifCJKsc-Regular.otf",
+    bold = "NotoSerifCJKsc-Bold.otf"
+  )
+  ## 黑体
+  sysfonts::font_add(
+    family = "Noto Sans CJK SC",
+    regular = "NotoSansCJKsc-Regular.otf",
+    bold = "NotoSansCJKsc-Bold.otf"
+  )
+} else { # Github Action Ubuntu
+  sysfonts::font_paths(new = c(
+    "/usr/share/fonts/opentype/noto/",
+    "/usr/share/fonts/truetype/noto/"
+  ))
+  ## 宋体
+  sysfonts::font_add(
+    family = "Noto Serif CJK SC",
+    regular = "NotoSerifCJK-Regular.ttc",
+    bold = "NotoSerifCJK-Bold.ttc"
+  )
+  ## 黑体
+  sysfonts::font_add(
+    family = "Noto Sans CJK SC",
+    regular = "NotoSansCJK-Regular.ttc",
+    bold = "NotoSansCJK-Bold.ttc"
+  )
+}
+
+## 衬线字体
 sysfonts::font_add(
   family = "Noto Serif",
   regular = "NotoSerif-Regular.ttf",
@@ -73,6 +95,7 @@ sysfonts::font_add(
   italic = "NotoSerif-Italic.ttf",
   bolditalic = "NotoSerif-BoldItalic.ttf"
 )
+## 无衬线字体
 sysfonts::font_add(
   family = "Noto Sans",
   regular = "NotoSans-Regular.ttf",

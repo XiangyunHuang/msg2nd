@@ -31,15 +31,6 @@ Epilogue 结语 后记 afterword postscript backmatter
 分析是不断提出假设和验证假设的过程
 探索性数据分析：什么样的数据是正态的，理论上是清楚的，对统计建模来说，更实际的问题是什么样的数据是够正态的！
 
-空间建模分析与随机森林
-[spatialRF](https://github.com/BlasBenito/spatialRF)
-
-[ranger](https://github.com/imbs-hl/ranger) 使用了 ranger 做随机森林
-https://arxiv.org/abs/1508.04409
-
-
-Machine Learning algorithms for spatial and spatiotemporal data
-https://github.com/thengl/GeoMLA
 -->
 
 数据分析是未来，涉及一系列的问题，如何出发，如何分析，如何理论，如何收获，如何应用，如何推广。用 R 语言讲好数据故事 [@Machlis2018]。

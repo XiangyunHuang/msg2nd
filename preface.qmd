@@ -17,6 +17,24 @@ a cheat-sheet for mathematical notation in code form
 图形直观
 Graphic notes on Gilbert Strang's "Linear Algebra for Everyone"
 https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra
+
+提及但尽量避免正文出现 ggplot2，书籍补充材料包含所有 ggplot2 的绘制方法
+
+可视化的内容：
+第一版：数据的一元、二元、多元分类。
+第二版：
+以介绍 lattice 为主，要定制一款主题，视觉效果直追 ggplot2 
+数据可视化基础：基本要素（坐标轴、图例、标题、注释等）、中英字体、数学符号、颜色选择、排版布局等五个章节
+数据可视化分类：从用户需求出发，分数据的分布、比例、关系、对比、趋势等五个方面分五章阐述。
+数据可视化工具：动态 rgl 交互 leaflet 两个工具，分两个章节
+数据可视化应用：
+- 基于 reactable 包将趋势变化应用于表格，
+- 各类图形应用于 shiny BI 工具 scatter3D / leaflet 等。分交互表格和数据工具两个章节
+- https://github.com/c19in/covid19india 案例
+- 无需 Shiny 的 DT + plotly + leaflet 构造统计年鉴的前端展示
+数据可视化案例：时间序列和空间数据各两个实际案例，分六个章节。为避免出版限制，都使用来自美国的数据
+- 时序数据类型及其基本操作，两个完整案例，包含数据探索、分析，共分三个章节
+- 时空数据类型及其基本操作，两个完整案例，区域数据和点数据，包含数据探索、分析，共分三个章节
 -->
 
 > 世界上只有一种英雄主义，就是看清生活的真相之后依然热爱它。  
@@ -106,9 +124,12 @@ aggregate(data = dat, weight ~ weight_bucket + group, FUN = length)
 
 > 国内外，相关书籍的概况如何？
 
+
 早年比较经典的书籍包括《Graphics of Large Datasets: Visualizing a Million》[@Unwin2006] 和《Handbook of Data Visualization》[@Chen2008]。近些年，新的可视化工具和技术日趋成熟，《R Graphics》主要介绍了 R 语言环境中栅格绘图系统 [@Paul2018]。在此基础上，衍生出 **ggplot2** 扩展包，它基于图形语法，建立了从数据到图形的映射。[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) 主要介绍了 **ggplot2** 绘图技法 [@Wickham2016]，紧接着出现了以 ggplot2 为主的图形食谱 [R Graphics Cookbook](https://r-graphics.org/) [@Chang2018]，主要解决读者作图过程中常碰到的问题。而《Displaying Time Series, Spatial, and Space-Time Data with R》[@Oscar2018] 针对时间序列数据、空间数据和时空数据提供了详细的介绍，《Interactive web-based data visualization with R, plotly, and shiny》[@Sievert2020] 着重介绍了以 **plotly** 和 **shiny** 为代表的图形交互能力。
 Kieran Healy 的 [Data Visualization: A practical introduction](https://socviz.co/) [@Healy2019] 和
 Claus O. Wilke 的 [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) [@Wilke2019] 由浅入深地介绍了数据可视化的要素和原则，而 Thomas Rahlf 的《Data Visualisation with R》[@Rahlf2019] 提供了丰富的示例。国内陈为老师的《数据可视化》[@Chen2019] 也非常值得一看。
+
+
 
 > 你觉得数据可视化的核心价值是什么？
 
@@ -124,7 +145,15 @@ kable(anscombe[, new_order], caption = "anscombe 数据集", booktabs = T) |>
   kable_classic()
 ```
 
-```{r anscombe, fig.cap="数据可视化很重要", fig.showtext=TRUE, out.width='85%', fig.width=6, fig.height=6, echo=FALSE}
+```{r}
+#| label: anscombe 
+#| fig.cap: "数据可视化很重要"
+#| fig.showtext: true
+#| out.width: '85%'
+#| fig.width: 6
+#| fig.height: 6
+#| echo: false
+
 data(anscombe)
 form <- sprintf("y%d ~ x%d", 1:4, 1:4)
 fit <- lapply(form, lm, data = anscombe)
@@ -150,7 +179,15 @@ mtext("数据集的四重奏", outer = TRUE, family = "Noto Serif CJK SC")
 
 值得一提的是，**plotrix** [@plotrix2006]、**scatterplot3d** [@scatterplot3d2003]、**misc3d** [@misc3d2008] 和 **plot3D** [@plot3D2021] 加强了 Base R 在制作三维图形方面的能力。但归根结底，很多时候束缚住自己的不是工具，而是视野和思维。
 
-```{r volcano, fig.cap="奥克兰火山等值地形图", out.width='65%', fig.width=5, fig.height=3.5, fig.showtext=TRUE, echo=FALSE}
+```{r}
+#| label: volcano 
+#| fig.cap: "奥克兰火山等值地形图"
+#| out.width: '65%' 
+#| fig.width: 5
+#| fig.height: 3.5
+#| fig.showtext: true
+#| echo: false
+
 library(lattice)
 levelplot(volcano,
   col.regions = hcl.colors,
@@ -277,7 +314,6 @@ Base R 提供基础绘图系统，栅格绘图系统及其衍生的两套绘图�
 
 也有人写了心路历程 <https://jnolis.com/blog/data_science_on_book/>
 
-写完一本书的关键因素有很多，我不想谈哪个因素更重要，因为在创作过程中都离不开它们，首当其冲就是时间和精力，继而是如何高效地分配，分配必须目标导向，因而写书的规划是关键的，规划之后就是执行，执行的关键是持续和质量，必须以终为始，不然书和流水账式的便利贴没有本质的区别。
 
 自 2021 年 8 月 22 日以来，累计提交量随时间的变化情况如图 \@ref(fig:book-commit)，记录了作者创作的历程。
 
@@ -286,7 +322,13 @@ library(gert)
 git_config_set("user.name", "XiangyunHuang")
 git_config_set("user.email", "xiangyunfaith@outlook.com")
 ```
-```{r book-commit, fig.cap="累计提交量变化趋势", echo=FALSE, fig.showtext=TRUE, out.width='50%', fig.width=4.5, fig.height=3.5}
+```{r book-commit}
+#| fig.cap="累计提交量变化趋势", 
+#| echo=FALSE, 
+#| fig.showtext=TRUE, 
+#| out.width='50%', 
+#| fig.width=4.5, 
+#| fig.height=3.5
 library(gert)
 dat <- git_log(max = 1000)
 library(ggplot2)
@@ -300,7 +342,7 @@ dat <- transform(dat,
   week = as.integer(format(time, "%W"))
 )
 
-dat <- aggregate(formula = commit ~ year + month, data = dat, FUN = length)
+dat <- aggregate(commit ~ year + month, data = dat, FUN = length)
 
 ggplot(data = dat, aes(x = month, y = cumsum(commit), fill = year)) +
   geom_bar(stat = "identity", position = "dodge2") +
@@ -381,10 +423,18 @@ ggplot(data = dat, aes(x = age, y = deaths, fill = site)) +
 
 > 数据可视化中的陷阱
 
+可视化数据的分布，有很多方式 [@Thrun2020]，时间分布、空间分布和时空分布，单变量分布、多变量分布等。
+
 数据可视化陷阱[@Cairo2019;@Pu2020]，点出图 \@ref(fig:charts-lie) 中含义不明确的地方，错误的地方，边际概率、条件概率和全概率的关系。
 
 
-```{r charts-lie, echo=FALSE, fig.cap="统计图形是如何说谎的", fig.width=5, fig.height=6, out.width="85%", fig.showtext=TRUE}
+```{r charts-lie}
+#| echo=FALSE, 
+#| fig.cap="统计图形是如何说谎的", 
+#| fig.width=5, 
+#| fig.height=6, 
+#| out.width="85%", 
+#| fig.showtext=TRUE
 library(ggplot2)
 library(patchwork)
 
@@ -429,7 +479,13 @@ p1 / p2
 
 另一个常见的陷阱是用色不够准确，如图 \@ref(fig:color-traps)， 需要参考颇具商业化的数据表达，在于细节的打磨和诠释 [bbplot](https://github.com/bbc/bbplot)
 
-```{r color-traps, fig.width=8, fig.height=3, fig.cap="二维密度估计", out.width="85%", echo=FALSE, fig.showtext=TRUE}
+```{r color-traps}
+#| fig.width=8,
+#| fig.height=3, 
+#| fig.cap="二维密度估计", 
+#| out.width="85%", 
+#| echo=FALSE, 
+#| fig.showtext=TRUE
 library(ggplot2)
 library(patchwork)
 
@@ -450,9 +506,15 @@ p1 + p2
 
 > 最令你印象深刻的可视化作品是哪个？
 
-数据来源于：<https://www.gapminder.org/data/>，落后国家、发展中国家、发达国家存在明显的分层现象，而且扎堆。马太效应是科学、是规律，科学规律是不为任何人的意志为转移的，所以当它们出现在经济社会，乃至工作、生活当中，并深卷其中的时候，会发现是那么的残忍和血腥！理论和规律的介绍一定要结合实际的数据和业务背景，那样既清楚业务到数据的转化过程，以及转化所需要的各项能力，又能给人以身在其中的感觉。
+数据来源于：<https://www.gapminder.org/data/>，落后国家、发展中国家、发达国家存在明显的分层现象，而且扎堆。马太效应是科学、是规律，科学规律是不为任何人的意志为转移的，所以当它们出现在经济社会，乃至工作、生活当中，并深卷其中的时候，会发现是那么的残忍和血腥！理论和规律的介绍一定要结合实际的数据和业务背景，那样既清楚业务到数据的转化过程，以及转化所需要的各项能力，又能给人身在其中的感觉。
 
-```{r gapminder, fig.cap="2002 年全球 142 个国家和地区国民寿命和生产总值之间的关系", out.width='75%', fig.width=7.5, fig.height=5, fig.showtext=TRUE, echo=FALSE}
+```{r gapminder}
+#| fig.cap="2002 年全球 142 个国家和地区国民寿命和生产总值之间的关系",
+#| out.width='75%', 
+#| fig.width=7.5, 
+#| fig.height=5, 
+#| fig.showtext=TRUE, 
+#| echo=FALSE
 library(gapminder)
 library(ggrepel)
 ggplot(
@@ -474,6 +536,8 @@ ggplot(
   theme_bw(base_size = 13, base_family = "Noto Sans") +
   theme(title = element_text(family = "Noto Serif CJK SC"))
 ```
+
+
 
 > 你准备在书里介绍统计理论，范围是什么？深度如何？
 
@@ -579,7 +643,6 @@ ggplot(
 
 > 你写书的执行过程是怎样的？你觉得自己的执行力如何？
 
-写书首先是善心，把思维的光华而不是糟粕分享给读者；其次是耐心，它是一个长期性的项目，期间涉及个人创作、出版沟通、家庭生活和工作学习，不要独立地看待写书这个事情；最后需要决心，强大的执行力才是最后成事的关键，再好的想法不付诸实践都只是空想。
 
 ```{r algo, engine="tikz", echo=FALSE, fig.cap="执行过程", out.width="75%", cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[fontset=fandol]{ctex}","\\usepackage[default]{sourcesanspro}","\\usepackage{smartdiagram}"))}
 \smartdiagramset{uniform color list=gray!40!white for 10 items}

@@ -1,0 +1,345 @@
+# 欢迎 {#welcome .unnumbered}
+
+```{r, echo=FALSE}
+source(file = "_common.R")
+```
+
+::: {.callout-caution}
+本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
+:::
+
+
+## 排版约定 {#convention .unnumbered}
+
+\index{showtext}
+
+书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体，
+为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。
+而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。 @fig-noto-fonts 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
+
+```{r}
+#| label: fig-noto-fonts
+#| par: true
+#| fig-cap: "中英文字体设置"
+#| fig-subcap: 
+#| - 'Base R 图形'
+#| - 'ggplot2 图形'
+#| out-width: '50%'
+#| fig-width: 4.5
+#| fig-height: 3.5
+#| fig-alt: '汞蒸气的压力随温度的指数级变化'
+#| fig-showtext: true
+#| fig-ncol: 2
+
+# 准备 Noto 中英文字体
+# sysfonts::font_add_google(name = "Noto Sans", family = "Noto Sans")
+# sysfonts::font_add_google(name = "Noto Serif SC", family = "Noto Serif CJK SC")
+# 在 Base R 图形中使用 Noto 字体
+plot(pressure, type = "b", pch = 19, ann = FALSE, family = "Noto Sans")
+title(xlab = "温度", ylab = "压力", family = "Noto Serif CJK SC")
+# 在 ggplot2 图形中使用 Noto 字体
+library(ggplot2)
+ggplot(data = pressure, aes(x = temperature, y = pressure)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(x = "温度", y = "压力") +
+  scale_x_continuous(breaks = seq(0, 400, by = 50)) +
+  theme_bw(base_size = 13) +
+  theme(
+    axis.title = element_text(family = "Noto Serif CJK SC"),
+    axis.title.x = element_text(
+      margin = margin(b = 0, l = 0, t = 20, r = 0)
+    ),
+    axis.title.y = element_text(
+      margin = margin(b = 0, l = 0, t = 0, r = 20)
+    ),
+    panel.border = element_rect(color = "black"),
+    panel.grid = element_blank(),
+    axis.ticks.length = unit(0.25, "cm"),
+    axis.text.x = element_text(
+      family = "Noto Sans", color = "black",
+      vjust = -1.5, size = rel(1.25)
+    ),
+    axis.text.y = element_text(
+      family = "Noto Sans", color = "black",
+      angle = 90, vjust = 1.5, hjust = 0.5,
+      size = rel(1.25)
+    )
+  )
+```
+
+
+
+@fig-xkcd-fonts 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系，所用 iris 数据集也来自 Base R 自带的 **datasets** 包，由 Anderson Edgar 收集，最早见于 1935 年的文章，后被 Ronald Fisher 在研究分类问题时引用[@Fisher1936]，到如今，在机器学习的社区里，提及 iris 数据集，很多人只知 Fisher 不知 Anderson。
+
+
+```{r}
+#| label: fig-xkcd-fonts
+#| fig-cap: "手绘漫画风格的图形"
+#| out-width: "75%"
+#| fig-width: 5
+#| fig-height: 3
+#| echo: false
+#| fig-showtext: true
+
+# brew tap homebrew/cask-fonts
+# brew install --cask font-xkcd
+sysfonts::font_add("xkcd", regular = "xkcd.otf")
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point(aes(color = Species, shape = Species)) +
+  scale_color_grey() +
+  theme_bw(base_size = 13, base_family = "xkcd") +
+  theme(
+    panel.border = element_rect(color = "black"),
+    panel.grid = element_blank()
+  )
+```
+
+
+如读者所见，本书不会局限于作图的工具，除了上面已经展示的 Base R 和 **ggplot2**，还会陆续用到 **lattice** [@Sarkar2008] 和 [**rgl**](https://github.com/dmurdoch/rgl) 包，甚至会超出 R 语言的范畴，介绍 LaTeX 世界里的 [TikZ](https://ctan.org/pkg/pgf) 和 JavaScript 中的 WebGL 等。如图 @fig-linear-model ，因图形中包含数学公式和符号，为了获得原汁原味的渲染效果，在使用 Base R 绘图的过程中通过 [**tikzDevice**](https://github.com/daqana/tikzDevice) 包引入了 LaTeX 中的 TikZ 绘图引擎。众所周知，Donald Knuth 十年磨一剑，开发了 TeX 排版系统，就是解决排版数学公式的痛点。在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，到达「道」与「术」和谐统一的境界。
+
+
+```{r}
+#| label: fig-linear-model
+#| dev: 'tikz'
+#| fig-cap: "简单线性模型"
+#| out-width: "60%"
+#| fig-width: 3
+#| fig-height: 3 
+#| cache: true
+#| fig-process: !expr to_png
+#| echo: false
+
+opar <- par(no.readonly = TRUE)
+on.exit(par(opar), add = TRUE)
+par(mgp = c(2, 0.7, 0), mar = c(4, 3, 4, 1) + 0.1)
+set.seed(2021)
+x <- rnorm(10)
+y <- x + rnorm(5, sd = 0.25)
+lab <- sample(
+  x = paste0("$\\mathcal{", LETTERS, "}$"),
+  size = 10, replace = FALSE
+)
+model <- lm(y ~ x)
+rsq <- summary(model)$r.squared
+rsq <- signif(rsq, 4)
+plot(x, y,
+  main = "你好 \\LaTeX!", # 引入 7 号文本字体
+  sub = "$\\mathcal{N}(x;\\mu,\\Sigma)$",
+  xlab = "$x$", ylab = "$y$", type = "n"
+)
+text(x = x, y = y, labels = lab)
+abline(model, col = "black")
+# 引入 7 号数学字体
+mtext(paste("线性模型: $\\mathsf{R}^{2}=", rsq, "$"), line = 0.5)
+legend("bottomright",
+  legend = paste0(
+    "$y = ", round(coef(model)[2], 3), "x +",
+    round(coef(model)[1], 3), "$"
+  ),
+  bty = "n"
+)
+```
+
+@fig-bessel-function 贝塞尔函数 $\mathcal{K}_{\kappa}(u)$ 在区间 $(10^{-8}, 10^2)$ 和 $(0, 4)$ 上的图像，@fig-bessel-function-1 区间 $(10^{-8}, 10^2)$ 上的贝塞尔函数 $\mathcal{K}_{\kappa}(u)$， @fig-bessel-function-2 区间 $(0, 4)$ 上的贝塞尔函数 $\mathcal{K}_{\kappa}(u)$ 。
+
+```{r}
+#| label: fig-bessel-function
+#| fig-cap: 贝塞尔函数图像
+#| fig-subcap: 
+#|   - 区间 (10^{-8}, 10^2) 上的贝塞尔函数
+#|   - 区间 (0, 4) 上的贝塞尔函数
+#| dev: 'tikz'
+#| cache: true
+#| fig-process: !expr to_png
+#| echo: false
+#| out-width: "50%"
+#| fig-width: 3.5
+#| fig-height: 3.5
+#| fig-show: hold
+
+x0 <- 2^(-20:10)
+nus <- c(2:5, 10, 20)
+x <- seq(0, 4, length.out = 501)
+
+plot(x0, x0^-8,
+  frame.plot = TRUE, # 添加绘图框
+  log = "xy", # x 和 y 轴都取对数尺度
+  axes = FALSE, # 去掉坐标轴
+  xlab = "$u$", ylab = "$\\mathcal{K}_{\\kappa}(u)$", # 设置坐标轴标签
+  type = "n", # 清除绘图区域的内容
+  ann = TRUE, # 添加标题 x和y轴标签
+  panel.first = grid() # 添加背景参考线
+)
+
+axis(1,
+  at = 10^seq(from = -8, to = 2, by = 2), 
+  labels = paste0("$\\mathsf{10^{", seq(from = -8, to = 2, by = 2), "}}$")
+)
+axis(2,
+  at = 10^seq(from = -8, to = 56, by = 16), 
+  labels = paste0("$\\mathsf{10^{", seq(from = -8, to = 56, by = 16), "}}$"), las = 1
+)
+
+for (i in seq(length(nus))) {
+  lines(x0, besselK(x0, nu = nus[i]), col = hcl.colors(9)[i], lwd = 2)
+}
+legend("topright",
+  legend = paste0("$\\kappa=", rev(nus), "$"),
+  col = hcl.colors(9, rev = T), lwd = 2, cex = 1
+)
+
+x <- seq(0, 4, length.out = 501)
+x <- x[x > 0]
+plot(x, x,
+  frame.plot = TRUE,
+  ylim = c(1e+0, 1e+20), log = "y",
+  xlab = "$u$", type = "n", yaxt = "n", 
+  ylab = "$\\mathcal{K}_{\\kappa}(u)$", ann = TRUE, panel.first = grid()
+)
+axis(2,
+  at = c(1e+0, 1e+05, 1e+10, 1e+15, 1e+20), 
+  labels = paste0("$\\mathsf{10^{", seq(from = 0, to = 20, by = 5), "}}$"), las = 1
+)
+
+for (i in seq(length(nus))) {
+  lines(x, besselK(x, nu = nus[i]), col = hcl.colors(9)[i], lwd = 2)
+}
+legend("topright",
+  legend = paste0("$\\kappa=", rev(nus), "$"),
+  col = hcl.colors(9, rev = T), lwd = 2, cex = 1
+)
+```
+
+
+<!--
+贝塞尔函数的前因后果，贝塞尔方程，宝马车工程师，飞机风洞试验，曲率控制，光滑性
+修正的第三类贝塞尔函数
+空间统计 随机过程的协方差结构，核函数
+
+```r
+exp(0.5)*besselK(0.5,20)
+besselK(0.5,20, expon.scaled = T)
+```
+-->
+
+
+
+`r if (!knitr::is_html_output()) '<!--'` 
+
+Base R 内置的 R 包含有丰富的数据集，非常适合演示图形和阐述统计理论，后面技术和理论部分的介绍大多围绕内置的数据集展开，数据集及其描述如下表所示：
+
+```{r }
+#| label: core-datasets
+#| echo: false
+# 抽取 R 包信息
+Pkgs <- sapply(list.files(R.home("library")), function(x) {
+  packageDescription(pkg = x, fields = "Priority")
+})
+# 抽取内置 R 包列表
+CorePkgs <- names(Pkgs[Pkgs %in% c("base", "recommended") & !is.na(Pkgs)])
+# 抽取 R 包的数据集
+BaseDataSets <- data(package = CorePkgs)$results[, c("Package", "Item", "Title")]
+
+library(DT)
+datatable(BaseDataSets,
+  rownames = FALSE, # 不显示行名
+  extensions = c("Buttons", "RowGroup"),
+  options = list(
+    pageLength = 10, # 每页显示的行数
+    language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Chinese.json"), # 汉化
+    dom = "Bfrtp", # 去掉显示行数 i、过滤 f 的能力，翻页用 p 表示
+    ordering = F, # 去掉列排序
+    buttons = c("copy", "csv", "excel", "print"), # 提供打印按钮
+    rowGroup = list(dataSrc = 0), # 按 Package 列分组
+    columnDefs = list(
+      list(className = "dt-center", targets = 0), # 不显示行名，则 targets 从 0 开始，否则从 1 开始
+      list(visible = FALSE, targets = 0) # 不显示 Package 列
+    )
+  ),
+  caption = "Base R 包内置的数据集"
+)
+```
+
+`r if (!knitr::is_html_output()) '-->'`
+
+书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
+
+:::{.callout-note}
+为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
+:::
+
+考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格使用 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 包，为简单起见，提供一个迷你的表格样式示例，如表 @tbl-iris 所示。截止写作时间，能够制作表格的 R 包其实有很多，比如 [DT](https://github.com/rstudio/DT)、[gt](https://github.com/rstudio/gt) 等[@xie2020]，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
+
+\index{kableExtra}
+
+```{r}
+#| label: tbl-iris
+#| echo: false
+#| tbl-cap: "iris 数据集（部分）"
+
+library(knitr)
+library(kableExtra)
+options(kableExtra.html.bsTable = T)
+head(iris, 10) |>
+  transform(
+    Sepal.Length =
+      cell_spec(Sepal.Length,
+        bold = T,
+        color = spec_color(Sepal.Length, end = 0.9)
+      )
+  ) |> 
+  transform(Species = cell_spec(
+    Species,
+    color = "white", bold = T,
+    background = spec_color(1:10,
+      end = 0.9,
+      option = "A", direction = -1
+    )
+  )) |>
+  kable(booktabs = TRUE,
+        escape = FALSE, align = "c",
+        col.names = gsub("[.]", " ", names(iris))) |>
+  kable_styling(bootstrap_options = c("striped", "condensed"),
+    latex_options = "basic",
+    full_width = F
+  )
+```
+
+
+总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，坚信优质的内容必将持续为读者提供价值！
+
+书籍开源在 Github 上，聪明的你如果准备参与创作，需要掌握一些基本的技能，以便大家展开协作。 @fig-skills 是一个简单的技能栈图，书稿以一个个 R Markdown 文件的形式存在，符合 bookdown 的组织方式，本地在 RStudio 里编辑和编译，线上在 GitHub Action 环境里编译成 HTML 和 PDF 格式，如果你还了解 LaTeX 或 Pandoc 就更好了，可以把本书做得更加漂亮。当然，工具可以不限于提到的这些，只要使着顺手，比如 [VS Code](https://code.visualstudio.com/)，它对 R 语言的支持也很好了，只要你懂各种配置，体验不比 RStudio 差。
+
+```{r fig-skills, engine="tikz", fig.cap="《现代统计图形》的技能栈", out.width="65%", echo=FALSE, cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[default]{sourcesanspro}","\\usepackage[fontset=fandol]{ctex}", "\\usepackage{smartdiagram}"))}
+\smartdiagramset{planet color=gray!40!white, uniform color list=gray!40!white for 10 items}
+\smartdiagram[bubble diagram]{基础技能,
+  编辑~\\ (RStudio), 组织~\\ (bookdown), 协作~\\ (Git), 排版~\\ (LaTeX/Pandoc), 编译~\\ (GitHub Action)}
+```
+
+
+## 软件信息 {#session-info .unnumbered}
+
+<!-- 记号约定，注释，R 包环境管理，部署服务 -->
+
+```{r}
+#| label: ci-indicator
+#| echo: false
+
+ci <- identical(Sys.getenv("CI"), "true")
+```
+
+R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 `plot()`，函数的参数名同理。代码块内注释用 `#` 表示，运行结果每一行开头以 `#>` 标记。本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018] 和 **bookdown** [@xie2016] 等众多 R 包。目前，书稿使用 `r R.version.string` 编译，你现在看到的是`r ifelse(ci, '在线', '离线')`编译版本，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，直接使用的 R 包如下：
+
+```{r}
+#| label: package-info
+#| tidy: true
+#| tidy-opts: !expr list(width.cutoff=50)
+
+xfun::session_info(packages = c(
+  "knitr", "rmarkdown", "bookdown", 
+  "ggplot2", "kableExtra", 
+  "showtext", "tikzDevice",
+  "rootSolve"
+), dependencies = FALSE)
+```

@@ -11,3 +11,7 @@
 _book/
 _bookdown_files/
 rsconnect/
+
+/.quarto/
+*_files/
+*_cache/

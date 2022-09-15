@@ -4,9 +4,9 @@ rsconnect::connectApiUser(
   account = "xiangyun", server = "bookdown.org",
   apiKey = Sys.getenv("CONNECT_API_KEY")
 )
-rsconnect::deploySite(
-  appId = Sys.getenv("CONTENT_ID"),
+quarto::quarto_publish_site(
+  name = "msg2nd", render = "none",
   server = "bookdown.org",
-  render = "none", logLevel = "verbose",
-  forceUpdate = TRUE
+  account = "xiangyun",
+  title = "Modern Statistical Graphics (2nd)"
 )

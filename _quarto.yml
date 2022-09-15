@@ -1,0 +1,49 @@
+project:
+  type: book
+
+lang: zh
+
+book:
+  title: "现代统计图形（第二版）"
+  output-file: "msg2nd"
+  author: "黄湘云"
+  date: today
+  chapters:
+    - index.qmd
+    - references.qmd
+  repo-branch: main
+  search: true
+  downloads: [pdf]
+
+bibliography: book.bib
+
+format:
+  html:
+    theme: cosmo
+    crossref:
+      chapters: true
+  pdf:
+    documentclass: book
+    include-in-header: preamble.tex
+    classoption:
+      - UTF8
+      - twoside
+      - openany
+      - table
+    keep-tex: true
+    lof: true
+    lot: true
+    geometry:
+      - tmargin=2.5cm
+      - bmargin=2.5cm
+      - lmargin=3.0cm
+      - rmargin=2.0cm
+    highlight-style: github
+    number-sections: true
+    top-level-division: chapter
+    colorlinks: true
+    link-citations: true
+    crossref:
+      chapters: true
+
+editor: source

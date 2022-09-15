@@ -16,9 +16,8 @@ env:
   isExtPR: ${{ github.event.pull_request.head.repo.fork == true }}
 
 jobs:
-  build:
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    runs-on: macos-latest
+  build-deploy:
+    runs-on: ubuntu-latest
     env:
       LANG: "en_US.UTF-8"
       TZ: "Asia/Shanghai"
@@ -46,53 +45,16 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 
-      - name: Cache conda
-        uses: actions/cache@v3
-        env:
-          # Increase this value to reset cache if environment.yml has not changed
-          CACHE_NUMBER: 0
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
-
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-update-conda: true
-          python-version: ${{ matrix.config.python }}
-          miniconda-version: "latest"
-          activate-environment: 'r-reticulate'
-          channel-priority: flexible
-          show-channel-urls: true
-          environment-file: environment.yml
-          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
-
-
-      - name: Install ghostscript and Others
-        if: runner.os == 'macOS'
+      - name: Install Fonts From System
         run: |
-          brew install ghostscript imagemagick poppler
-          brew install --cask xquartz
-          brew install --cask phantomjs
-          brew tap homebrew/cask-fonts
-          brew install --cask font-xkcd
-          brew install --cask font-noto-sans font-noto-serif
-          brew install --cask font-noto-sans-cjk-sc font-noto-serif-cjk-sc
-          fc-list :lang=zh | sort
-          fc-list :lang=en | sort
-          fc-list : family | sort -f
+          sudo apt-get install -y fonts-noto-core fonts-noto-cjk
+          fc-list | grep 'noto' | sort
+          fc-list | sort
 
       - name: Install LaTeX Packages
         run: |
           tinytex::tlmgr_install(readLines("texlive.txt"))
           tinytex::tl_pkgs()
-        shell: Rscript {0}
-
-      - name: Check Python Env
-        run: |
-          reticulate::py_discover_config()
-          reticulate::use_condaenv(condaenv = 'r-reticulate', required = TRUE)
-          reticulate::py_module_available(module = 'matplotlib')
-          reticulate::py_module_available(module = 'plotly')
         shell: Rscript {0}
 
       - name: Test Pkgs

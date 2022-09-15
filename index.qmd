@@ -84,7 +84,11 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd
-sysfonts::font_add("xkcd", regular = "xkcd.otf")
+if (xfun::is_macos()) {
+  sysfonts::font_add("xkcd", regular = "xkcd.otf")
+} else {
+  sysfonts::font_add("xkcd", regular = "xkcd.ttf")
+}
 ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point(aes(color = Species, shape = Species)) +
   scale_color_grey() +

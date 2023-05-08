@@ -322,6 +322,60 @@ head(iris, 10) |>
 ```
 
 
+```{r}
+#| label: fig-ridgeline
+#| fig-width: 7
+#| fig-height: 4
+#| fig-showtext: true
+#| fig-cap: "岭线图"
+
+library(ggplot2)
+library(ggridges)
+ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
+  scale_fill_brewer(palette = "Greys") +
+  geom_density_ridges(bandwidth = 0.2) +
+  theme_ridges(font_size = 12, font_family = "sans")
+```
+
+
+**aplpack** [@aplpack2021] 用函数 `iconplot()` 展示列联表数据，图 \@ref(fig:pictogram) 每个格子代表 100 人。
+
+```{r}
+#| label: fig-pictogram
+#| fig-width: 6
+#| fig-height: 5
+#| fig-cap: "加州伯克利大学的录取情况"
+#| fig-showtext: true
+#| warning: false
+
+library(aplpack)
+iconplot(
+  data = UCBAdmissions / 100, grp.color = Gender,
+  colors = c("#636363", "#BDBDBD"),
+  main = "Student Admissions at UC Berkeley"
+)
+```
+
+使用 R 语言图标替代格子
+
+```{r}
+#| label: fig-pictogram-icon
+#| fig-width: 6
+#| fig-height: 5
+#| fig-cap: "加州伯克利大学的录取情况"
+#| fig-showtext: true
+
+library(jpeg)
+rlogo <- readJPEG(source = system.file(package = "jpeg", "img", "Rlogo.jpg"))
+iconplot(
+  data = UCBAdmissions / 100, grp.color = Gender,
+  colors = c("#636363", "#BDBDBD"),
+  icons = as.raster(rlogo),
+  main = "Student Admissions at UC Berkeley"
+)
+```
+
+
 ## 软件信息 {#session-info .unnumbered}
 
 <!-- 记号约定，注释，R 包环境管理，部署服务 -->

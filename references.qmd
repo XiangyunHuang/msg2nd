@@ -1,6 +1,7 @@
-`r if (knitr::is_html_output()) '
 # 参考文献 {#references .unnumbered}
-'`
+
+::: {#refs}
+:::
 
 ```{r clean-book, cache=FALSE, include=FALSE}
 # 移除 TikZ 图形产生的日志

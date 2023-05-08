@@ -34,8 +34,6 @@ to_png <- function(fig_path) {
 }
 
 knitr::opts_chunk$set(webshot = "webshot")
-# screenshot HTML widgets
-if (is.null(webshot:::find_phantom())) webshot::install_phantomjs()
 
 knitr::knit_hooks$set(par = function(before, options, envir) {
   if (before && options$fig.show != "none") {

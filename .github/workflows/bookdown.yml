@@ -72,12 +72,14 @@ jobs:
           library(tikzDevice)
           tikzTest()
           tikzTest("$\\sin(x^2/2 - y^2/4 + 3) \\cos(2 x + 1 - \\exp(y))$")
+          # screenshot HTML widgets
+          if (is.null(webshot:::find_phantom())) webshot::install_phantomjs()
         shell: Rscript {0}
 
       - name: Render Book
         id: render-book
         run: |
-          quarto render --to html
+          quarto render
 
       - name: Upload book folder for debug
         if: failure()

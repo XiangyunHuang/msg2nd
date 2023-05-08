@@ -6,6 +6,7 @@
 source(file = "_common.R")
 ```
 
+```{=html}
 <!-- 
 https://github.com/XiangyunHuang/masr/issues/19
 Epilogue 结语 后记 afterword postscript backmatter
@@ -32,98 +33,84 @@ Epilogue 结语 后记 afterword postscript backmatter
 探索性数据分析：什么样的数据是正态的，理论上是清楚的，对统计建模来说，更实际的问题是什么样的数据是够正态的！
 
 -->
-
+```
 数据分析是未来，涉及一系列的问题，如何出发，如何分析，如何理论，如何收获，如何应用，如何推广。用 R 语言讲好数据故事 [@Machlis2018]。
 
 Karl Pearson 那个时代，生物统计系，达尔文进化论能被人所接受，我觉得很大部分是因为有大量的数据所支撑，来自世界各地的人给实验室寄去了各类标本，实验室做了大量的数据分析工作，主要的工具就是描述性统计（如均值、方差、相关系数等）和 Pearson 卡方检验（后来被 R. A. Fisher 改进了自由度），当时已经有线性模型、Pearson 相关系数，但是没有构建严格的数学理论，这个严格化的工作，包括假设检验等，后来主要由 Jerzy Neyman 和 Egon S. Pearson 完成。如果大家去仔细看相关的历史故事，会发现和如今有惊人的相似之处，就是算法和模型等工具已经在广泛使用，但是不知道它的理论基础，比如现在的深度学习为什么那么有效，这也同样带给人非常大的兴奋点，按照历史的发展轨迹来看，其严格化的数学基础应该会在我辈有生之年里建立起来。这方面的典范是从可加逻辑回归这一统计模型的角度看梯度提升[@Friedman2000]，2017 年 Bradley Efron 和 Trevor Hastie 接受剑桥大学出版社[采访](https://youtu.be/quoU5fjKBqo)时也表示了同一观点，读者不妨结合历史资料给出一个时间轴图。高尔顿受其近亲表兄达尔文的影响，在生物遗传方面做了大量的数据分析和研究工作，最经典、也最让人津津乐道的工作莫过于回归的发现，孩子身高和父母身高的关系，及用来解释的高尔顿板。杂志网站 <https://fivethirtyeight.com/>，它涉及设计、政治、经济、体育和其它事件，以数据驱动为原则 [@fivethirtyeight2018]，提供完整的[数据和代码](https://github.com/fivethirtyeight/data)，保障可重复性。
 
-数据分析、可视化、探索性分析、可解释性、可重复性的关注度越来越高，其重要性不言而喻[@Tukey1977]，
-方差分析从一开始就是数据分析[@Scheffe1959]，数据分析的未来 [@Tukey1962]，数据分析设计原则 [@McGowan2021]，数据科学的50年 [@Donoho2017]，统计建模：两种文化 [@Breiman2001]，[统计建模：三种文化](https://arxiv.org/abs/2012.04570)，[过去50年最重要的8个统计概念](https://arxiv.org/abs/2012.00174)，数据科学的统计原则[@Cressie2021]。借助 R 语言这一优秀的统计分析和计算环境，过渡到现代数据科学 [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/)，数据科学导论：数据分析和预测算法[@Irizarry2019]。Gabriel Peyré 的著作数据科学的数学基础 [Mathematical Foundations of Data Sciences](https://mathematical-tours.github.io/book/)，提供很多个语言版本的实现 [Numerical Tours of Data Sciences](https://www.numerical-tours.com/)。数据科学基石 [@Blum2020]，数据科学的统计基础[@Fan2020]。
+数据分析、可视化、探索性分析、可解释性、可重复性的关注度越来越高，其重要性不言而喻[@Tukey1977]， 方差分析从一开始就是数据分析[@Scheffe1959]，数据分析的未来 [@Tukey1962]，数据分析设计原则 [@McGowan2021]，数据科学的50年 [@Donoho2017]，统计建模：两种文化 [@Breiman2001]，[统计建模：三种文化](https://arxiv.org/abs/2012.04570)，[过去50年最重要的8个统计概念](https://arxiv.org/abs/2012.00174)，数据科学的统计原则[@Cressie2021]。借助 R 语言这一优秀的统计分析和计算环境，过渡到现代数据科学 [Modern Data Science with R](https://mdsr-book.github.io/mdsr2e/)，数据科学导论：数据分析和预测算法[@Irizarry2019]。Gabriel Peyré 的著作数据科学的数学基础 [Mathematical Foundations of Data Sciences](https://mathematical-tours.github.io/book/)，提供很多个语言版本的实现 [Numerical Tours of Data Sciences](https://www.numerical-tours.com/)。数据科学基石 [@Blum2020]，数据科学的统计基础[@Fan2020]。
 
 数据收集和组织管理是打造数据产品的基石，数据源头的可靠性，收集过程的规范性，组织的科学性，管理的合理性直接决定开发数据产品的效率和价值。数据可视化是相对靠后的一环，也是关键的一环！
 
+-   稳定性：可重复性对任何科学发现都是至关重要的，是稳定性的重要方面，实现稳定性从数据扰动入手的有 Jacknife、bootstrap、交叉验证，从模型扰动入手有稳健统计 [@Yu2013]。可重复性危机是使用方式不当，甚至是滥用所致，Russell A. Poldrack 深有感触，故而回到写书的教育工作[@Poldrack2021]。
 
-- 稳定性：可重复性对任何科学发现都是至关重要的，是稳定性的重要方面，实现稳定性从数据扰动入手的有 Jacknife、bootstrap、交叉验证，从模型扰动入手有稳健统计 [@Yu2013]。可重复性危机是使用方式不当，甚至是滥用所致，Russell A. Poldrack 深有感触，故而回到写书的教育工作[@Poldrack2021]。
+-   可视化：受 [Michael Friendly](https://www.datavis.ca/) 的著作《Visualizing Categorical Data》[@Friendly2000] 的启发，David Meyer 开发了 R 包 **vcd** [@Meyer06]，而后，二人一起合著《Discrete Data Analysis with R》[@Friendly2016]，Michael Friendly 继续开发了 [vcdExtra](https://github.com/friendly/vcdExtra) 包，扩展很多绘图能力。Antony Unwin 的《Graphical Data Analysis with R》[@Unwin2015] 和 Robert Kabacoff 的[Data Visualization with R](https://rkabacoff.github.io/datavis/) 非常适合入门。
 
-- 可视化：受 [Michael Friendly](https://www.datavis.ca/) 的著作《Visualizing Categorical Data》[@Friendly2000] 的启发，David Meyer 开发了 R 包 **vcd** [@Meyer06]，而后，二人一起合著《Discrete Data Analysis with R》[@Friendly2016]，Michael Friendly 继续开发了 [vcdExtra](https://github.com/friendly/vcdExtra) 包，扩展很多绘图能力。Antony Unwin 的《Graphical Data Analysis with R》[@Unwin2015] 和 Robert Kabacoff 的[Data Visualization with R](https://rkabacoff.github.io/datavis/) 非常适合入门。
+-   可视化技术：将高维空间的数据映射到低维空间，即投影寻踪技术[@tourr2011; @tourr2020]
 
-- 可视化技术：将高维空间的数据映射到低维空间，即投影寻踪技术[@tourr2011;@tourr2020]
+-   统计分析：贝叶斯数据分析经典教材当属 Andrew Gelman 等人合著的《Bayesian Data Analysis》 [@Gelman2013]，读者可跟随 [Aki Vehtari](https://avehtari.github.io/) 的课程 [Bayesian Data Analysis](https://avehtari.github.io/BDA_course_Aalto/) 一起学习。Robert Kabacoff 的《R in Action: Data Analysis and Graphics with R》目前已经出到[第三版](https://github.com/Rkabacoff/RiA3)了。
 
-- 统计分析：贝叶斯数据分析经典教材当属 Andrew Gelman 等人合著的《Bayesian Data Analysis》 [@Gelman2013]，读者可跟随 [Aki Vehtari](https://avehtari.github.io/) 的课程 [Bayesian Data Analysis](https://avehtari.github.io/BDA_course_Aalto/) 一起学习。Robert Kabacoff 的《R in Action: Data Analysis and Graphics with R》目前已经出到[第三版](https://github.com/Rkabacoff/RiA3)了。
+-   统计模型与软件：混合效应模型[@Pinheiro1995; @Pinheiro2000; @Demidenko2013]，稳健分析[@Maronna2019]等。 广义线性模型[@Nelder1972; @McCullagh1989; @Dobson2018]，高维 glmnet [@Friedman2010; @Simon2011; @Kenneth2021]。 线性混合效应模型[@Jiang2021]，相关 R 包 lmerTest [@Kuznetsova2017]、 lme4 [@Bates2015]、 FastLMM [@Christoph2011]。广义线性混合效应 [@Bolker2009]，相关 R 包 [glmm](https://cran.r-project.org/package=glmm)、 glmmBUGS [@Brown2010]、[GLMMadaptive](https://github.com/drizopoulos/GLMMadaptive)、 [glmmTMB](https://github.com/glmmTMB/glmmTMB) [@Brooks2017]、MCMCglmm [@Hadfield2010]、 [glmmfields](https://github.com/seananderson/glmmfields) [@Anderson2018]、 [glmmLasso](https://cran.r-project.org/package=glmmLasso)，[r2glmm](https://github.com/bcjaeger/r2glmm) 计算 $R^2$， cAIC4 计算 AIC [@Benjamin2021]。广义可加模型[@Wood2017; @Fasiolo2019]，广义可加混合效应模型 spikeSlabGAM [@Scheipl2011]。空间广义线性混合效应 [@Zhang2002; @Warnes1987]。
 
+-   统计检验：多重检验中的控制错误发现率 FDR [@Benjamini1995]，功效分析 [@Cohen1988]，列联表的统计分析 [@Fagerland2017]。关于假设检验，重新定义假设检验 [@Benjamin2017]，统计假设显著性退休吧 [@Amrhein2019] 逃离 $p<0.05$ 的世界 [@Wasserstein2019]。
 
-- 统计模型与软件：混合效应模型[@Pinheiro1995;@Pinheiro2000;@Demidenko2013]，稳健分析[@Maronna2019]等。 广义线性模型[@Nelder1972;@McCullagh1989;@Dobson2018]，高维 glmnet [@Friedman2010;@Simon2011;@Kenneth2021]。
-线性混合效应模型[@Jiang2021]，相关 R 包 lmerTest [@Kuznetsova2017]、 lme4 [@Bates2015]、 FastLMM [@Christoph2011]。广义线性混合效应 [@Bolker2009]，相关 R 包 [glmm](https://cran.r-project.org/package=glmm)、
-glmmBUGS [@Brown2010]、[GLMMadaptive](https://github.com/drizopoulos/GLMMadaptive)、 [glmmTMB](https://github.com/glmmTMB/glmmTMB) [@Brooks2017]、MCMCglmm [@Hadfield2010]、
-[glmmfields](https://github.com/seananderson/glmmfields) [@Anderson2018]、
-[glmmLasso](https://cran.r-project.org/package=glmmLasso)，[r2glmm](https://github.com/bcjaeger/r2glmm) 计算 $R^2$，
-cAIC4 计算 AIC [@Benjamin2021]。广义可加模型[@Wood2017;@Fasiolo2019]，广义可加混合效应模型 spikeSlabGAM [@Scheipl2011]。空间广义线性混合效应 [@Zhang2002;@Warnes1987]。
+-   可解释性：模型的可解释性受到越来越多的关注和重视 [@Biecek2021; @Molnar2020]，而因果关系的发现和利用变得越来越重要[@Miguel2020]。 可解释性机器学习的定义、方法和应用[@Murdoch2019]
 
-- 统计检验：多重检验中的控制错误发现率 FDR [@Benjamini1995]，功效分析 [@Cohen1988]，列联表的统计分析 [@Fagerland2017]。关于假设检验，重新定义假设检验 [@Benjamin2017]，统计假设显著性退休吧 [@Amrhein2019] 逃离 $p<0.05$ 的世界 [@Wasserstein2019]。
+-   新方向：《自然》杂志发布深度学习 [@LeCun2015] 开启深度学习的浪潮， 如雨后春笋，涉及数据科学的理论、模型、算法，机器翻译 [@Bruce2020]，跟随新浪潮，国内神经网络相关的书籍也多如牛毛， 陆续翻译和创作了一批书籍[@Zhao2017; @Qiu2020; @Xiao2021; @Aston2019]。
 
-- 可解释性：模型的可解释性受到越来越多的关注和重视 [@Biecek2021;@Molnar2020]，而因果关系的发现和利用变得越来越重要[@Miguel2020]。
-可解释性机器学习的定义、方法和应用[@Murdoch2019]
+-   机器学习理论：机器学习导论[@Zhou2016]，机器学习的数学基础 [Mathematics for Machine Learning](https://mml-book.github.io/)[@Deisenroth2020]，机器学习的贝叶斯和优化视角[@Theodoridis2020]，机器学习的概率视角导论[@pml2022]和高级主题[@pml2023]。
 
-- 新方向：《自然》杂志发布深度学习 [@LeCun2015] 开启深度学习的浪潮，
-如雨后春笋，涉及数据科学的理论、模型、算法，机器翻译 [@Bruce2020]，跟随新浪潮，国内神经网络相关的书籍也多如牛毛，
-陆续翻译和创作了一批书籍[@Zhao2017;@Qiu2020;@Xiao2021;@Aston2019]。
+-   统计理论：统计基础理论 [@Savage1972]，统计学习理论 [@Vapnik1998; @Hastie2009]，稀疏性主题[@Hastie2015]，统计学习应用 [@James2021]，计算机时代的统计推断[@Efron2016]。如何从统计角度建立深度学习的理论框架是当前热门的方向。
 
-- 机器学习理论：机器学习导论[@Zhou2016]，机器学习的数学基础 [Mathematics for Machine Learning](https://mml-book.github.io/)[@Deisenroth2020]，机器学习的贝叶斯和优化视角[@Theodoridis2020]，机器学习的概率视角导论[@pml2022]和高级主题[@pml2023]。
+-   计算机理论：《Information Theory, Inference and Learning Algorithms》[@MacKay2003]
 
-- 统计理论：统计基础理论 [@Savage1972]，统计学习理论 [@Vapnik1998;@Hastie2009]，稀疏性主题[@Hastie2015]，统计学习应用 [@James2021]，计算机时代的统计推断[@Efron2016]。如何从统计角度建立深度学习的理论框架是当前热门的方向。
+-   深度学习框架：继 [Tensorflow](https://github.com/tensorflow/tensorflow)、 [PyTorch](https://github.com/pytorch/pytorch)、 [MXNet](https://github.com/apache/incubator-mxnet) 之后，深度学习框架开始涌现，大厂和创业公司都在涉足，比如百度的[PaddlePaddle](https://github.com/PaddlePaddle)、奇虎360的[XLearning](https://github.com/Qihoo360/XLearning)、旷视科技的[MegEngine](https://github.com/MegEngine/MegEngine)、一流科技的 [oneflow](https://github.com/Oneflow-Inc/oneflow)。
 
-- 计算机理论：《Information Theory, Inference and Learning Algorithms》[@MacKay2003] 
+-   机器学习框架：[h2o-3](https://github.com/h2oai/h2o-3)、 [keras](https://github.com/keras-team/keras)、[weka-3.8](https://github.com/Waikato/weka-3.8)、[caret](https://github.com/topepo/caret)、[mlr](https://github.com/mlr-org/mlr3) 和 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 等。梯度提升框架有[xgboost](https://github.com/dmlc/xgboost)[@xgboost2021]、[LightGBM](https://github.com/microsoft/LightGBM)[@lightgbm2021]和[catboost](https://github.com/catboost/catboost) 等，大部分都有 R 语言接口，如 RWeka [@Hornik2009]，mlr3 [@Michel2019]等。
 
-- 深度学习框架：继 [Tensorflow](https://github.com/tensorflow/tensorflow)、 [PyTorch](https://github.com/pytorch/pytorch)、 [MXNet](https://github.com/apache/incubator-mxnet) 之后，深度学习框架开始涌现，大厂和创业公司都在涉足，比如百度的[PaddlePaddle](https://github.com/PaddlePaddle)、奇虎360的[XLearning](https://github.com/Qihoo360/XLearning)、旷视科技的[MegEngine](https://github.com/MegEngine/MegEngine)、一流科技的 [oneflow](https://github.com/Oneflow-Inc/oneflow)。
+-   统计图形框架：Python 的 [matplotlib](https://github.com/matplotlib/matplotlib)、LaTeX 的 [pgf](https://github.com/pgf-tikz/pgf)、JavaScript 的 [echarts](https://github.com/apache/echarts)、[plotly](https://github.com/plotly/plotly.js)和[bokeh](https://github.com/bokeh/bokeh) 等。
 
-- 机器学习框架：[h2o-3](https://github.com/h2oai/h2o-3)、 [keras](https://github.com/keras-team/keras)、[weka-3.8](https://github.com/Waikato/weka-3.8)、[caret](https://github.com/topepo/caret)、[mlr](https://github.com/mlr-org/mlr3) 和 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 等。梯度提升框架有[xgboost](https://github.com/dmlc/xgboost)[@xgboost2021]、[LightGBM](https://github.com/microsoft/LightGBM)[@lightgbm2021]和[catboost](https://github.com/catboost/catboost) 等，大部分都有 R 语言接口，如 RWeka [@Hornik2009]，mlr3 [@Michel2019]等。
+-   贝叶斯软件：计算贝叶斯：从1976年至21世纪的贝叶斯计算 [@Martin2020]。[OpenBUGS](https://www.mrc-bsu.cam.ac.uk/software/bugs/openbugs/) 及 R 语言接口 BRugs [@BRugs2006]、[JAGS](https://mcmc-jags.sourceforge.io/) 及 R 语言接口 [rjags](https://cran.r-project.org/package=rjags) 包、[MultiBUGS](https://www.multibugs.org/)[@Goudie2020]，未来主要的方向在 [Stan](https://github.com/stan-dev/stan) 及 R 语言接口 [rstan](https://github.com/stan-dev/rstan)。
 
-- 统计图形框架：Python 的 [matplotlib](https://github.com/matplotlib/matplotlib)、LaTeX 的 [pgf](https://github.com/pgf-tikz/pgf)、JavaScript 的 [echarts](https://github.com/apache/echarts)、[plotly](https://github.com/plotly/plotly.js)和[bokeh](https://github.com/bokeh/bokeh) 等。
+-   知识传递：[G. Elliott Morris](https://github.com/elliottmorris/R-for-political-data) 是杂志《The Economist》的 Data journalist 数据新闻工作者。
 
-- 贝叶斯软件：计算贝叶斯：从1976年至21世纪的贝叶斯计算 [@Martin2020]。[OpenBUGS](https://www.mrc-bsu.cam.ac.uk/software/bugs/openbugs/) 及 R 语言接口 BRugs [@BRugs2006]、[JAGS](https://mcmc-jags.sourceforge.io/) 及 R 语言接口 [rjags](https://cran.r-project.org/package=rjags) 包、[MultiBUGS](https://www.multibugs.org/)[@Goudie2020]，未来主要的方向在 [Stan](https://github.com/stan-dev/stan) 及 R 语言接口 [rstan](https://github.com/stan-dev/rstan)。
+-   会议期刊：[推荐系统会议](https://recsys.acm.org/)
 
-- 知识传递：[G. Elliott Morris](https://github.com/elliottmorris/R-for-political-data) 是杂志《The Economist》的 Data journalist 数据新闻工作者。
+-   开放数据集：推荐系统 [影评数据](https://grouplens.org/datasets/movielens/)
 
-- 会议期刊：[推荐系统会议](https://recsys.acm.org/)
-
-- 开放数据集：推荐系统 [影评数据](https://grouplens.org/datasets/movielens/)
-
-- 缺失数据处理：缺失数据探索和可视化，缺失评估[@Tierney2020]，使用图形用户界面探查多元缺失数据[@Cheng2015]
+-   缺失数据处理：缺失数据探索和可视化，缺失评估[@Tierney2020]，使用图形用户界面探查多元缺失数据[@Cheng2015]
 
 R 语言应用到各行各业的数据分析，比如
 
-- 用户行为分析：[Enrique Garcia Ceja](https://www.enriquegc.com/) 曾在华为工作，行为监测和分析，机器学习，可穿戴设备，研究了 11 年 行为分析[@Garcia2021]
+-   用户行为分析：[Enrique Garcia Ceja](https://www.enriquegc.com/) 曾在华为工作，行为监测和分析，机器学习，可穿戴设备，研究了 11 年 行为分析[@Garcia2021]
 
-- 事件历史分析：[eha](https://github.com/goranbrostrom/eha/) [@Brostrom2021] 
+-   事件历史分析：[eha](https://github.com/goranbrostrom/eha/) [@Brostrom2021]
 
-- 组织人事分析：
-[Keith McNulty](https://drkeithmcnulty.com/)
-统计里的回归模型应用到组织中的人事分析，在机器学习和深度学习里，预测是主要的工作，而在组织人事分析方面，如何找到原因是更关心的问题。[@McNulty2021]
+-   组织人事分析： [Keith McNulty](https://drkeithmcnulty.com/) 统计里的回归模型应用到组织中的人事分析，在机器学习和深度学习里，预测是主要的工作，而在组织人事分析方面，如何找到原因是更关心的问题。[@McNulty2021]
 
-- 公共政策分析：服务于社会学家和城市规划师，政府数据分析为智慧城市建设献言献策 [@Steif2022;@Urdinez2021]
+-   公共政策分析：服务于社会学家和城市规划师，政府数据分析为智慧城市建设献言献策 [@Steif2022; @Urdinez2021]
 
-- 卫生健康分析：空间建模和数据可视化应用于公共卫生健康领域 [@Moraga2019;@Lawson2021;@Haining2021;@Wikle2019;@Andrew2021]
+-   卫生健康分析：空间建模和数据可视化应用于公共卫生健康领域 [@Moraga2019; @Lawson2021; @Haining2021; @Wikle2019; @Andrew2021]
 
-- 社会人口分析：每次人口普查相关的数据公布，都会引发热烈的关注，2021 年完成第七次全国人口普查，发布了一批数据，自古以来，人口和土地是非常重要的资源，如何系统地分析和挖掘其中的信息非常重要。Kyle Walker 以美国的普查数据为分析对象，从方法、地图和模型等多角度，想必是很有参考价值的[@Walker2022]。
+-   社会人口分析：每次人口普查相关的数据公布，都会引发热烈的关注，2021 年完成第七次全国人口普查，发布了一批数据，自古以来，人口和土地是非常重要的资源，如何系统地分析和挖掘其中的信息非常重要。Kyle Walker 以美国的普查数据为分析对象，从方法、地图和模型等多角度，想必是很有参考价值的[@Walker2022]。
 
-- 空间数据分析：空间数据统计[@Cressie1993] 空间采样[@Brus2021]
+-   空间数据分析：空间数据统计[@Cressie1993] 空间采样[@Brus2021]
 
-- 教育行业分析：教育行业的数据科学[@Estrellado2020]
+-   教育行业分析：教育行业的数据科学[@Estrellado2020]
 
-- 机器学习应用：博弈论+机器学习=？, 方飞, 卡内基梅隆大学助理教授 <https://yixi.tv/#/speech/detail?id=970> 涉及空间随机场、随机森林等
+-   机器学习应用：博弈论+机器学习=？, 方飞, 卡内基梅隆大学助理教授 <https://yixi.tv/#/speech/detail?id=970> 涉及空间随机场、随机森林等
 
 一些有意思的思考方向：
 
-- 国家层面关注的重大问题：人口数、出生率、死亡率、增长率、物价指数、消费指数、恩格尔系数、国民收入、道格拉斯生产函数、Gini 系数。
+-   国家层面关注的重大问题：人口数、出生率、死亡率、增长率、物价指数、消费指数、恩格尔系数、国民收入、道格拉斯生产函数、Gini 系数。
 
-- 中国经济社会发展： 1983 年以来的中国统计年鉴分析。
+-   中国经济社会发展： 1983 年以来的中国统计年鉴分析。
 
-- 就某一指标，300 年来数据收集、统计、分析的工具和方法的变迁。也会很有意思，找一条线串起来介绍相关统计理论的发展。
+-   就某一指标，300 年来数据收集、统计、分析的工具和方法的变迁。也会很有意思，找一条线串起来介绍相关统计理论的发展。
 
-- 统计概念的首次提出者及其国家，年龄、年月，估计是一个很有意思的事情，但是数据收集和整理的工作量会很大。最终要说明什么呢？除去战争因素，国际统计中心为什么会从英国转移到美国？
+-   统计概念的首次提出者及其国家，年龄、年月，估计是一个很有意思的事情，但是数据收集和整理的工作量会很大。最终要说明什么呢？除去战争因素，国际统计中心为什么会从英国转移到美国？
 
-- 历届COPSS奖得主的获奖时候年龄分布，现在的年龄，21世纪100位统计大师
-
+-   历届COPSS奖得主的获奖时候年龄分布，现在的年龄，21世纪100位统计大师
 
 ## 区间估计 {#cp-estimator}
 
@@ -144,13 +131,11 @@ Clopper-Pearson 精确区间估计
 binom.test(x = 2, n = 10, p = 0.2)
 ```
 
-在给定置信水平为 0.95，即 $\alpha = 0.05$，固定样本量 $n = 10$，观测到的成功次数 $x$ 可能为 $0,1,\cdots,10$，
-对于给定的 $p$，不同 $x$ 值出现的机率由 $(p + q)^10$ 二项展开式的项给出，这里 $q = 1-p$，
+在给定置信水平为 0.95，即 $\alpha = 0.05$，固定样本量 $n = 10$，观测到的成功次数 $x$ 可能为 $0,1,\cdots,10$， 对于给定的 $p$，不同 $x$ 值出现的机率由 $(p + q)^10$ 二项展开式的项给出，这里 $q = 1-p$，
 
 二项分布有对称性，尾项之和应不超过 $\alpha/2$，最大的 $x$ 值可有如下方程给出
 
-$$\sum_{r = x}^{n}\binom{n}{x}p^x(1-p)^{n-x} = \frac{\alpha}{2}$$
-在给定 $p = 0.1$ 的情况下，二项分布的上分位点 $x = 3$，即
+$$\sum_{r = x}^{n}\binom{n}{x}p^x(1-p)^{n-x} = \frac{\alpha}{2}$$ 在给定 $p = 0.1$ 的情况下，二项分布的上分位点 $x = 3$，即
 
 ```{r}
 qbinom(0.025, size = 10, prob = 0.1, lower.tail = F)
@@ -204,14 +189,13 @@ text(x = 2, y = 0.55, labels = "p2", pos = 1)
 text(x = 2, y = 0.03, labels = "p1", pos = 3)
 ```
 
-
-
 ## 假设检验 {#fisher-test}
 
 [Fisher 精确检验](https://en.wikipedia.org/wiki/Fisher's_exact_test)
 
 ## 逻辑回归 {#logistic-regression}
 
+```{=html}
 <!-- 
 鸢尾花数据集，2 features  petal length, petal width and all 3 classes
 罗辑回归拟合，绘制分类边界图，实现 R 版本，概率统计、优化理论角度，讲清楚背后原理
@@ -221,24 +205,4 @@ https://github.com/probml/pyprobml/blob/master/scripts/iris_logreg.py#L115
 
 回归模型的结果，用 SQL 转义出来，放在数据库上高性能地执行分类预测
 -->
-
-<!-- 局限
-新的语法目前不支持 EPUB 格式输出
-https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#theorem-engine
-编译 EPUB 伴随有警告
-Warning message:
-The label(s) thm:pyth not found
-
-见定理 \@ref(thm:pyth)
-
-::: {.theorem #pyth name="Pythagorean theorem"}
-This is a `theorem` environment that can contain **any**
-_Markdown_ syntax.
-
-For a right triangle, if $c$ denotes the length of the hypotenuse
-and $a$ and $b$ denote the lengths of the other two sides, we have
-$$a^2 + b^2 = c^2$$
-:::
--->
-
-
+```

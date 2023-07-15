@@ -12,7 +12,7 @@ source(file = "_common.R")
 
 \index{showtext}
 
-书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体， 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。 而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。 @fig-noto-fonts 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext=TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
+书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体， 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。 而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。 @fig-noto-fonts 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext = TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
 ```{r}
 #| label: fig-noto-fonts
@@ -65,7 +65,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
   )
 ```
 
-@fig-xkcd-fonts 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系，所用 iris 数据集也来自 Base R 自带的 **datasets** 包，由 Anderson Edgar 收集，最早见于 1935 年的文章，后被 Ronald Fisher 在研究分类问题时引用[@Fisher1936]，到如今，在机器学习的社区里，提及 iris 数据集，很多人只知 Fisher 不知 Anderson。
+@fig-xkcd-fonts 是一幅手绘漫画风格的图形，展示了三种不同鸢尾花的萼片宽度和长度的关系。
 
 ```{r}
 #| label: fig-xkcd-fonts
@@ -75,6 +75,7 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 #| fig-height: 3
 #| echo: false
 #| fig-showtext: true
+#| eval: false
 
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd
@@ -260,10 +261,6 @@ datatable(BaseDataSets,
 
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 
-::: callout-note
-为方便测试贡献者提供的 PR，本书托管在 Github 上，同时启用 Github Action 服务。书中使用的 Noto 系列字体来自 Google 字体网站，国内可能无法访问，但为了尽可能减少可重复的成本，保持书籍能够在 MacOS、Windows 和 Linux 等系统上顺利编译，字体要尽可能便携易得，此外，考虑到美观性，以及避免仓库中附带字体可能带来的权限问题，因此，在绘图程序中使用了 Noto 字体，暂时没有更好的办法。
-:::
-
 考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格使用 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 包，为简单起见，提供一个迷你的表格样式示例，如表 @tbl-iris 所示。截止写作时间，能够制作表格的 R 包其实有很多，比如 [DT](https://github.com/rstudio/DT)、[gt](https://github.com/rstudio/gt) 等[@xie2020]，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！
 
 \index{kableExtra}
@@ -303,27 +300,18 @@ head(iris, 10) |>
 
 总而言之，本书将基于开源的工具和成熟的技术，提供简洁美观不失真意的可视化表达。欢迎各位读者参与贡献，甚至加入写作团队，成为主力创作者，虚位以待！如你所见，本书将大量使用开源的软件、字体、R 包和免费的服务，因此贡献的内容也应以此为基础，赋以独树一帜的洞见，优雅简洁的实现，过程稳定可重复，长期有耐心，坚信优质的内容必将持续为读者提供价值！
 
-书籍开源在 Github 上，聪明的你如果准备参与创作，需要掌握一些基本的技能，以便大家展开协作。 @fig-skills 是一个简单的技能栈图，书稿以一个个 R Markdown 文件的形式存在，符合 bookdown 的组织方式，本地在 RStudio 里编辑和编译，线上在 GitHub Action 环境里编译成 HTML 和 PDF 格式，如果你还了解 LaTeX 或 Pandoc 就更好了，可以把本书做得更加漂亮。当然，工具可以不限于提到的这些，只要使着顺手，比如 [VS Code](https://code.visualstudio.com/)，它对 R 语言的支持也很好了，只要你懂各种配置，体验不比 RStudio 差。
+书籍开源在 Github 上，如果你准备参与创作，需要掌握一些基本的技能，以便大家展开协作。 @fig-skills 是一个简单的技能栈图，书稿以一个个 R Markdown 文件的形式存在，符合 bookdown 的组织方式，本地在 RStudio 里编辑和编译，线上在 GitHub Action 环境里编译成 HTML 和 PDF 格式，如果你还了解 LaTeX 或 Pandoc 就更好了，可以把本书做得更加漂亮。当然，工具可以不限于提到的这些，只要使着顺手，比如 [VS Code](https://code.visualstudio.com/)，它对 R 语言的支持也很好了，只要你懂各种配置，体验不比 RStudio 差。
 
-```{r fig-skills, engine="tikz", fig.cap="《现代统计图形》的技能栈", out.width="65%", echo=FALSE, cache=TRUE, engine.opts=list(extra.preamble=c("\\usepackage[default]{sourcesanspro}","\\usepackage[fontset=fandol]{ctex}", "\\usepackage{smartdiagram}"))}
+```{r}
+#| label: fig-skills
+#| engine: "tikz"
+#| fig.cap: "《现代统计图形》的技能栈"
+#| out.width: "65%"
+#| engine-opts: !expr list(extra.preamble=c("\\usepackage{smartdiagram}"))
+
 \smartdiagramset{planet color=gray!40!white, uniform color list=gray!40!white for 10 items}
 \smartdiagram[bubble diagram]{基础技能,
   编辑~\\ (RStudio), 组织~\\ (bookdown), 协作~\\ (Git), 排版~\\ (LaTeX/Pandoc), 编译~\\ (GitHub Action)}
-```
-
-```{r}
-#| label: fig-ridgeline
-#| fig-width: 7
-#| fig-height: 4
-#| fig-showtext: true
-#| fig-cap: "岭线图"
-
-library(ggplot2)
-library(ggridges)
-ggplot(data = iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
-  scale_fill_brewer(palette = "Greys") +
-  geom_density_ridges(bandwidth = 0.2) +
-  theme_ridges(font_size = 12, font_family = "sans")
 ```
 
 **aplpack** [@aplpack2021] 用函数 `iconplot()` 展示列联表数据，图 \@ref(fig:pictogram) 每个格子代表 100 人。
@@ -361,28 +349,4 @@ iconplot(
   icons = as.raster(rlogo),
   main = "Student Admissions at UC Berkeley"
 )
-```
-
-## 软件信息 {#session-info .unnumbered}
-
-<!-- 记号约定，注释，R 包环境管理，部署服务 -->
-
-```{r}
-#| label: ci-indicator
-#| echo: false
-
-ci <- identical(Sys.getenv("CI"), "true")
-```
-
-R 包名以粗体表示，如 **knitr** 包，函数名以等宽体表示，如 `plot()`，函数的参数名同理。代码块内注释用 `#` 表示，运行结果每一行开头以 `#>` 标记。本书写作过程中，依赖 **knitr** [@xie2015]、**rmarkdown** [@xie2018] 和 **bookdown** [@xie2016] 等众多 R 包。目前，书稿使用 `r R.version.string` 编译，你现在看到的是`r ifelse(ci, '在线', '离线')`编译版本，最新一次编译时间是 `r format(Sys.time(), tz = "Asia/Shanghai")`，直接使用的 R 包如下：
-
-```{r}
-#| label: package-info
-
-xfun::session_info(packages = c(
-  "knitr", "rmarkdown", "bookdown", 
-  "ggplot2", "kableExtra", 
-  "showtext", "tikzDevice",
-  "rootSolve"
-), dependencies = FALSE)
 ```

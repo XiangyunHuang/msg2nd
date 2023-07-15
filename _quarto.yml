@@ -10,6 +10,7 @@ book:
   date: today
   chapters:
     - index.qmd
+    - preface.qmd
     - references.qmd
   repo-branch: main
   search: true
@@ -45,10 +46,5 @@ format:
     link-citations: true
     crossref:
       chapters: true
-    knitr:
-      opts_chunk:
-        out.width: 80%
-        R.options:
-          width: 62
 
 editor: visual

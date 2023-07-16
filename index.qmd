@@ -221,44 +221,6 @@ besselK(0.5,20, expon.scaled = T)
 -->
 ````
 
-`r if (!knitr::is_html_output()) '<!--'`
-
-Base R 内置的 R 包含有丰富的数据集，非常适合演示图形和阐述统计理论，后面技术和理论部分的介绍大多围绕内置的数据集展开，数据集及其描述如下表所示：
-
-```{r }
-#| label: core-datasets
-#| echo: false
-# 抽取 R 包信息
-Pkgs <- sapply(list.files(R.home("library")), function(x) {
-  packageDescription(pkg = x, fields = "Priority")
-})
-# 抽取内置 R 包列表
-CorePkgs <- names(Pkgs[Pkgs %in% c("base", "recommended") & !is.na(Pkgs)])
-# 抽取 R 包的数据集
-BaseDataSets <- data(package = CorePkgs)$results[, c("Package", "Item", "Title")]
-
-library(DT)
-datatable(BaseDataSets,
-  rownames = FALSE, # 不显示行名
-  extensions = c("Buttons", "RowGroup"),
-  options = list(
-    pageLength = 10, # 每页显示的行数
-    language = list(url = "//cdn.datatables.net/plug-ins/1.10.11/i18n/Chinese.json"), # 汉化
-    dom = "Bfrtp", # 去掉显示行数 i、过滤 f 的能力，翻页用 p 表示
-    ordering = F, # 去掉列排序
-    buttons = c("copy", "csv", "excel", "print"), # 提供打印按钮
-    rowGroup = list(dataSrc = 0), # 按 Package 列分组
-    columnDefs = list(
-      list(className = "dt-center", targets = 0), # 不显示行名，则 targets 从 0 开始，否则从 1 开始
-      list(visible = FALSE, targets = 0) # 不显示 Package 列
-    )
-  ),
-  caption = "Base R 包内置的数据集"
-)
-```
-
-`r if (!knitr::is_html_output()) '-->'`
-
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
 
 考虑到要同时支持 PDF 和 HTML 两种书籍格式，书中制作表格使用 **knitr** 和 [**kableExtra**](https://github.com/haozhu233/kableExtra) 包，为简单起见，提供一个迷你的表格样式示例，如表 @tbl-iris 所示。截止写作时间，能够制作表格的 R 包其实有很多，比如 [DT](https://github.com/rstudio/DT)、[gt](https://github.com/rstudio/gt) 等[@xie2020]，但同时深度支持 PDF 和 HTML 两种输出格式且达到出版级水准的，只有 **kableExtra**，此处感谢朱昊为 R 社区作出的贡献！

@@ -75,7 +75,6 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 #| fig-height: 3
 #| echo: false
 #| fig-showtext: true
-#| eval: false
 
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd

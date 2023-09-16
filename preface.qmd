@@ -63,8 +63,7 @@ source(file = "_common.R")
 #| fig.cap="1940年弗吉尼亚州死亡率", 
 #| out.width='75%', 
 #| fig.width=6, fig.height=6, 
-#| fig.showtext=TRUE, 
-#| echo=FALSE
+#| fig.showtext=TRUE
 
 dat <- transform(expand.grid(
   site = c("乡村", "城镇"), sex = c("男", "女"), 
@@ -90,16 +89,15 @@ ggplot(data = dat, aes(x = sex, y = deaths, fill = age)) +
   )
 ```
 
-将对比对象从年龄转化为城乡，描述城乡差距在死亡率上的体现，是不是得到更多的信息含量？如图\@ref(fig:virginia-deaths-site)暗示城市化提高人的留存率。
+将对比对象从年龄转化为城乡，描述城乡差距在死亡率上的体现，是不是得到更多的信息含量？城市化降低人的死亡率。
 
 ```{r}
-#| virginia-deaths-site, 
-#| fig.cap="1940年弗吉尼亚州死亡率的城乡差异", 
-#| out.width='75%', 
-#| fig.width=6, 
-#| fig.height=6, 
-#| fig.showtext=TRUE, 
-#| echo=FALSE
+#| label: fig-virginia-deaths-site
+#| fig-cap: 1940 年弗吉尼亚州死亡率的城乡差异
+#| out-width: 75%
+#| fig-width: 6
+#| fig-height: 6
+#| fig-showtext: true
 
 ggplot(data = dat, aes(x = age, y = deaths, fill = site)) +
   geom_col(position = "dodge2") +

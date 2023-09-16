@@ -73,6 +73,7 @@ if (xfun::is_macos()) {
   )
 }
 
+# brew install --cask font-noto-sans font-noto-serif
 ## 衬线字体
 sysfonts::font_add(
   family = "Noto Serif",

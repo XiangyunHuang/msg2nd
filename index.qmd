@@ -16,7 +16,6 @@ source(file = "_common.R")
 
 ```{r}
 #| label: fig-noto-fonts
-#| par: true
 #| fig-cap: "中英文字体设置"
 #| fig-subcap: 
 #| - 'Base R 图形'
@@ -26,7 +25,8 @@ source(file = "_common.R")
 #| fig-height: 3.5
 #| fig-alt: '汞蒸气的压力随温度的指数级变化'
 #| fig-showtext: true
-#| fig-ncol: 2
+#| layout-ncol: 2
+#| par: true
 
 # 准备 Noto 中英文字体
 # sysfonts::font_add_google(name = "Noto Sans", family = "Noto Sans")
@@ -70,7 +70,6 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 ```{r}
 #| label: fig-xkcd-fonts
 #| fig-cap: "手绘漫画风格的图形"
-#| out-width: "75%"
 #| fig-width: 5
 #| fig-height: 3
 #| echo: false

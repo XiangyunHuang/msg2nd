@@ -10,7 +10,7 @@ book:
   date: today
   chapters:
     - index.qmd
-    - preface.qmd
+    # - preface.qmd
     - visualization-basic.qmd
     - visualization-intermediate.qmd
     - visualization-advanced.qmd

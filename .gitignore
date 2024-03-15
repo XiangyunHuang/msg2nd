@@ -5,7 +5,6 @@
 .DS_Store
 
 *.log
-*.rds
 *-tikzDictionary
 
 _book/

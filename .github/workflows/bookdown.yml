@@ -58,6 +58,9 @@ jobs:
         run: |
           sudo apt-get install -y ghostscript graphviz optipng
           sudo apt-get install -y fonts-noto-core fonts-noto-cjk
+          mkdir -p ~/.fonts/
+          curl -fLo xkcd.ttf http://simonsoftware.se/other/xkcd.ttf
+          cp xkcd.ttf ~/.fonts/
           fc-list | grep 'noto' | sort
           fc-list | sort
 

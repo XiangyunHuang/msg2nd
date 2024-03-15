@@ -76,6 +76,8 @@ Remotes:
 Suggests:
     quarto (>= 1.2),
     rsconnect (>= 1.1.0)
+Enhances:
+    sp (>= 2.0-0)
 SystemRequirements: pgf (>= 3.00)
 Additional_repositories:
     https://grantmcdermott.r-universe.dev

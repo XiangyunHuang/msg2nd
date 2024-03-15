@@ -1,3 +1,46 @@
-\usepackage[heading=true, UTF8]{ctex}
-\usepackage[scale=0.85]{sourcecodepro}
-\usepackage{booktabs}
+\PassOptionsToPackage{list=true}{subcaption}
+\usepackage[heading=true,fontset=fandol,UTF8]{ctex}
+\usepackage[nottoc]{tocbibind}
+\usepackage[toc,lof,lot]{multitoc}
+\usepackage{makeidx}
+\makeindex
+\usepackage[scale=0.85,semibold]{sourcecodepro}
+\usepackage[angle=90,text=\textcopyright 黄湘云,color=gray,pos={0.5in,1.5in},scale=0.25]{draftwatermark}
+% https://github.com/CTeX-org/ctex-kit/issues/331
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},formatcom=\xeCJKVerbAddon}
+\usepackage{bookmark}
+\bookmarksetup{open,numbered,
+	depth=2, % 设置PDF的书签级别,2显示到subsection,3显示到subsubsection
+	addtohook={ %
+		\ifnum\bookmarkget{level}=0 % chapter
+			\bookmarksetup{bold} %
+		\fi
+		\ifnum\bookmarkget{level}=-1 % part
+			\bookmarksetup{color=orange,bold} %
+		\fi
+	}
+}
+\usepackage{animate}
+\usepackage{bm} % \bm
+\usepackage{mathrsfs}
+% soul's \st doesn't work for CJK
+\usepackage{xeCJKfntef}
+\ifdefined\st
+  \renewcommand{\st}[1]{\CJKsout{#1}}
+\else
+  \newcommand{\st}[1]{\CJKsout{#1}}
+\fi
+
+% http://tex.stackexchange.com/questions/198140/
+% \usepackage[toc,xindy]{glossaries} % 术语表
+% \makenoidxglossaries
+%
+% % 词汇表
+% \newglossaryentry{LM}
+% {
+%   name=线性模型,
+%   description={Linear Models},
+%   sort={Linear Models},
+% }
+% \newacronym{gls}{GLS}{Generalized Least Squares}
+% \newacronym{ls}{LS}{Least Squares}

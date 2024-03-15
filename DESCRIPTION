@@ -3,27 +3,83 @@ Type: Book
 Title: Modern Statistical Graphics (Second Edition)
 Version: 1.0.0.9999
 Depends: R (>= 4.1.1)
-Imports: 
-    bookdown (>= 0.24),
-    bslib (>= 0.3.0),
-    formatR (>= 1.11),
-    gapminder,
-    ggplot2 (>= 3.3.5),
-    ggridges,
-    ggrepel,
-    knitr (>= 1.37),
-    pdftools (>= 3.0.1),
-    patchwork,
-    quarto,
-    reticulate (>= 1.22),
-    rootSolve (>= 1.8.2.3),
-    showtext (>= 0.9.4),
-    tikzDevice (>= 0.12.3.1),
-    webshot (>= 0.5.2)
-Suggests:
-    rsconnect,
+Imports:
+    beanplot,
+    broom,
+    data.table,
     downlit,
+    dbplyr,
+    dplyr (>= 1.1.0),
+    DT,
+    dygraphs,
+    gifski,
+    ggalluvial,
+    gganimate (>= 1.0.9),
+    ggbeeswarm,
+    ggbump,
+    ggdensity,
+    ggeffects,
+    ggExtra,
+    ggforce,
+    ggfortify,
+    ggmosaic,
+    ggnewscale,
+    ggplot2 (>= 3.5.0),
+    ggraph (>= 2.2.0),
+    ggrepel,
+    ggridges,
+    ggsignif,
+    ggstats (>= 0.5.0),
+    ggstream,
+    ggthemes (>= 5.0.0),
+    ggTimeSeries,
+    ggVennDiagram,
+    ggwordcloud,
+    glmnet,
+    gt (>= 0.10.1),
+    hexbin,
+    HistData,
+    knitr (>= 1.44),
+    latticeExtra,
+    lvplot (>= 0.2.1),
+    magick,
+    maps,
+    misc3d,
+    nloptr,
+    nomnoml (>= 0.3.0),
+    patchwork,
+    pdftools,
+    plot3D,
+    plotly (>= 4.10.1),
+    pROC,
+    pwr,
+    purrr (>= 1.0.0),
+    quadprog,
+    quantmod,
+    ragg,
+    reticulate,
+    rootSolve,
+    RSQLite,
+    showtext,
+    tidygraph,
+    tinyplot,
+    titanic,
+    tikzDevice,
+    treemapify,
+    vcd,
+    vioplot,
+    webshot2,
     xml2,
-    magick
-SystemRequirements: Gifski (<https://gif.ski/>), ImageMagick (<https://imagemagick.org/>), OptiPNG (<http://optipng.sourceforge.net/>) and Pandoc (<https://pandoc.org>)
+    xts
+Remotes:
+    davidsjoberg/ggbump,
+    davidsjoberg/ggstream
+Suggests:
+    quarto (>= 1.2),
+    rsconnect (>= 1.1.0)
+Enhances:
+    sp (>= 2.0-0)
+SystemRequirements: pgf (>= 3.00)
+Additional_repositories:
+    https://grantmcdermott.r-universe.dev
 BugReports: https://github.com/XiangyunHuang/msg2nd/issues

@@ -11,12 +11,22 @@ book:
   chapters:
     - index.qmd
     - preface.qmd
+    - visualization-basic.qmd
+    - visualization-intermediate.qmd
+    - visualization-advanced.qmd
+    - visualization-lattice.qmd
+    - visualization-graphics.qmd
+    - visualization-tikz.qmd
+    - visualization-practice.qmd
     - references.qmd
   repo-branch: main
   search: true
   downloads: [pdf]
 
-bibliography: book.bib
+bibliography:
+  - book.bib
+  - packages.bib
+  - references.bib
 
 format:
   html:

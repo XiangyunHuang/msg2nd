@@ -1,92 +1,94 @@
 on:
   push:
-    branches:
-      - main
-    paths-ignore:
-      - 'examples/**'
+    branches: main
   pull_request:
-    branches:
-      - main
-  schedule:
-    - cron:  '0 23 15 * *'
+    branches: main
 
-name: bookdown
+# https://github.com/dmlc/xgboost/commit/bc516198dccd9fb345ac318c56ee7bb48bba5aae
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
-env:
-  isExtPR: ${{ github.event.pull_request.head.repo.fork == true }}
+name: Book-Ubuntu
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
-      LANG: "en_US.UTF-8"
-      TZ: "Asia/Shanghai"
-      DISPLAY: ':99.0'
-      RGL_USE_NULL: TRUE
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
+      PANDOC_VERSION: "3.1.11"
+      RETICULATE_PYTHON_ENV: /opt/.virtualenvs/r-tensorflow
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 100
+      - uses: actions/checkout@v4
 
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          # To install LaTeX to build PDF book
-          tinytex: false
-          version: 1.3.340
-
-      - uses: r-lib/actions/setup-tinytex@v2
-        env:
-          # install full prebuilt version
-          TINYTEX_INSTALLER: TinyTeX
+          version: 1.4.550
 
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-          r-version: '4.3.0'
+          r-version: '4.3.3'
+          extra-repositories: 'https://grantmcdermott.r-universe.dev'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 
+      - name: Install Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: ${{ env.PANDOC_VERSION }}
+
+      - name: Install TinyTeX
+        uses: r-lib/actions/setup-tinytex@v2
+        env:
+          # install full prebuilt version
+          TINYTEX_INSTALLER: TinyTeX
+
+      - name: Setup Python
+        run: |
+          pip3 install virtualenv
+          mkdir -p /opt/.virtualenvs/r-tensorflow
+          virtualenv -p /usr/bin/python3 $RETICULATE_PYTHON_ENV
+          source $RETICULATE_PYTHON_ENV/bin/activate
+          pip3 install -r requirements.txt
+          deactivate
+
       - name: Install Fonts From System
         run: |
+          sudo apt-get install -y ghostscript graphviz optipng
           sudo apt-get install -y fonts-noto-core fonts-noto-cjk
-          fc-list | grep 'noto' | sort
           mkdir -p ~/.fonts/
           curl -fLo xkcd.ttf http://simonsoftware.se/other/xkcd.ttf
           cp xkcd.ttf ~/.fonts/
+          fc-list | grep 'noto' | sort
           fc-list | sort
 
-      - name: Install LaTeX Packages
+      - name: Install LaTeX packages
         run: |
+          if(!require('tinytex')) install.packages('tinytex')
           tinytex::tlmgr_install(readLines("texlive.txt"))
           tinytex::tl_pkgs()
+          tikzDevice::tikzTest("m", engine = "xetex")
+          tikzDevice::tikzTest("$\\sin(x^2/2 - y^2/4 + 3) \\cos(2 x + 1 - \\exp(y))$")
         shell: Rscript {0}
 
-      - name: Test Pkgs
+      - name: Setup magick
         run: |
-          sessionInfo(.packages(T))
-          capabilities()
-          library(tikzDevice)
-          tikzTest()
-          tikzTest("$\\sin(x^2/2 - y^2/4 + 3) \\cos(2 x + 1 - \\exp(y))$")
-          # screenshot HTML widgets
-          if (is.null(webshot:::find_phantom())) webshot::install_phantomjs()
-        shell: Rscript {0}
+          sudo sed -i_bak \
+             's/name="disk" value="1GiB"/name="disk" value="8GiB"/' \
+             /etc/ImageMagick-6/policy.xml
 
       - name: Render Book
-        id: render-book
         run: |
+          source $RETICULATE_PYTHON_ENV/bin/activate
+          quarto check
           quarto render --to html
+        shell: bash
+        env:
+          RETICULATE_PYTHON_ENV: /opt/.virtualenvs/r-tensorflow
+          RETICULATE_PYTHON: /opt/.virtualenvs/r-tensorflow/bin/python
 
-      - name: Upload book folder for debug
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: Upload Book
-          path: _book
 
       - name: Deploy book to bookdown.org
         if: github.event_name == 'push'
@@ -97,7 +99,7 @@ jobs:
           Rscript '_deploy-book.R'
 
       - name: Checkout the gh-pages branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: book-output

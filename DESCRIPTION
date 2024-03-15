@@ -57,6 +57,7 @@ Imports:
     quadprog,
     quantmod,
     ragg,
+    reticulate,
     rootSolve,
     RSQLite,
     showtext,

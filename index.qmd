@@ -1,6 +1,6 @@
 # 欢迎 {#welcome .unnumbered}
 
-```{r, echo=FALSE}
+```{r}
 source(file = "_common.R")
 ```
 
@@ -20,13 +20,14 @@ source(file = "_common.R")
 #| fig-subcap: 
 #| - 'Base R 图形'
 #| - 'ggplot2 图形'
-#| out-width: '50%'
 #| fig-width: 4.5
 #| fig-height: 3.5
 #| fig-alt: '汞蒸气的压力随温度的指数级变化'
 #| fig-showtext: true
 #| layout-ncol: 2
 #| par: true
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
 
 # 准备 Noto 中英文字体
 # sysfonts::font_add_google(name = "Noto Sans", family = "Noto Sans")
@@ -74,6 +75,8 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 #| fig-height: 3
 #| echo: false
 #| fig-showtext: true
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
 
 # brew tap homebrew/cask-fonts
 # brew install --cask font-xkcd

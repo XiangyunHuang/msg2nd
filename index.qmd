@@ -73,7 +73,6 @@ ggplot(data = pressure, aes(x = temperature, y = pressure)) +
 #| fig-cap: "手绘漫画风格的图形"
 #| fig-width: 5
 #| fig-height: 3
-#| echo: false
 #| fig-showtext: true
 #| echo: !expr knitr::is_html_output()
 #| code-fold: true

@@ -73,15 +73,15 @@ if (xfun::is_macos()) {
   )
 }
 
-# brew install --cask font-noto-sans font-noto-serif
+# brew install font-noto-sans font-noto-serif
 ## 衬线字体
-sysfonts::font_add(
-  family = "Noto Serif",
-  regular = "NotoSerif-Regular.ttf",
-  bold = "NotoSerif-Bold.ttf",
-  italic = "NotoSerif-Italic.ttf",
-  bolditalic = "NotoSerif-BoldItalic.ttf"
-)
+# sysfonts::font_add(
+#   family = "Noto Serif",
+#   regular = "NotoSerif-Regular.ttf",
+#   bold = "NotoSerif-Bold.ttf",
+#   italic = "NotoSerif-Italic.ttf",
+#   bolditalic = "NotoSerif-BoldItalic.ttf"
+# )
 ## 无衬线字体
 sysfonts::font_add(
   family = "Noto Sans",

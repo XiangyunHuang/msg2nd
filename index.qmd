@@ -10,10 +10,6 @@ source(file = "_common.R")
 本书是《现代统计图形》[@msg2021] 的后续第二版，尚处于草创阶段。
 :::
 
-## 排版约定 {#convention .unnumbered}
-
-\index{showtext}
-
 书中的代码字体采用美观的 [Source Code Pro](https://ctan.org/pkg/sourcecodepro) 字体， 为方便跨操作系统编译书籍电子版，正文的中文字体采用开源的 [fandol](https://ctan.org/pkg/fandol) 字体。 而本书图形中使用的 Noto 系列中英文字体来自 [Google Fonts 字体库](https://fonts.google.com/)，分别是 Noto Sans 无衬线英文字体和 Noto Serif SC 宋体中文字体。 @fig-noto-fonts 中的左、右子图分别展示 Base R 和 ggplot2 [@Wickham2016] 图形中中英文字体的效果。在图形中调用中文字体分两步走，先使用 **sysfonts** 包获取并注册 Noto 相关字体，然后在绘图的时候指定字体，并在代码块选项中启用 `fig.showtext = TRUE`，这样就能在 R Markdown 环境中优雅地绘制含中文的图形。如果在 R Console 中绘图则需加载 **showtext** 包，运行函数 `showtext_auto()`。
 
 ```{r}
@@ -100,4 +96,6 @@ ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
 
 在掌握各类现代的绘图技术后，回归统计图形的落脚点，从数据传递的信息出发，选择合适的图形和实现工具，兼顾美观，到达「道」与「术」和谐统一的境界。
 
+<!--
 书中参考文献的样式一律遵守2015年国家颁布的《GB/T 7714-2015 信息与文献 参考文献著录规则》，全书使用作者年份引用格式，感谢胡振震开发的 [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 宏包，使参考文献的引用在 LaTeX 文档中变得更容易，解放了一部分排版编辑工作，让作者腾出时间专注于内容。
+-->

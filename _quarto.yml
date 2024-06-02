@@ -31,6 +31,7 @@ bibliography:
 format:
   html:
     theme: cosmo
+    cover-image: cover.png
     crossref:
       chapters: true
   pdf:

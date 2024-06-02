@@ -1,6 +1,8 @@
 # 欢迎 {#welcome .unnumbered}
 
 ```{r}
+#| echo: false
+
 source(file = "_common.R")
 ```
 

@@ -639,12 +639,12 @@ plt.rcParams.update({
 # 读取数据
 volcano = pd.read_csv("data/volcano.csv", header=None)
 # DataFrame 转 Array
-z = volcano.to_numpy()
+z = volcano.to_numpy().transpose()
 # 数据行、列数
-nrows, ncols = z.shape
+ncols, nrows = z.shape
 # 线性序列
-x = np.linspace(1, 87, ncols)
-y = np.linspace(1, 61, nrows)
+x = np.linspace(0, 86, nrows)
+y = np.linspace(0, 60, ncols)
 # 类似 R 语言函数 expand.grid()
 xv, yv = np.meshgrid(x, y)
 # 设置主题

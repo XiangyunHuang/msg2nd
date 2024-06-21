@@ -633,6 +633,8 @@ write.table(volcano,
 from matplotlib import cm
 from matplotlib.colors import LightSource
 import matplotlib.pyplot as plt
+# 设置风格样式
+plt.style.use('fast')
 import numpy as np
 import pandas as pd
 
@@ -641,9 +643,10 @@ import matplotlib as mpl
 mpl.use("pgf")
 # XeLaTeX 编译图形
 plt.rcParams.update({
+    "font.family": "sans-serif",
     "text.usetex": True,
     "pgf.texsystem": "xelatex",
-    "pgf.rcfonts": False,    # don't setup fonts from rc parameters
+    "pgf.rcfonts": False,  # don't setup fonts from rc parameters
     "pgf.preamble": "\n".join([
             r"\usepackage[fontset=fandol,UTF8]{ctex}",
         ]),

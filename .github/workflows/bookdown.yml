@@ -99,5 +99,5 @@ jobs:
           path: book-output
 
       - name: Deploy to Github Pages
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/devel' }}
         run: ./_deploy.sh

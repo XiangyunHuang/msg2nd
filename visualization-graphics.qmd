@@ -639,11 +639,14 @@ import pandas as pd
 # 设置 PGF 后端渲染图形
 import matplotlib as mpl
 mpl.use("pgf")
+# 设置风格样式
+# plt.style.use('fast')
 # XeLaTeX 编译图形
 plt.rcParams.update({
+    "font.family": "serif",
     "text.usetex": True,
     "pgf.texsystem": "xelatex",
-    "pgf.rcfonts": False,    # don't setup fonts from rc parameters
+    "pgf.rcfonts": False,  # don't setup fonts from rc parameters
     "pgf.preamble": "\n".join([
             r"\usepackage[fontset=fandol,UTF8]{ctex}",
         ]),

@@ -633,17 +633,17 @@ write.table(volcano,
 from matplotlib import cm
 from matplotlib.colors import LightSource
 import matplotlib.pyplot as plt
+# 设置风格样式
+plt.style.use('fast')
 import numpy as np
 import pandas as pd
 
 # 设置 PGF 后端渲染图形
 import matplotlib as mpl
 mpl.use("pgf")
-# 设置风格样式
-# plt.style.use('fast')
 # XeLaTeX 编译图形
 plt.rcParams.update({
-    "font.family": "serif",
+    "font.family": "sans-serif",
     "text.usetex": True,
     "pgf.texsystem": "xelatex",
     "pgf.rcfonts": False,  # don't setup fonts from rc parameters

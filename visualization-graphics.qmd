@@ -533,22 +533,34 @@ tinyplot(Sepal.Length ~ Sepal.Width | Species,
 on.exit(par(op), add = TRUE)
 ```
 
-还可以绘制其它类型的图形，如分组密度曲线图等。
+还可以绘制其它类型的图形，如分组密度曲线图、分面散点图等。
 
 ```{r}
-#| label: fig-tinyplot-density
-#| fig-cap: tinyplot 包绘制密度曲线图
-#| fig-width: 5
+#| label: fig-tinyplot-others
+#| fig-cap: tinyplot 包的分组和分面功能
+#| fig-subcap: 
+#| - 分组密度曲线图
+#| - 分面散点图
+#| fig-width: 6
 #| fig-height: 5
 #| fig-showtext: true
+#| layout-ncol: 1
+#| layout-nrow: 2
 
-with(iris, tinyplot(
-  density(Sepal.Length), by = Species,
-  bg = "by",   # 分组填充
+tinyplot(
+  ~ Petal.Length | Species, data = iris,
+  type = "density",
+  fill = "by", # 分组填充
   grid = TRUE, # 背景网格
-  palette = "Tableau 10",
-  legend = list("topright", bty = "o") # 右上角图例
-))
+  palette = "Tableau 10"
+)
+
+tinyplot(
+  Petal.Width ~ Petal.Length | Sepal.Length, data = iris,
+  facet = ~ Species,  # 分面
+  grid = TRUE, pch = 19, frame = TRUE,
+  palette = terrain.colors # 生成调色板的函数指定配色
+)
 ```
 
 ### plot3D 包 {#sec-graphics-plot3D}

@@ -19,13 +19,12 @@ jobs:
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.4.550
+          version: 1.4.555
 
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-          r-version: '4.4.0'
-          extra-repositories: 'https://grantmcdermott.r-universe.dev'
+          r-version: '4.4.1'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 

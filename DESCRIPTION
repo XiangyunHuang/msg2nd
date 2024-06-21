@@ -80,6 +80,4 @@ Suggests:
 Enhances:
     sp (>= 2.0-0)
 SystemRequirements: pgf (>= 3.00)
-Additional_repositories:
-    https://grantmcdermott.r-universe.dev
 BugReports: https://github.com/XiangyunHuang/msg2nd/issues

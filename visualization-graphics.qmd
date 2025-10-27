@@ -164,6 +164,27 @@ palette(value = c("#EA4335", "#4285f4", "#34A853", "#FBBC05"))
 plot(Sepal.Length ~ Sepal.Width, data = iris, col = Species, pch = 16)
 ```
 
+用户也可自定义调色板，先选取一些满意的颜色，然后用函数 `colorRampPalette()` 生成调色板。
+
+```{r}
+#| label: fig-palette
+#| fig-cap: 自定义调色板
+#| fig-subcap: 
+#| - Matlab 调色板
+#| - Lab.palette 调色板
+#| fig-width: 7
+#| fig-height: 5
+#| layout-nrow: 2
+
+jet.colors <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan",
+                     "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
+filled.contour(volcano, color.palette = jet.colors)
+Lab.palette <- colorRampPalette(c("red", "orange", "blue"), space = "Lab")
+filled.contour(volcano, color.palette = Lab.palette)
+```
+
+看到这个图立马能让人想到 10 年前在学校里用过的 Matlab 里的绘图工具。不同颜色之间的过渡非常糟糕，一点也不平滑，视觉刺激很强，导致图形本身要传递的信息被冲淡了。换了调色板后，整套配色显得柔和多了，不同颜色之间过渡自然，图形中要表达的重点突出。
+
 ### 注释 {#sec-elements-annotation}
 
 函数 `text()` 可以在图上任意位置添加文本或公式。下图在位置 (4,6.5) 处添加红色的文字 flower。

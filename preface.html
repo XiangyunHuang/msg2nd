@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>前言 – 现代统计图形（第二版）</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./visualization-basic.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./preface.html">前言</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">现代统计图形（第二版）</a> 
+        <div class="sidebar-tools-main">
+    <a href="./msg2nd.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">欢迎</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot2 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-intermediate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基础图形</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">统计图形</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-lattice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">lattice 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">graphics 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-tikz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">TikZ 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">探索实践</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#既然是现代统计图形的第二版和第一版的主要区别是什么目标读者是否一样" id="toc-既然是现代统计图形的第二版和第一版的主要区别是什么目标读者是否一样" class="nav-link active" data-scroll-target="#既然是现代统计图形的第二版和第一版的主要区别是什么目标读者是否一样">既然是《现代统计图形》的第二版，和第一版的主要区别是什么？目标读者是否一样？</a></li>
+  <li><a href="#国内外介绍统计图形的书肯定不止这一本本书独特的价值在哪里" id="toc-国内外介绍统计图形的书肯定不止这一本本书独特的价值在哪里" class="nav-link" data-scroll-target="#国内外介绍统计图形的书肯定不止这一本本书独特的价值在哪里">国内外介绍统计图形的书肯定不止这一本，本书独特的价值在哪里？</a></li>
+  <li><a href="#你为什么要写这样一本书你的创作初衷是什么" id="toc-你为什么要写这样一本书你的创作初衷是什么" class="nav-link" data-scroll-target="#你为什么要写这样一本书你的创作初衷是什么">你为什么要写这样一本书，你的创作初衷是什么？</a></li>
+  <li><a href="#国内外相关书籍的概况如何" id="toc-国内外相关书籍的概况如何" class="nav-link" data-scroll-target="#国内外相关书籍的概况如何">国内外，相关书籍的概况如何？</a></li>
+  <li><a href="#你为什么要讲创作的心路历程" id="toc-你为什么要讲创作的心路历程" class="nav-link" data-scroll-target="#你为什么要讲创作的心路历程">你为什么要讲创作的心路历程？</a></li>
+  <li><a href="#你准备在书里介绍统计理论范围是什么深度如何" id="toc-你准备在书里介绍统计理论范围是什么深度如何" class="nav-link" data-scroll-target="#你准备在书里介绍统计理论范围是什么深度如何">你准备在书里介绍统计理论，范围是什么？深度如何？</a></li>
+  <li><a href="#你准备在书里介绍机器学习范围是什么深度如何" id="toc-你准备在书里介绍机器学习范围是什么深度如何" class="nav-link" data-scroll-target="#你准备在书里介绍机器学习范围是什么深度如何">你准备在书里介绍机器学习，范围是什么？深度如何？</a></li>
+  <li><a href="#你多年从事数据相关的工作你怎么看待数据科学" id="toc-你多年从事数据相关的工作你怎么看待数据科学" class="nav-link" data-scroll-target="#你多年从事数据相关的工作你怎么看待数据科学">你多年从事数据相关的工作，你怎么看待数据科学？</a></li>
+  <li><a href="#你写书的心路历程是怎样的经历过怎样的认知迭代" id="toc-你写书的心路历程是怎样的经历过怎样的认知迭代" class="nav-link" data-scroll-target="#你写书的心路历程是怎样的经历过怎样的认知迭代">你写书的心路历程是怎样的？经历过怎样的认知迭代？</a></li>
+  <li><a href="#你写书的执行过程是怎样的你觉得自己的执行力如何" id="toc-你写书的执行过程是怎样的你觉得自己的执行力如何" class="nav-link" data-scroll-target="#你写书的执行过程是怎样的你觉得自己的执行力如何">你写书的执行过程是怎样的？你觉得自己的执行力如何？</a></li>
+  <li><a href="#知识技术到应用的距离怎样的应用相关的伦理道德问题" id="toc-知识技术到应用的距离怎样的应用相关的伦理道德问题" class="nav-link" data-scroll-target="#知识技术到应用的距离怎样的应用相关的伦理道德问题">知识、技术到应用的距离？怎样的应用？相关的伦理道德问题？</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="preface" class="quarto-section-identifier">前言</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>世界上只有一种英雄主义，就是看清生活的真相之后依然热爱它。</p>
+<p>— 罗曼·罗兰</p>
+</blockquote>
+<p>我在本书每个章节开头都会给一条名人名言，不要笑，生活已经很苦了，写书让我感到快乐和慰藉。这些名人名言伴随了我心路成长的历程。</p>
+<section id="既然是现代统计图形的第二版和第一版的主要区别是什么目标读者是否一样" class="level2">
+<h2 class="anchored" data-anchor-id="既然是现代统计图形的第二版和第一版的主要区别是什么目标读者是否一样">既然是《现代统计图形》的第二版，和第一版的主要区别是什么？目标读者是否一样？</h2>
+<ol type="1">
+<li><p>全书的图形风格将更加的协调和美观，无论 Base R 还是 ggplot2 绘制的图形都要遵循这一点。</p></li>
+<li><p>全书的组织和内容更加体现应用性，将更多地从数据和应用场景出发，而不是从图形种类和技术出发。</p></li>
+<li><p>更加强调数据可视化在探索性、可重复性、沟通交流和信息传递中的重要性。</p></li>
+<li><p>全书图片采用灰度调色板统一配色，黑白印刷也不会出现图文颜色描述不匹配的情况，方便出版打印，也能一定程度上降低书籍的定价，部分图形提供彩版。</p></li>
+<li><p>尽量兼顾统计理论的严谨和统计图形的直观，对于有明显统计意义的图形都要讲述其统计原理，做到知其然且知其所以然。</p></li>
+<li><p>统计图形的历史不再单独成章介绍，而是在具体的数据分析和应用时介绍或者作为一个章节的片尾故事。</p></li>
+<li><p>在介绍统计理论和可视化理论的时候，尽可能多地使用 Base R 基础数据集，基础数据集涉及的知识范围很多很广，故事也多，且稳定可靠。应用部分尽可能多地采纳开放数据，现代工业数据背景，和读者有亲近感，有实际参考价值，有经验教训可期。</p></li>
+<li><p>应用部分，数据集取材于 BBC，经济学人，尽可能来源于真实场景，比如 kaggle 数学建模，天池比赛，黑子活动这样的 R 内置数据集也可以扩展到如今，分析的对象不做限制。目的：一是紧跟时代，二是加强读者对统计学的了解，向来从历史和人物的角度引入比较容易让人接受。</p></li>
+</ol>
+<p>我们希望目标读者学过一点微积分、线性代数和非专业的统计学，对数据分析和可视化，乃至整个数据科学都感兴趣。本书非常适合经济管理、新闻传播、社科医学、统计专业的高年级本科生和研究生，对从事数据相关工作的商业分析师和算法工程师会非常有帮助，对有志从事数据科学的其它专业学生和已从事相关工作的人也有价值。</p>
+</section>
+<section id="国内外介绍统计图形的书肯定不止这一本本书独特的价值在哪里" class="level2">
+<h2 class="anchored" data-anchor-id="国内外介绍统计图形的书肯定不止这一本本书独特的价值在哪里">国内外介绍统计图形的书肯定不止这一本，本书独特的价值在哪里？</h2>
+<p>本书从数据和场景出发，应用性会非常强，其次，数据分析、可视化和信息展示的过程可重复，既照顾到技术的快速发展又有很强的稳定性，结合作者多年来从事数据科学工作的实践经验，从学以自用到学以致用，相信会很有参考意义。</p>
+</section>
+<section id="你为什么要写这样一本书你的创作初衷是什么" class="level2">
+<h2 class="anchored" data-anchor-id="你为什么要写这样一本书你的创作初衷是什么">你为什么要写这样一本书，你的创作初衷是什么？</h2>
+<p>我在读本科学习数理统计的时候接触了 R 语言，自此和数据可视化结缘，曾也专注于统计理论的学习，但越学越觉得建立统计直觉和学习理论一样的重要。工作后，一直从事数据分析相关的工作，从本科以来就有记笔记的习惯，读研究生的时候接触了 <strong>rmarkdown</strong> 和 <strong>bookdown</strong>，线下笔记可以很好的线上化，分门别类，不少人也知道我的一些技术笔记在 Github 上迭代过好几轮，经年累月，受益匪浅，持续的技术和业务沉淀让我决心以出版书籍的标准再次整理笔记和素材。</p>
+</section>
+<section id="国内外相关书籍的概况如何" class="level2">
+<h2 class="anchored" data-anchor-id="国内外相关书籍的概况如何">国内外，相关书籍的概况如何？</h2>
+<p>早年比较经典的书籍包括《Graphics of Large Datasets: Visualizing a Million》<span class="citation" data-cites="Unwin2006">(<a href="references.html#ref-Unwin2006" role="doc-biblioref">Antony Unwin 2006</a>)</span> 和《Handbook of Data Visualization》<span class="citation" data-cites="Chen2008">(<a href="references.html#ref-Chen2008" role="doc-biblioref">Chen, Härdle, 和 Unwin 2008</a>)</span>。近些年，新的可视化工具和技术日趋成熟，《R Graphics》主要介绍了 R 语言环境中栅格绘图系统 <span class="citation" data-cites="Paul2018">(<a href="references.html#ref-Paul2018" role="doc-biblioref">Murrell 2018</a>)</span>。在此基础上，衍生出 <strong>ggplot2</strong> 扩展包，它基于图形语法，建立了从数据到图形的映射。<a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a> 主要介绍了 <strong>ggplot2</strong> 绘图技法 <span class="citation" data-cites="Wickham2016">(<a href="references.html#ref-Wickham2016" role="doc-biblioref">Wickham 2016</a>)</span>，紧接着出现了以 ggplot2 为主的图形食谱 <a href="https://r-graphics.org/">R Graphics Cookbook</a> <span class="citation" data-cites="Chang2018">(<a href="references.html#ref-Chang2018" role="doc-biblioref">Chang 2018</a>)</span>，主要解决读者作图过程中常碰到的问题。而《Displaying Time Series, Spatial, and Space-Time Data with R》<span class="citation" data-cites="Oscar2018">(<a href="references.html#ref-Oscar2018" role="doc-biblioref">Lamigueiro 2018</a>)</span> 针对时间序列数据、空间数据和时空数据提供了详细的介绍，《Interactive web-based data visualization with R, plotly, and shiny》<span class="citation" data-cites="Sievert2020">(<a href="references.html#ref-Sievert2020" role="doc-biblioref">Sievert 2020</a>)</span> 着重介绍了以 <strong>plotly</strong> 和 <strong>shiny</strong> 为代表的图形交互能力。 Kieran Healy 的 <a href="https://socviz.co/">Data Visualization: A practical introduction</a> <span class="citation" data-cites="Healy2019">(<a href="references.html#ref-Healy2019" role="doc-biblioref">Healy 2019</a>)</span> 和 Claus O. Wilke 的 <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a> <span class="citation" data-cites="Wilke2019">(<a href="references.html#ref-Wilke2019" role="doc-biblioref">Wilke 2019</a>)</span> 由浅入深地介绍了数据可视化的要素和原则，而 Thomas Rahlf 的《Data Visualisation with R》<span class="citation" data-cites="Rahlf2019">(<a href="references.html#ref-Rahlf2019" role="doc-biblioref">Rahlf 2019</a>)</span> 提供了丰富的示例。国内陈为老师的《数据可视化》<span class="citation" data-cites="Chen2019">(<a href="references.html#ref-Chen2019" role="doc-biblioref">陈为, 沈则潜, 和 陶煜波 2019</a>)</span> 也非常值得一看。</p>
+</section>
+<section id="你为什么要讲创作的心路历程" class="level2">
+<h2 class="anchored" data-anchor-id="你为什么要讲创作的心路历程">你为什么要讲创作的心路历程？</h2>
+<p>因为我觉得过程比结果重要，身临其境才有感同身受，培养延迟满足感很重要， 2019年我在论坛发问：<a href="https://d.cosx.org/d/421159">书应该怎么写才符合素质教育的理念？</a>。 国内外有大量非常好的书籍介绍统计学史，一些基本概念的来龙去脉， 比如《Past, Present, and Future of Statistical Science》<span class="citation" data-cites="Lin2014">(<a href="references.html#ref-Lin2014" role="doc-biblioref">Lin 等 2014</a>)</span>、 《Fisher, Neyman, and the Creation of Classical Statistics》<span class="citation" data-cites="Lehmann2011">(<a href="references.html#ref-Lehmann2011" role="doc-biblioref">Lehmann 2011</a>)</span>、 《The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century》<span class="citation" data-cites="Salsburg2001">(<a href="references.html#ref-Salsburg2001" role="doc-biblioref">Salsburg 2001</a>)</span>、 《Statisticians of the Centuries》<span class="citation" data-cites="Heyde2001">(<a href="references.html#ref-Heyde2001" role="doc-biblioref">Heyde 等 2001</a>)</span> 和 《Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present》 <span class="citation" data-cites="Johnson1997">(<a href="references.html#ref-Johnson1997" role="doc-biblioref">Johnson 和 Kotz 1997</a>)</span>， 国内也有很多，比如《统计发展史》<span class="citation" data-cites="Chen1987">(<a href="references.html#ref-Chen1987" role="doc-biblioref">陈善林 和 张浙 1987</a>)</span>、《数理统计学简史》<span class="citation" data-cites="Chen2000">(<a href="references.html#ref-Chen2000" role="doc-biblioref">陈希孺 2000</a>)</span> 和《统计学漫话》<span class="citation" data-cites="Chen2016">(<a href="references.html#ref-Chen2016" role="doc-biblioref">陈希孺 和 苏淳 2016</a>)</span>等， 还有人物传记类，比如《Neyman》<span class="citation" data-cites="Reid1982">(<a href="references.html#ref-Reid1982" role="doc-biblioref">Reid 1982</a>)</span> 及其译作<span class="citation" data-cites="Neyman1987">(<a href="references.html#ref-Neyman1987" role="doc-biblioref">Reid 1987</a>)</span>、《漫漫修远攻算路：方开泰自述》 <span class="citation" data-cites="Fang2016">(<a href="references.html#ref-Fang2016" role="doc-biblioref">方开泰 2016</a>)</span> 和《道德文章垂范人间：纪念许宝騄先生百年诞辰》 <span class="citation" data-cites="Xu2010">(<a href="references.html#ref-Xu2010" role="doc-biblioref">许宝騄先生纪念文集编委会编 2010</a>)</span>，IMS 的统计科学访谈文章<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>， 还有一些文章，比如吴建福老师的《从历史发展看中国统计发展方向》<span class="citation" data-cites="Jeff1986">(<a href="references.html#ref-Jeff1986" role="doc-biblioref">吴建福 1986</a>)</span>和《统计学者的工作及风范：灵感、抱负、雄心》<span class="citation" data-cites="Jeff2011">(<a href="references.html#ref-Jeff2011" role="doc-biblioref">吴建福 2011</a>)</span>，还有 2010年新办的杂志<a href="https://www.global-sci.com/mc.html">《数学文化》</a>，2009年丘成桐、杨乐等主编的<a href="http://www.intlpress.net/mh/">《数学与人文》</a> 丛书等，<a href="https://cosx.org/">统计之都</a> 也有大量访谈形式的文章，非常值得一读。更多统计历史相关的材料见 <a href="https://github.com/sctyner/history_of_statistics" class="uri">https://github.com/sctyner/history_of_statistics</a>，真是篇幅所限，没法一一列举。</p>
+<p>培养开阔的思维，广泛的人际关系和优秀的沟通能力，不走极端，专业技术只是决定你的起点，软实力将决定你的高度。以史为镜可知兴替，突破自己的局限，少犯一些错误。要认识到往往是时势造就了英雄，环境对人的影响很大，大到国家，小到团队组织，事情能否做成往往取决于环境，而不是个人能力。若能从历史中看到未来的变化趋势，顺势而为，则善莫大焉，只要在风口上，猪都能飞起来，更是屡见不鲜！</p>
+<p>最后，给一个开放的思考：Bernoulli 家族的教育教学有哪些值得学习的地方？他们的生平经历如何？是在什么样的成长环境下孕育如此之多的科学家？在历史的长河之中，一个家族中有一两位科学家不足为奇，但是好几代人，连续出现10多位科学家就很值得研究了。</p>
+</section>
+<section id="你准备在书里介绍统计理论范围是什么深度如何" class="level2">
+<h2 class="anchored" data-anchor-id="你准备在书里介绍统计理论范围是什么深度如何">你准备在书里介绍统计理论，范围是什么？深度如何？</h2>
+<p>统计部分覆盖面是数理统计的常规内容，涉及抽样分布（常见正态、<span class="math inline">\(t\)</span> 和<span class="math inline">\(\chi^2\)</span> 分布），参数估计（点估计、区间估计和估计方法三方面的内容）和假设检验（参数、非参数检验及其检验理论）。不会过多重复普通教材的内容，教材内已有的会点到即止，重点在彼此的联系，基础概念的深刻理解，又要保持通俗易懂。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="preface_files/figure-html/triangle-1.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>数理统计</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>关于参数估计，我们走过了高斯时代的最小二乘估计、Karl Person 时代的矩估计和 Ronald A. Fisher 时代的极大似然估计。</p>
+</section>
+<section id="你准备在书里介绍机器学习范围是什么深度如何" class="level2">
+<h2 class="anchored" data-anchor-id="你准备在书里介绍机器学习范围是什么深度如何">你准备在书里介绍机器学习，范围是什么？深度如何？</h2>
+<p>今年来机器学习和深度学习成为了国之显学，国内外教材如过江之鲫，我一学统计的，不揣浅陋列举几本，如 <span class="citation" data-cites="Bishop2006">Bishop (<a href="references.html#ref-Bishop2006" role="doc-biblioref">2006</a>)</span>;<span class="citation" data-cites="Goodfellow2016">Goodfellow, Bengio, 和 Courville (<a href="references.html#ref-Goodfellow2016" role="doc-biblioref">2016</a>)</span>;<span class="citation" data-cites="Mohri2018">Mohri, Rostamizadeh, 和 Talwalkar (<a href="references.html#ref-Mohri2018" role="doc-biblioref">2018</a>)</span>。 结合自己在工作这几年的所见所闻，又考虑到本书的定位，理论的范围以 <a href="https://spark.apache.org/docs/latest/ml-guide.html">Spark 的机器学习库</a> 为参照。</p>
+</section>
+<section id="你多年从事数据相关的工作你怎么看待数据科学" class="level2">
+<h2 class="anchored" data-anchor-id="你多年从事数据相关的工作你怎么看待数据科学">你多年从事数据相关的工作，你怎么看待数据科学？</h2>
+<p>我很多人都看过 Hadley Wickham 和 Garrett Grolemund 合著的《R for Data Science》<span class="citation" data-cites="Hadley2017">(<a href="references.html#ref-Hadley2017" role="doc-biblioref">Wickham 和 Grolemund 2017</a>)</span>，书里对数据科学的描述大致如图 @ref(fig:data-science) 所示，实际上数据收集可不是调几个 R 包，不同学科，如经济管理会发问卷，物理做实体或模拟实验，互联网在 App 内埋点收集数据。收集数据之前要做好试验设计，试验设计之前要提出好问题，如何发现、定义和界定问题其实是最难的部分，不仅需要熟悉全链路的技术环节，还要知晓各个岗位的职责边界，既要像万花筒那样深根自己的领域，又要学会像八抓鱼那样获取团队、部门和公司内外的有效输入，还要以强大的执行力推动问题解决。</p>
+</section>
+<section id="你写书的心路历程是怎样的经历过怎样的认知迭代" class="level2">
+<h2 class="anchored" data-anchor-id="你写书的心路历程是怎样的经历过怎样的认知迭代">你写书的心路历程是怎样的？经历过怎样的认知迭代？</h2>
+<p>探索数据科学的旅程如邓宁-克鲁格认知迭代曲线 @ref(fig:dk-curve)， 经历不知道自己不知道的愚昧阶段，知道自己不知道的绝望阶段，知道自己知道的开悟阶段，经过漫长的修行到达不知道自己知道的大师阶段。我可能还在愚昧的山峰，只是自己觉得自己正在从绝望的谷底开始往开悟之坡攀爬！</p>
+<p>我也经历了放弃，放弃一段时间后，偶然看到某篇文章、某本书或者某个讲座上某个人说过的某句话，灵光一现，又再捡起来，会有完全不同的想法冒出来，过程很奇妙，有柳暗花明又一村的感觉！比如书中关于二项分布的参数 <span class="math inline">\(p\)</span> 在不同的区间估计下，参数 <span class="math inline">\(p\)</span> 与覆盖概率的关系，见图@ref(fig:coverage)，其实，早在2020年5月就埋下<a href="https://d.cosx.org/d/421502">伏笔</a>了。</p>
+<p>我原以为自己是统计科班出身，研究生学习数理统计还算扎实，想必读几十年前关于数理统计的论文会比较容易，遂先从置信区间开始，哪知即遭当头一棒，C. J. Clopper 和 E. S. Pearson 在 1934 年合作的论文 <span class="citation" data-cites="Clopper1934">Clopper 和 Pearson (<a href="references.html#ref-Clopper1934" role="doc-biblioref">1934</a>)</span> 我竟前前后后读了近两年时间才自觉明白。为什么呢？近百年过去了，一些提法和现在的书不同了，加之已有一些先入为主的概念阻碍了我，又是利用工作之余的时间在读，缺乏连续性，当年在学校里侧重知识的灌输而不是思维的训练，对基本概念缺乏追根溯源式的深入学习。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="preface_files/figure-html/dk-curve-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>邓宁-克鲁格认知迭代曲线</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="你写书的执行过程是怎样的你觉得自己的执行力如何" class="level2">
+<h2 class="anchored" data-anchor-id="你写书的执行过程是怎样的你觉得自己的执行力如何">你写书的执行过程是怎样的？你觉得自己的执行力如何？</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="preface_files/figure-html/algo-1.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>执行过程</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>广度是基础理论在各个应用场景开花结果，业务问题转化为数据问题、统计问题；深度是追根溯源和理清线索，找到区别和联系，以点带线，而后形成知识网；远度是回顾历史和展望未来，给出自己的预判和讨论。</p>
+</section>
+<section id="知识技术到应用的距离怎样的应用相关的伦理道德问题" class="level2">
+<h2 class="anchored" data-anchor-id="知识技术到应用的距离怎样的应用相关的伦理道德问题">知识、技术到应用的距离？怎样的应用？相关的伦理道德问题？</h2>
+<p>学校作为教学的主要场所，很多人诟病当前的教育教学与社会实际脱节。学校需要批量化地生产高知识的劳动力，剥离业务背景的知识是有限的，教学可以规模化，在3-5年内速成。进入企业，可能要明白的是业务的商业逻辑是什么，业务阶段是什么，明白探索、进攻、发展、变革阶段会有什么特点，对组织和个人的影响是什么？机遇和挑战是什么？弄清楚业务问题，将业务问题转化为数据问题、统计问题、算法问题、产品问题和工程问题。</p>
+<p>另外一个，重点问题是技术应当以人为本，因为它是一把双刃剑， 互联网行业算法的益处就不多说了，算法的害处是被严重低估和忽视的，大家知道，互联网公司的大部分收入来自广告，广告的价值却源于每个人未来时间精力的投入。广告算法工程师应该不会希望将个性化广告投放技术应用到自己的家人身上，给自己、家庭和社会带来给多的焦虑吧！ 市面上很多的书籍教你如何掌握统计学习、机器学习、深度学习、大数据技术，而技术的好坏是由其应用的场景决定的。<a href="https://www.acfun.cn/v/ac18902556">The Social Dilem</a> 详细讲了算法智能的陷阱。最近，国家有关监管部门也派人到各大主要互联网公司调研个性化广告、推荐和搜索算法！</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Unwin2006" class="csl-entry" role="listitem">
+Antony Unwin, Heike Hofmann, Martin Theus. 2006. <em>Graphics of Large Datasets: Visualizing a Million</em>. New York, NY: Springer-Verlag.
+</div>
+<div id="ref-Bishop2006" class="csl-entry" role="listitem">
+Bishop, Christopher. 2006. <em>Pattern Recognition and Machine Learning</em>. New York, NY: Springer. <a href="https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/">https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/</a>.
+</div>
+<div id="ref-Chang2018" class="csl-entry" role="listitem">
+Chang, Winston. 2018. <em><span>R</span> Graphics Cookbook: Practical Recipes for Visualizing Data</em>. 2nd 本. Sebastopol, California: O’Reilly Media, Inc. <a href="https://r-graphics.org/">https://r-graphics.org/</a>.
+</div>
+<div id="ref-Chen2008" class="csl-entry" role="listitem">
+Chen, Chun-houh, Wolfgang Härdle, 和 Antony Unwin. 2008. <em>Handbook of Data Visualization</em>. Berlin, Heidelberg: Springer-Verlag.
+</div>
+<div id="ref-Clopper1934" class="csl-entry" role="listitem">
+Clopper, C. J., 和 E. S. Pearson. 1934. <span>《The Use of Confidence or Fiducial Limits Illustrated In The Case of The Binomial》</span>. <em>Biometrika</em> 26 (4): 404–13. <a href="https://doi.org/10.1093/biomet/26.4.404">https://doi.org/10.1093/biomet/26.4.404</a>.
+</div>
+<div id="ref-Goodfellow2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, 和 Aaron Courville. 2016. <em>Deep Learning</em>. MIT Press. <a href="https://www.deeplearningbook.org/">https://www.deeplearningbook.org/</a>.
+</div>
+<div id="ref-Healy2019" class="csl-entry" role="listitem">
+Healy, Kieran. 2019. <em>Data Visualization: A Practical Introduction</em>. Princeton, New Jersey: Princeton University Press. <a href="https://socviz.co/">https://socviz.co/</a>.
+</div>
+<div id="ref-Heyde2001" class="csl-entry" role="listitem">
+Heyde, C. C., E. Seneta, P. Crépel, S. E. Fienberg, 和 J. Gani. 2001. <em>Statisticians of the Centuries</em>. New York, NY: Springer-Verlag. <a href="https://doi.org/10.1007/978-1-4613-0179-0">https://doi.org/10.1007/978-1-4613-0179-0</a>.
+</div>
+<div id="ref-Johnson1997" class="csl-entry" role="listitem">
+Johnson, Norman L., 和 Samuel Kotz, 编. 1997. <em>Leading Personalities in Statistical Sciences: From The Seventeenth Century to The Present</em>. John Wiley <span>&amp;</span> Sons, Inc. <a href="https://doi.org/10.1002/9781118150719">https://doi.org/10.1002/9781118150719</a>.
+</div>
+<div id="ref-Oscar2018" class="csl-entry" role="listitem">
+Lamigueiro, Oscar Perpinan. 2018. <em>Displaying Time Series, Spatial, and Space-Time Data with <span>R</span></em>. 2nd 本. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://oscarperpinan.github.io/bookvis/">https://oscarperpinan.github.io/bookvis/</a>.
+</div>
+<div id="ref-Lehmann2011" class="csl-entry" role="listitem">
+Lehmann, Erich L. 2011. <em>Fisher, Neyman, and the Creation of Classical Statistics</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4419-9500-1">https://doi.org/10.1007/978-1-4419-9500-1</a>.
+</div>
+<div id="ref-Lin2014" class="csl-entry" role="listitem">
+Lin, Xihong, Christian Genest, David L. Banks, Geert Molenberghs, David W. Scott, 和 Jane-Ling Wang, 编. 2014. <em>Past, Present, and Future of Statistical Science</em>. Boca Raton, Florida: Chapman; Hall/CRC.
+</div>
+<div id="ref-Mohri2018" class="csl-entry" role="listitem">
+Mohri, Mehryar, Afshin Rostamizadeh, 和 Ameet Talwalkar. 2018. <em>Foundations of Machine Learning</em>. 2nd 本. Cambridge, Massachusetts: MIT Press. <a href="https://cs.nyu.edu/~mohri/mlbook/">https://cs.nyu.edu/~mohri/mlbook/</a>.
+</div>
+<div id="ref-Paul2018" class="csl-entry" role="listitem">
+Murrell, Paul. 2018. <em><span>R</span> Graphics</em>. 3rd 本. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.stat.auckland.ac.nz/~paul/RG3e/">https://www.stat.auckland.ac.nz/~paul/RG3e/</a>.
+</div>
+<div id="ref-Rahlf2019" class="csl-entry" role="listitem">
+Rahlf, Thomas. 2019. <em>Data Visualisation with <span>R</span></em>. 2nd 本. New York, NY: Springer Nature. <a href="https://www.datavisualisation-r.com/">https://www.datavisualisation-r.com/</a>.
+</div>
+<div id="ref-Reid1982" class="csl-entry" role="listitem">
+Reid, Constance. 1982. <em>Neyman</em>. New York, NY: Springer-Verlag. <a href="https://doi.org/10.1007/978-1-4612-5754-7">https://doi.org/10.1007/978-1-4612-5754-7</a>.
+</div>
+<div id="ref-Neyman1987" class="csl-entry" role="listitem">
+———. 1987. <em>耐曼—现代统计学家</em>. 编辑 袁运开, 张瑞琨, 和 应兴国. 翻译 姚慕生等. 上海: 上海翻译出版公司.
+</div>
+<div id="ref-Salsburg2001" class="csl-entry" role="listitem">
+Salsburg, David. 2001. <em>The Lady Tasting Tea: How Statistics Revolutionized Science In The Twentieth Century</em>. New York, NY: W. H. Freeman; Company.
+</div>
+<div id="ref-Sievert2020" class="csl-entry" role="listitem">
+Sievert, Carson. 2020. <em>Interactive web-based data visualization with <span>R</span>, <span>plotly</span>, and <span>shiny</span></em>. 1st 本. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://plotly-r.com/">https://plotly-r.com/</a>.
+</div>
+<div id="ref-Wickham2016" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016. <em><span>ggplot2</span>: Elegant Graphics for Data Analysis</em>. 2nd 本. New York: Springer-Verlag. <a href="https://ggplot2-book.org/">https://ggplot2-book.org/</a>.
+</div>
+<div id="ref-Hadley2017" class="csl-entry" role="listitem">
+Wickham, Hadley, 和 Garrett Grolemund. 2017. <em><span>R</span> for Data Science</em>. 1st 本. Sebastopol, California: O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
+</div>
+<div id="ref-Wilke2019" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. Sebastopol, California: O’Reilly Media, Inc. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>.
+</div>
+<div id="ref-Jeff1986" class="csl-entry" role="listitem">
+吴建福. 1986. <span>《从历史发展看中国统计发展方向》</span>. <em>数理统计与管理</em>, 期 1: 1–7. <a href="https://doi.org/10.13860/j.cnki.sltj.1986.01.001">https://doi.org/10.13860/j.cnki.sltj.1986.01.001</a>.
+</div>
+<div id="ref-Jeff2011" class="csl-entry" role="listitem">
+———. 2011. <span>《统计学者的工作及风范：灵感、抱负、雄心》</span>. <em>应用概率统计</em>, 期 2: 113–23.
+</div>
+<div id="ref-Fang2016" class="csl-entry" role="listitem">
+方开泰. 2016. <em>漫漫修远攻算路—方开泰自述</em>. 第一版. 长沙: 湖南教育出版社.
+</div>
+<div id="ref-Xu2010" class="csl-entry" role="listitem">
+许宝騄先生纪念文集编委会编. 2010. <em>道德文章垂范人间：纪念许宝騄先生百年诞辰</em>. 第一版. 北京: 北京大学出版社.
+</div>
+<div id="ref-Chen2019" class="csl-entry" role="listitem">
+陈为, 沈则潜, 和 陶煜波. 2019. <em>数据可视化</em>. 第二版. 北京: 电子工业出版社. <a href="https://zjuvag.org/">https://zjuvag.org/</a>.
+</div>
+<div id="ref-Chen1987" class="csl-entry" role="listitem">
+陈善林, 和 张浙. 1987. <em>统计发展史</em>. 上海: 立信会计图书用品社.
+</div>
+<div id="ref-Chen2000" class="csl-entry" role="listitem">
+陈希孺. 2000. <em>数理统计学简史</em>. 第一版. 长沙: 湖南教育出版社.
+</div>
+<div id="ref-Chen2016" class="csl-entry" role="listitem">
+陈希孺, 和 苏淳. 2016. <em>统计学漫话</em>. 第二版. 合肥, 安徽: 中国科学技术大学出版社.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><a href="https://imstat.org/journals-and-publications/statistical-science/conversations/" class="uri">https://imstat.org/journals-and-publications/statistical-science/conversations/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="欢迎">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">欢迎</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./visualization-basic.html" class="pagination-link" aria-label="ggplot2 入门">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot2 入门</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

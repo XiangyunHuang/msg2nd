@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>参考文献 – 现代统计图形（第二版）</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./visualization-practice.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">参考文献</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">现代统计图形（第二版）</a> 
+        <div class="sidebar-tools-main">
+    <a href="./msg2nd.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">欢迎</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">ggplot2 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-intermediate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基础图形</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">统计图形</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-lattice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">lattice 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">graphics 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-tikz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">TikZ 入门</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">探索实践</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="references" class="quarto-section-identifier">参考文献</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Unwin2006" class="csl-entry" role="listitem">
+Antony Unwin, Heike Hofmann, Martin Theus. 2006. <em>Graphics of Large
+Datasets: Visualizing a Million</em>. New York, NY: Springer-Verlag.
+</div>
+<div id="ref-ggthemes2021" class="csl-entry" role="listitem">
+Arnold, Jeffrey B. 2021. <em><span class="nocase">ggthemes</span>: Extra
+Themes, Scales and Geoms for <span class="nocase">ggplot2</span></em>.
+<a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
+</div>
+<div id="ref-ggExtra2022" class="csl-entry" role="listitem">
+Attali, Dean, and Christopher Baker. 2022. <em><span class="nocase">ggExtra</span>: Add Marginal Histograms to <span class="nocase">ggplot2</span>, and More <span class="nocase">ggplot2</span> Enhancements</em>. <a href="https://CRAN.R-project.org/package=ggExtra">https://CRAN.R-project.org/package=ggExtra</a>.
+</div>
+<div id="ref-Bai2009" class="csl-entry" role="listitem">
+Bai, H., L. Wang, W. Pan, and M. Frey. 2009. <span>“Measuring
+Mathematics Anxiety: Psychometric Analysis of a Bidimensional Affective
+Scale.”</span> <em>Journal of Instructional Psychology</em> 36 (3):
+185–93.
+</div>
+<div id="ref-ggtech2018" class="csl-entry" role="listitem">
+Bion, Ricardo. 2018. <em><span class="nocase">ggtech</span>: <span class="nocase">ggplot2</span> Tech Themes and Scales</em>.
+</div>
+<div id="ref-Bishop2006" class="csl-entry" role="listitem">
+Bishop, Christopher. 2006. <em>Pattern Recognition and Machine
+Learning</em>. New York, NY: Springer. <a href="https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/">https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/</a>.
+</div>
+<div id="ref-Blyth1960" class="csl-entry" role="listitem">
+Blyth, Colin R., and David W. Hutchinson. 1960. <span>“Table of
+Neyman-Shortest Unbiased Confidence Intervals for the Binomial
+Parameter.”</span> <em>Biometrika</em> 47 (3/4): 381–91. <a href="https://www.jstor.org/stable/2333308">https://www.jstor.org/stable/2333308</a>.
+</div>
+<div id="ref-Lawrence2001" class="csl-entry" role="listitem">
+Brown, Lawrence D., T. Tony Cai, and Anirban DasGupta. 2001.
+<span>“Interval Estimation for a Binomial Proportion.”</span>
+<em>Statistical Science</em>, no. 2: 101–33. <a href="https://projecteuclid.org/euclid.ss/1009213286">https://projecteuclid.org/euclid.ss/1009213286</a>.
+</div>
+<div id="ref-Chang2018" class="csl-entry" role="listitem">
+Chang, Winston. 2018. <em><span>R</span> Graphics Cookbook: Practical
+Recipes for Visualizing Data</em>. 2nd ed. Sebastopol, California:
+O’Reilly Media, Inc. <a href="https://r-graphics.org/">https://r-graphics.org/</a>.
+</div>
+<div id="ref-Chen2008" class="csl-entry" role="listitem">
+Chen, Chun-houh, Wolfgang Härdle, and Antony Unwin. 2008. <em>Handbook
+of Data Visualization</em>. Berlin, Heidelberg: Springer-Verlag.
+</div>
+<div id="ref-Clopper1934" class="csl-entry" role="listitem">
+Clopper, C. J., and E. S. Pearson. 1934. <span>“The Use of Confidence or
+Fiducial Limits Illustrated in the Case of the Binomial.”</span>
+<em>Biometrika</em> 26 (4): 404–13. <a href="https://doi.org/10.1093/biomet/26.4.404">https://doi.org/10.1093/biomet/26.4.404</a>.
+</div>
+<div id="ref-ggsignif2021" class="csl-entry" role="listitem">
+Constantin, Ahlmann-Eltze, and Indrajeet Patil. 2021. <span>“<span class="nocase">ggsignif</span>: R Package for Displaying Significance
+Brackets for <span class="nocase">ggplot2</span>.”</span>
+<em>PsyArxiv</em>. <a href="https://doi.org/10.31234/osf.io/7awm6">https://doi.org/10.31234/osf.io/7awm6</a>.
+</div>
+<div id="ref-misc3d2008" class="csl-entry" role="listitem">
+Feng, Dai, and Luke Tierney. 2008. <span>“Computing and Displaying
+Isosurfaces in <span>R</span>.”</span> <em>Journal of Statistical
+Software</em> 28 (1). <a href="https://doi.org/10.18637/jss.v028.i01">https://doi.org/10.18637/jss.v028.i01</a>.
+</div>
+<div id="ref-viridis2021" class="csl-entry" role="listitem">
+Garnier, Simon, Ross, Noam, Rudis, Robert, Camargo, et al. 2021.
+<em><span class="nocase">viridis</span>: Colorblind-Friendly Color Maps
+for <span>R</span></em>. <a href="https://doi.org/10.5281/zenodo.4679424">https://doi.org/10.5281/zenodo.4679424</a>.
+</div>
+<div id="ref-Geyer2005" class="csl-entry" role="listitem">
+Geyer, Charles J., and Glen D. Meeden. 2005. <span>“Fuzzy and Randomized
+Confidence Intervals and p-Values.”</span> <em>Statistical Science</em>
+20 (4): 358–66. <a href="https://www.jstor.org/stable/20061193">https://www.jstor.org/stable/20061193</a>.
+</div>
+<div id="ref-Goodfellow2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep
+Learning</em>. MIT Press. <a href="https://www.deeplearningbook.org/">https://www.deeplearningbook.org/</a>.
+</div>
+<div id="ref-ggThemeAssist2016" class="csl-entry" role="listitem">
+Gross, Calli, and Philipp Ottolinger. 2016. <em><span class="nocase">ggThemeAssist</span>: Add-in to Customize <span class="nocase">ggplot2</span> Themes</em>. <a href="https://CRAN.R-project.org/package=ggThemeAssist">https://CRAN.R-project.org/package=ggThemeAssist</a>.
+</div>
+<div id="ref-pilot2022" class="csl-entry" role="listitem">
+Hawkins, Oliver. 2022. <em><span class="nocase">pilot</span>: A Minimal
+<span class="nocase">ggplot2</span> Theme with an Accessible Discrete
+Color Palette</em>. <a href="https://github.com/olihawkins/pilot">https://github.com/olihawkins/pilot</a>.
+</div>
+<div id="ref-Healy2019" class="csl-entry" role="listitem">
+Healy, Kieran. 2019. <em>Data Visualization: A Practical
+Introduction</em>. Princeton, New Jersey: Princeton University Press. <a href="https://socviz.co/">https://socviz.co/</a>.
+</div>
+<div id="ref-Heyde2001" class="csl-entry" role="listitem">
+Heyde, C. C., E. Seneta, P. Crépel, S. E. Fienberg, and J. Gani. 2001.
+<em>Statisticians of the Centuries</em>. New York, NY: Springer-Verlag.
+<a href="https://doi.org/10.1007/978-1-4613-0179-0">https://doi.org/10.1007/978-1-4613-0179-0</a>.
+</div>
+<div id="ref-paletteer2021" class="csl-entry" role="listitem">
+Hvitfeldt, Emil. 2021. <em><span class="nocase">paletteer</span>:
+Comprehensive Collection of Color Palettes</em>. <a href="https://github.com/EmilHvitfeldt/paletteer">https://github.com/EmilHvitfeldt/paletteer</a>.
+</div>
+<div id="ref-Johnson1997" class="csl-entry" role="listitem">
+Johnson, Norman L., and Samuel Kotz, eds. 1997. <em>Leading
+Personalities in Statistical Sciences: From the Seventeenth Century to
+the Present</em>. John Wiley <span>&amp;</span> Sons, Inc. <a href="https://doi.org/10.1002/9781118150719">https://doi.org/10.1002/9781118150719</a>.
+</div>
+<div id="ref-Chacon2018" class="csl-entry" role="listitem">
+José. Chacón, Tarn Duong. 2018. <em>Multivariate Kernel Smoothing and
+Its Applications</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.mvstat.net/mvksa/">https://www.mvstat.net/mvksa/</a>.
+</div>
+<div id="ref-colormap2016" class="csl-entry" role="listitem">
+Karambelkar, Bhaskar. 2016. <em><span class="nocase">colormap</span>:
+Color Palettes Using Colormaps Node Module</em>. <a href="https://CRAN.R-project.org/package=colormap">https://CRAN.R-project.org/package=colormap</a>.
+</div>
+<div id="ref-ggpubr2022" class="csl-entry" role="listitem">
+Kassambara, Alboukadel. 2022. <em><span class="nocase">ggpubr</span>:
+<span class="nocase">ggplot2</span> Based Publication Ready Plots</em>.
+<a href="https://CRAN.R-project.org/package=ggpubr">https://CRAN.R-project.org/package=ggpubr</a>.
+</div>
+<div id="ref-ggdist2022" class="csl-entry" role="listitem">
+Kay, Matthew. 2022. <em><span class="nocase">ggdist</span>:
+Visualizations of Distributions and Uncertainty</em>. <a href="https://doi.org/10.5281/zenodo.3879620">https://doi.org/10.5281/zenodo.3879620</a>.
+</div>
+<div id="ref-ggTimeSeries2022" class="csl-entry" role="listitem">
+Kothari, Aditya. 2022. <em><span class="nocase">ggTimeSeries</span>:
+Time Series Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggTimeSeries">https://CRAN.R-project.org/package=ggTimeSeries</a>.
+</div>
+<div id="ref-Oscar2018" class="csl-entry" role="listitem">
+Lamigueiro, Oscar Perpinan. 2018. <em>Displaying Time Series, Spatial,
+and Space-Time Data with <span>R</span></em>. 2nd ed. Boca Raton,
+Florida: Chapman; Hall/CRC. <a href="https://oscarperpinan.github.io/bookvis/">https://oscarperpinan.github.io/bookvis/</a>.
+</div>
+<div id="ref-Lehmann2011" class="csl-entry" role="listitem">
+Lehmann, Erich L. 2011. <em>Fisher, Neyman, and the Creation of
+Classical Statistics</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4419-9500-1">https://doi.org/10.1007/978-1-4419-9500-1</a>.
+</div>
+<div id="ref-Lemon2006" class="csl-entry" role="listitem">
+Lemon, Jim. 2006. <span>“<span class="nocase">plotrix</span>: A Package
+in the Red Light District of <span>R</span>.”</span> <em>R-News</em> 6
+(4): 8–12.
+</div>
+<div id="ref-Uwe2003" class="csl-entry" role="listitem">
+Ligges, Uwe, and Martin Mächler. 2003. <span>“<span class="nocase">scatterplot3d</span>: An <span>R</span> Package for
+Visualizing Multivariate Data.”</span> <em>Journal of Statistical
+Software</em> 8 (11): 1–20. <a href="https://doi.org/10.18637/jss.v008.i11">https://doi.org/10.18637/jss.v008.i11</a>.
+</div>
+<div id="ref-Likert1932" class="csl-entry" role="listitem">
+Likert, Rensis. 1932. <span>“A Technique for the Measurement of
+Attitudes.”</span> <em>Archives of Psychology</em> 142 (1): 1–55.
+</div>
+<div id="ref-Lin2014" class="csl-entry" role="listitem">
+Lin, Xihong, Christian Genest, David L. Banks, Geert Molenberghs, David
+W. Scott, and Jane-Ling Wang, eds. 2014. <em>Past, Present, and Future
+of Statistical Science</em>. Boca Raton, Florida: Chapman; Hall/CRC.
+</div>
+<div id="ref-Marron2022" class="csl-entry" role="listitem">
+Marron, J. S., and Ian L. Dryden. 2022. <em>Object Oriented Data
+Analysis</em>. 1st ed. Boca Raton, Florida: Chapman; Hall/CRC.
+</div>
+<div id="ref-Tukey1978" class="csl-entry" role="listitem">
+McGill, Tukey, R., and W. A. Larsen. 1978. <span>“Variations of Box
+Plots.”</span> <em>The American Statistician</em> 32 (1): 12–16. <a href="https://www.jstor.org/stable/2683468">https://www.jstor.org/stable/2683468</a>.
+</div>
+<div id="ref-Mohri2018" class="csl-entry" role="listitem">
+Mohri, Mehryar, Afshin Rostamizadeh, and Ameet Talwalkar. 2018.
+<em>Foundations of Machine Learning</em>. 2nd ed. Cambridge,
+Massachusetts: MIT Press. <a href="https://cs.nyu.edu/~mohri/mlbook/">https://cs.nyu.edu/~mohri/mlbook/</a>.
+</div>
+<div id="ref-Paul2018" class="csl-entry" role="listitem">
+Murrell, Paul. 2018. <em><span>R</span> Graphics</em>. 3rd ed. Boca
+Raton, Florida: Chapman; Hall/CRC. <a href="https://www.stat.auckland.ac.nz/~paul/RG3e/">https://www.stat.auckland.ac.nz/~paul/RG3e/</a>.
+</div>
+<div id="ref-ggcharts2020" class="csl-entry" role="listitem">
+Neitmann, Thomas. 2020. <em><span class="nocase">ggcharts</span>:
+Shorten the Distance from Data Visualization Idea to Actual Plot</em>.
+<a href="https://CRAN.R-project.org/package=ggcharts">https://CRAN.R-project.org/package=ggcharts</a>.
+</div>
+<div id="ref-RColorBrewer2022" class="csl-entry" role="listitem">
+Neuwirth, Erich. 2022. <em><span>RColorBrewer</span>:
+<span>ColorBrewer</span> Palettes</em>. <a href="https://CRAN.R-project.org/package=RColorBrewer">https://CRAN.R-project.org/package=RColorBrewer</a>.
+</div>
+<div id="ref-Otto2023" class="csl-entry" role="listitem">
+Otto, James, and David Kahle. 2023. <span>“<span class="nocase">ggdensity</span>: Improved Bivariate Density
+Visualization in <span>R</span>.”</span> <em>The R Journal</em> 15:
+220–36. <a href="https://doi.org/10.32614/RJ-2023-048">https://doi.org/10.32614/RJ-2023-048</a>.
+</div>
+<div id="ref-Indrajeet2021" class="csl-entry" role="listitem">
+Patil, Indrajeet. 2021. <span>“<span class="nocase">Visualizations with
+statistical details: The <span class="nocase">ggstatsplot</span>
+approach</span>.”</span> <em><span>Journal of Open Source
+Software</span></em> 6 (61): 3167. <a href="https://doi.org/10.21105/joss.03167">https://doi.org/10.21105/joss.03167</a>.
+</div>
+<div id="ref-scico2022" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin, and Fabio Crameri. 2022. <em><span class="nocase">scico</span>: Colour Palettes Based on the Scientific
+Colour-Maps</em>. <a href="https://CRAN.R-project.org/package=scico">https://CRAN.R-project.org/package=scico</a>.
+</div>
+<div id="ref-pu2020" class="csl-entry" role="listitem">
+Pu, Xiaoying, and Matthew Kay. 2020. <span>“A Probabilistic Grammar of
+Graphics.”</span> In <em>Proceedings of the 2020 <span>CHI</span>
+Conference on Human Factors in Computing Systems</em>, 1–13. ACM. <a href="https://doi.org/10.1145/3313831.3376466">https://doi.org/10.1145/3313831.3376466</a>.
+</div>
+<div id="ref-Rahlf2019" class="csl-entry" role="listitem">
+Rahlf, Thomas. 2019. <em>Data Visualisation with <span>R</span></em>.
+2nd ed. New York, NY: Springer Nature. <a href="https://www.datavisualisation-r.com/">https://www.datavisualisation-r.com/</a>.
+</div>
+<div id="ref-Reid1982" class="csl-entry" role="listitem">
+Reid, Constance. 1982. <em>Neyman</em>. New York, NY: Springer-Verlag.
+<a href="https://doi.org/10.1007/978-1-4612-5754-7">https://doi.org/10.1007/978-1-4612-5754-7</a>.
+</div>
+<div id="ref-Neyman1987" class="csl-entry" role="listitem">
+———. 1987. <em>耐曼—现代统计学家</em>. Edited by 袁运开, 张瑞琨, and
+应兴国. Translated by 姚慕生等. 上海: 上海翻译出版公司.
+</div>
+<div id="ref-Salsburg2001" class="csl-entry" role="listitem">
+Salsburg, David. 2001. <em>The Lady Tasting Tea: How Statistics
+Revolutionized Science in the Twentieth Century</em>. New York, NY: W.
+H. Freeman; Company.
+</div>
+<div id="ref-Sarkar2008" class="csl-entry" role="listitem">
+Sarkar, Deepayan. 2008b. <em><span class="nocase">lattice</span>:
+Multivariate Data Visualization with <span>R</span></em>. New York:
+Springer. <a href="http://lmdvr.r-forge.r-project.org">http://lmdvr.r-forge.r-project.org</a>.
+</div>
+<div id="ref-Deepayan2008" class="csl-entry" role="listitem">
+———. 2008a. <em><span class="nocase">lattice</span>: Multivariate Data
+Visualization with <span>R</span></em>. New York: Springer. <a href="http://lmdvr.r-forge.r-project.org">http://lmdvr.r-forge.r-project.org</a>.
+</div>
+<div id="ref-SinaPlot2018" class="csl-entry" role="listitem">
+Sidiropoulos, Nikos, Sina Hadi Sohi, Thomas Lin Pedersen, Bo Torben
+Porse, Ole Winther, Nicolas Rapin, and Frederik Otzen Bagger. 2018.
+<span>“<span>SinaPlot</span>: An Enhanced Chart for Simple and Truthful
+Representation of Single Observations over Multiple Classes.”</span>
+<em>Journal of Computational and Graphical Statistics</em> 27 (3):
+673–76. <a href="https://doi.org/10.1080/10618600.2017.1366914">https://doi.org/10.1080/10618600.2017.1366914</a>.
+</div>
+<div id="ref-Sievert2020" class="csl-entry" role="listitem">
+Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with
+<span>R</span>, <span class="nocase">plotly</span>, and <span class="nocase">shiny</span></em>. 1st ed. Boca Raton, Florida: Chapman;
+Hall/CRC. <a href="https://plotly-r.com/">https://plotly-r.com/</a>.
+</div>
+<div id="ref-ggrepel2021" class="csl-entry" role="listitem">
+Slowikowski, Kamil. 2021. <em><span class="nocase">ggrepel</span>:
+Automatically Position Non-Overlapping Text Labels with <span class="nocase">ggplot2</span></em>. <a href="https://CRAN.R-project.org/package=ggrepel">https://CRAN.R-project.org/package=ggrepel</a>.
+</div>
+<div id="ref-plot3D2021" class="csl-entry" role="listitem">
+Soetaert, Karline. 2021. <em><span class="nocase">plot3D</span>:
+Plotting Multi-Dimensional Data</em>. <a href="https://CRAN.R-project.org/package=plot3D">https://CRAN.R-project.org/package=plot3D</a>.
+</div>
+<div id="ref-bbplot2022" class="csl-entry" role="listitem">
+Stylianou, Nassos, Will Dahlgreen, Robert Cuffe, Tom Calver, and Ransome
+Mpini. 2022. <em><span class="nocase">bbplot</span>: Making <span class="nocase">ggplot2</span> Graphics in <span>BBC NEWS</span>
+Style</em>.
+</div>
+<div id="ref-ggthemr2020" class="csl-entry" role="listitem">
+Tobin, Ciaran. 2020. <em><span class="nocase">ggthemr</span>: Themes for
+<span class="nocase">ggplot2</span></em>.
+</div>
+<div id="ref-KernSmooth1995" class="csl-entry" role="listitem">
+Wand, M. P., and M. C. Jones. 1995. <em>Kernel Smoothing</em>. 1st ed.
+Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://matt-wand.utsacademics.info/webWJbook/">http://matt-wand.utsacademics.info/webWJbook/</a>.
+</div>
+<div id="ref-munsell2018" class="csl-entry" role="listitem">
+Wickham, Charlotte. 2018. <em><span class="nocase">munsell</span>:
+Utilities for Using Munsell Colours</em>. <a href="https://CRAN.R-project.org/package=munsell">https://CRAN.R-project.org/package=munsell</a>.
+</div>
+<div id="ref-Wickham2016" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016b. <em><span class="nocase">ggplot2</span>: Elegant
+Graphics for Data Analysis</em>. 2nd ed. New York: Springer-Verlag. <a href="https://ggplot2-book.org/">https://ggplot2-book.org/</a>.
+</div>
+<div id="ref-Hadley2016" class="csl-entry" role="listitem">
+———. 2016a. <em><span class="nocase">ggplot2</span>: Elegant Graphics
+for Data Analysis</em>. 2nd ed. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-Hadley2017" class="csl-entry" role="listitem">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em><span>R</span> for
+Data Science</em>. 1st ed. Sebastopol, California: O’Reilly Media, Inc.
+<a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
+</div>
+<div id="ref-scales2022" class="csl-entry" role="listitem">
+Wickham, Hadley, and Dana Seidel. 2022. <em><span class="nocase">scales</span>: Scale Functions for Visualization</em>. <a href="https://CRAN.R-project.org/package=scales">https://CRAN.R-project.org/package=scales</a>.
+</div>
+<div id="ref-Wilke2019" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer
+on Making Informative and Compelling Figures</em>. Sebastopol,
+California: O’Reilly Media, Inc. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>.
+</div>
+<div id="ref-ggtext2020" class="csl-entry" role="listitem">
+———. 2020. <em><span class="nocase">ggtext</span>: Improved Text
+Rendering Support for <span class="nocase">ggplot2</span></em>. <a href="https://CRAN.R-project.org/package=ggtext">https://CRAN.R-project.org/package=ggtext</a>.
+</div>
+<div id="ref-Wilson1927" class="csl-entry" role="listitem">
+Wilson, Edwin B. 1927. <span>“Probable Inference, the Law of Succession,
+and Statistical Inference.”</span> <em>Journal of the American
+Statistical Association</em> 22 (158): 209–12. <a href="https://doi.org/10.1080/01621459.1927.10502953">https://doi.org/10.1080/01621459.1927.10502953</a>.
+</div>
+<div id="ref-ggsci2018" class="csl-entry" role="listitem">
+Xiao, Nan. 2018. <em><span class="nocase">ggsci</span>: Scientific
+Journal and Sci-Fi Themed Color Palettes for <span class="nocase">ggplot2</span></em>. <a href="https://CRAN.R-project.org/package=ggsci">https://CRAN.R-project.org/package=ggsci</a>.
+</div>
+<div id="ref-ggimage2022" class="csl-entry" role="listitem">
+Yu, Guangchuang. 2022. <em><span class="nocase">ggimage</span>: Use
+Image in <span class="nocase">ggplot2</span></em>. <a href="https://CRAN.R-project.org/package=ggimage">https://CRAN.R-project.org/package=ggimage</a>.
+</div>
+<div id="ref-string2path2022" class="csl-entry" role="listitem">
+Yutani, Hiroaki. 2022. <em><span class="nocase">string2path</span>:
+Rendering Font into <span class="nocase">data.frame</span></em>. <a href="https://CRAN.R-project.org/package=string2path">https://CRAN.R-project.org/package=string2path</a>.
+</div>
+<div id="ref-Zeileis2020" class="csl-entry" role="listitem">
+Zeileis, Achim, Jason C. Fisher, Kurt Hornik, Ross Ihaka, Claire D.
+McWhite, Paul Murrell, Reto Stauffer, and Claus O. Wilke. 2020.
+<span>“<span class="nocase">colorspace</span>: A Toolbox for
+Manipulating and Assessing Colors and Palettes.”</span> <em>Journal of
+Statistical Software</em> 96 (1): 1–49. <a href="https://doi.org/10.18637/jss.v096.i01">https://doi.org/10.18637/jss.v096.i01</a>.
+</div>
+<div id="ref-Jeff1986" class="csl-entry" role="listitem">
+吴建福. 1986. <span>“从历史发展看中国统计发展方向.”</span>
+<em>数理统计与管理</em>, no. 1: 1–7. <a href="https://doi.org/10.13860/j.cnki.sltj.1986.01.001">https://doi.org/10.13860/j.cnki.sltj.1986.01.001</a>.
+</div>
+<div id="ref-Jeff2011" class="csl-entry" role="listitem">
+———. 2011. <span>“统计学者的工作及风范：灵感、抱负、雄心.”</span>
+<em>应用概率统计</em>, no. 2: 113–23.
+</div>
+<div id="ref-Fang2016" class="csl-entry" role="listitem">
+方开泰. 2016. <em>漫漫修远攻算路—方开泰自述</em>. 第一版. 长沙:
+湖南教育出版社.
+</div>
+<div id="ref-Xu2010" class="csl-entry" role="listitem">
+许宝騄先生纪念文集编委会编. 2010.
+<em>道德文章垂范人间：纪念许宝騄先生百年诞辰</em>. 第一版. 北京:
+北京大学出版社.
+</div>
+<div id="ref-msg2021" class="csl-entry" role="listitem">
+赵鹏, 谢益辉, and 黄湘云. 2021. <em>现代统计图形</em>. 北京:
+人民邮电出版社. <a href="https://bookdown.org/xiangyun/msg">https://bookdown.org/xiangyun/msg</a>.
+</div>
+<div id="ref-Chen2019" class="csl-entry" role="listitem">
+陈为, 沈则潜, and 陶煜波. 2019. <em>数据可视化</em>. 第二版. 北京:
+电子工业出版社. <a href="https://zjuvag.org/">https://zjuvag.org/</a>.
+</div>
+<div id="ref-Chen1987" class="csl-entry" role="listitem">
+陈善林, and 张浙. 1987. <em>统计发展史</em>. 上海: 立信会计图书用品社.
+</div>
+<div id="ref-Chen2000" class="csl-entry" role="listitem">
+陈希孺. 2000. <em>数理统计学简史</em>. 第一版. 长沙: 湖南教育出版社.
+</div>
+<div id="ref-Chen2016" class="csl-entry" role="listitem">
+陈希孺, and 苏淳. 2016. <em>统计学漫话</em>. 第二版. 合肥, 安徽:
+中国科学技术大学出版社.
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./visualization-practice.html" class="pagination-link" aria-label="探索实践">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">探索实践</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

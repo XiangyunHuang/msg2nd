@@ -43,6 +43,7 @@ Imports:
     latticeExtra,
     lvplot (>= 0.2.1),
     likert,
+    labelled,
     magick,
     maps,
     misc3d,

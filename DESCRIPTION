@@ -24,7 +24,7 @@ Imports:
     ggfortify,
     ggmosaic,
     ggnewscale,
-    ggplot2 (>= 3.5.0),
+    ggplot2 (>= 4.0.0),
     ggraph (>= 2.2.0),
     ggrepel,
     ggridges,
@@ -42,6 +42,8 @@ Imports:
     knitr (>= 1.44),
     latticeExtra,
     lvplot (>= 0.2.1),
+    likert,
+    labelled,
     magick,
     maps,
     misc3d,
@@ -73,6 +75,7 @@ Imports:
     xts
 Remotes:
     davidsjoberg/ggbump,
+    haleyjeppson/ggmosaic,
     davidsjoberg/ggstream
 Suggests:
     quarto (>= 1.2),
